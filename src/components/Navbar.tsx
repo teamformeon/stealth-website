@@ -3,8 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
-import Button from './Button';
-import DownloadButtons from './DownloadButtons';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -30,22 +28,20 @@ const Navbar = () => {
             <div className="container-wide flex items-center justify-between">
                 <Link href="/" className="flex items-center gap-3 active:scale-95 transition-transform">
                     <div className="w-6 h-6 bg-white rounded-sm rotate-45 flex-shrink-0" />
-                    <span className="text-xl font-bold tracking-tighter">Stealth</span>
+                    <span className="text-xl font-bold tracking-tighter uppercase">Stealth Technologies</span>
                 </Link>
 
                 {/* Desktop Links - Minimal & Spacious */}
                 <div className="hidden md:flex items-center gap-10">
                     <div className="flex items-center gap-8 text-[13px] font-medium text-neutral-500 uppercase tracking-widest">
-                        <Link href="#features" className="hover:text-white transition-colors">Features</Link>
-                        <Link href="#how-it-works" className="hover:text-white transition-colors">Process</Link>
-                        <Link href="#pricing" className="hover:text-white transition-colors">Pricing</Link>
+                        <Link href="/#features" className="hover:text-white transition-colors">Features</Link>
+                        <Link href="/#how-it-works" className="hover:text-white transition-colors">Process</Link>
                     </div>
                     <div className="h-4 w-px bg-white/10" />
                     <div className="flex items-center gap-4">
-                        <Button variant="ghost" size="sm" className="text-neutral-400 hover:text-white">
-                            Log in
-                        </Button>
-                        <DownloadButtons variant="nav" />
+                        <Link href="/#explore" className="text-[13px] font-bold text-white uppercase tracking-widest hover:opacity-70 transition-opacity">
+                            Explore the Product
+                        </Link>
                     </div>
                 </div>
 
@@ -75,14 +71,18 @@ const Navbar = () => {
                         </button>
 
                         <div className="flex flex-col items-center gap-12 text-center text-4xl font-black tracking-tighter uppercase">
-                            <Link href="#features" onClick={() => setMobileMenuOpen(false)}>Features</Link>
-                            <Link href="#how-it-works" onClick={() => setMobileMenuOpen(false)}>Process</Link>
-                            <Link href="#pricing" onClick={() => setMobileMenuOpen(false)}>Pricing</Link>
+                            <Link href="/#features" onClick={() => setMobileMenuOpen(false)}>Features</Link>
+                            <Link href="/#how-it-works" onClick={() => setMobileMenuOpen(false)}>Process</Link>
                         </div>
 
                         <div className="mt-16 w-full max-w-xs space-y-4">
-                            <DownloadButtons className="flex-col w-full" />
-                            <Button variant="ghost" className="w-full text-neutral-500">Sign In</Button>
+                            <Link
+                                href="/#explore"
+                                onClick={() => setMobileMenuOpen(false)}
+                                className="block w-full text-center py-4 bg-white text-black text-xs font-bold uppercase tracking-widest"
+                            >
+                                Explore Product
+                            </Link>
                         </div>
                     </motion.div>
                 )}

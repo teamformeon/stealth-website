@@ -2,7 +2,6 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import Section from '@/components/Section';
-import Button from '@/components/Button';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Play, Terminal, History, Save, ChevronRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -79,14 +78,13 @@ export default function DemoPage() {
                                 placeholder="Ask anything..."
                                 className="w-full h-32 bg-transparent border-none text-white focus:ring-0 p-0 text-sm placeholder:text-neutral-700 resize-none mb-8"
                             />
-                            <Button
-                                className="w-full h-14 bg-white text-black font-black uppercase tracking-widest text-[11px]"
-                                variant="glow"
+                            <button
+                                className="w-full h-14 bg-white text-black font-black uppercase tracking-widest text-[11px] rounded-lg hover:opacity-90 transition-all flex items-center justify-center disabled:opacity-50"
                                 onClick={handleRun}
                                 disabled={isProcessing || !prompt.trim()}
                             >
                                 {isProcessing ? 'Processing' : 'Execute Command'}
-                            </Button>
+                            </button>
                         </div>
 
                         <div className="premium-card p-10">

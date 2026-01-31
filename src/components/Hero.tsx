@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Section from '@/components/Section';
-import DownloadButtons from './DownloadButtons';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 
 const Hero = () => {
@@ -19,17 +19,24 @@ const Hero = () => {
                         Limited Beta v1.0.0
                     </div>
 
-                    <h1 className="text-6xl md:text-8xl font-black tracking-tight mb-8 leading-[0.95] text-balance">
-                        The OS for <br />
-                        <span className="text-stealth-accent">Intelligence.</span>
+                    <h1 className="text-6xl md:text-8xl font-black tracking-tight mb-8 leading-[0.95] text-balance uppercase">
+                        Zero <br />
+                        <span className="text-stealth-accent">Prompting.</span>
                     </h1>
 
                     <p className="text-xl md:text-2xl text-neutral-400 mb-12 max-w-2xl leading-relaxed text-balance">
-                        Stealth is a deeply integrated AI layer for professional workflows. <br className="hidden md:block" />
-                        Automate the mundane. Focus on the creative.
+                        Stealth Technologies is the invisible operating layer that lives across your desktop.
+                        It observes context, understands intent, and executes work before you even ask.
                     </p>
 
-                    <DownloadButtons className="mb-16" />
+                    <div className="flex flex-col sm:flex-row gap-4 mb-16">
+                        <Link href="/#explore" className="px-10 py-5 bg-white text-black text-xs font-bold uppercase tracking-[0.2em] hover:opacity-90 transition-all rounded-sm text-center">
+                            Explore the Product
+                        </Link>
+                        <Link href="/#vision" className="px-10 py-5 bg-transparent border border-white/10 text-white text-xs font-bold uppercase tracking-[0.2em] hover:bg-white/5 transition-all rounded-sm text-center">
+                            See the Vision
+                        </Link>
+                    </div>
                 </motion.div>
             </div>
 

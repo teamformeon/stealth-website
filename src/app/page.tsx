@@ -3,9 +3,8 @@ import ProductStory from "@/components/ProductStory";
 import Features from "@/components/Features";
 import HowItWorks from "@/components/HowItWorks";
 import UseCases from "@/components/UseCases";
-import Security from "@/components/Security";
-import Pricing from "@/components/Pricing";
-import FAQ from "@/components/FAQ";
+import WhoItFor from "@/components/WhoItFor";
+import Vision from "@/components/Vision";
 import FinalCTA from "@/components/FinalCTA";
 
 export default function Home() {
@@ -16,9 +15,8 @@ export default function Home() {
       <Features />
       <HowItWorks />
       <UseCases />
-      <Security />
-      <Pricing />
-      <FAQ />
+      <WhoItFor />
+      <Vision />
       <FinalCTA />
     </div>
   );

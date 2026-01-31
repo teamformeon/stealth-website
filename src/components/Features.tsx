@@ -8,34 +8,24 @@ import { motion } from 'framer-motion';
 
 const features = [
     {
-        title: 'Context Engine',
-        description: 'Understands your active files, terminal output, and logs in real-time.',
-        icon: <Cpu size={24} />,
-    },
-    {
-        title: 'Overlay Control',
-        description: 'Invoke power anywhere with a single global hotkey interface.',
-        icon: <Command size={24} />,
-    },
-    {
-        title: 'Zero-Knowledge',
-        description: 'Privacy by design. Your data never touches our servers.',
-        icon: <Shield size={24} />,
-    },
-    {
-        title: 'Native Speed',
-        description: 'Built with performance in mind. Zero bloat, zero latency.',
-        icon: <Zap size={24} />,
-    },
-    {
-        title: 'Custom Logic',
-        description: 'Script complex interactions with simple natural language.',
+        title: 'Context Awareness',
+        description: 'Stealth AI retains continuous memory across your entire desktop. It understands what you’re working on—whether it’s a Slack thread, a local spreadsheet, or a browser terminal—and acts accordingly.',
         icon: <Layers size={24} />,
     },
     {
-        title: 'OS Integration',
-        description: 'Deep control over file systems and hardware peripherals.',
+        title: 'Cross-App Execution',
+        description: 'Beyond generation, it performs. Stealth drafts emails, updates CRM records, pulls data from dashboards, and coordinates tasks between tools without you lifting a finger.',
         icon: <MousePointer2 size={24} />,
+    },
+    {
+        title: 'Predictive Assistance',
+        description: 'By observing your workflows, Stealth anticipates your next move. It surfaces relevant information and drafts actions before you explicitly ask, reducing tool switching by 80%.',
+        icon: <Zap size={24} />,
+    },
+    {
+        title: 'Zero Prompting',
+        description: 'No prompt engineering. No complex command syntax. Stealth works silently in the background, executing intent rather than just following instructions.',
+        icon: <Command size={24} />,
     },
 ];
 
@@ -47,19 +37,19 @@ const Features = () => {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="text-4xl md:text-6xl font-bold mb-8"
+                    className="text-4xl md:text-6xl font-bold mb-8 uppercase"
                 >
-                    Everything you need. <br />
-                    <span className="text-stealth-accent">Nothing you don’t.</span>
+                    Software that <br />
+                    <span className="text-stealth-accent">Executes.</span>
                 </motion.h2>
                 <motion.p
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.1 }}
-                    className="text-neutral-500 text-xl leading-relaxed"
+                    className="text-neutral-500 text-xl leading-relaxed max-w-xl"
                 >
-                    Powerful features designed for serious builders who value privacy and performance.
+                    Stealth Technologies isn’t another chatbot. It’s an execution layer designed for operators who need work done, not just text generated.
                 </motion.p>
             </div>
 

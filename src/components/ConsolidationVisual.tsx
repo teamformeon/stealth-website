@@ -1,226 +1,309 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-    Mail,
     MessageSquare,
-    FileText,
-    Trello,
-    Users,
+    Briefcase,
     Calendar,
-    CheckCircle2,
-    ArrowRight,
+    CheckSquare,
+    Settings,
+    User,
     Search,
-    Clock
+    Star,
+    Clock,
+    Send,
+    AlertCircle,
+    Inbox,
+    Users,
+    Tag,
+    ChevronLeft,
+    Sparkles,
+    MousePointer2
 } from 'lucide-react';
-import { cn } from '@/lib/utils';
-
-const apps = [
-    { id: 'email', name: 'Email', icon: Mail, color: '#EA4335', position: { top: '10%', left: '15%' } },
-    { id: 'slack', name: 'Slack', icon: MessageSquare, color: '#4A154B', position: { top: '25%', left: '5%' } },
-    { id: 'docs', name: 'Docs', icon: FileText, color: '#4285F4', position: { top: '65%', left: '8%' } },
-    { id: 'jira', name: 'Jira', icon: Trello, color: '#0052CC', position: { top: '85%', left: '15%' } },
-    { id: 'crm', name: 'CRM', icon: Users, color: '#F2994A', position: { top: '80%', left: '80%' } },
-    { id: 'calendar', name: 'Calendar', icon: Calendar, color: '#34A853', position: { top: '15%', left: '82%' } },
-];
-
-const actions = [
-    {
-        id: 1,
-        type: 'Draft',
-        app: 'Email',
-        title: 'Response for John Smith',
-        content: 'Drafted follow-up regarding the Q4 roadmap synthesis.',
-        icon: Mail,
-        time: 'Just now'
-    },
-    {
-        id: 2,
-        type: 'Task',
-        app: 'Jira',
-        title: 'Create Engineering Sync',
-        content: 'Actionable items extracted from Slack #eng thread.',
-        icon: Trello,
-        time: '2m ago'
-    },
-    {
-        id: 3,
-        type: 'Summary',
-        app: 'Calendar',
-        title: 'Product Review Sync',
-        content: 'Consolidated notes and next steps from 10:00 AM call.',
-        icon: FileText,
-        time: '5m ago'
-    }
-];
 
 const ConsolidationVisual = () => {
+    const [activeTab, setActiveTab] = useState<'sidebar' | 'gmail'>('sidebar');
+    const [demoPhase, setDemoPhase] = useState<'idle' | 'moving' | 'clicked' | 'viewing' | 'resetting'>('idle');
+
+    // Automated Demo Logic
+    useEffect(() => {
+        const sequence = async () => {
+            // Start Loop
+            while (true) {
+                setDemoPhase('idle');
+                setActiveTab('sidebar');
+                await new Promise(r => setTimeout(r, 2000));
+
+                setDemoPhase('moving');
+                await new Promise(r => setTimeout(r, 1500));
+
+                setDemoPhase('clicked');
+                setActiveTab('gmail');
+                await new Promise(r => setTimeout(r, 4000));
+
+                setDemoPhase('resetting');
+                setActiveTab('sidebar');
+                await new Promise(r => setTimeout(r, 1000));
+            }
+        };
+
+        sequence();
+    }, []);
+
+    const gmailEmails = [
+        { id: 1, sender: 'Product Hunt', subject: 'Your launch is trending! 🚀', time: '10:42 AM', preview: "Hey! Just wanted to let you know that Stealth Technologies is currently #1...", labels: ['Primary'], unread: true },
+        { id: 2, sender: 'Slack', subject: 'New login from Chrome on Windows', time: '9:15 AM', preview: "A new login was detected on your account. If this wasn't you, please...", labels: ['Social'], unread: false },
+        { id: 3, sender: 'Vercel', subject: 'Deployment Successful: stealth-web', time: 'Yesterday', preview: "Your project was successfully deployed to production. Click to view...", labels: ['Updates'], unread: false },
+        { id: 4, sender: 'GitHub', subject: '[GitHub] Security Alert: vulnerability found', time: 'Yesterday', preview: "We found a potential security vulnerability in one of your dependencies...", labels: ['Promotions'], unread: true }
+    ];
+
     return (
-        <div className="relative w-full h-full bg-black rounded-3xl overflow-hidden border border-white/5 shadow-2xl">
-            {/* Grid Background */}
-            <div className="absolute inset-0 opacity-[0.03]"
-                style={{ backgroundImage: 'radial-gradient(circle, #00f5ff 1px, transparent 1px)', backgroundSize: '40px 40px' }}
-            />
+        <div className="relative w-full h-full rounded-3xl overflow-hidden border border-white/5 shadow-2xl group bg-[#0a0a0a]">
+            {/* Real Backdrop Background (Forest/Nature) with Parallax */}
+            <motion.div
+                animate={{
+                    y: [0, -20, 0],
+                    scale: [1, 1.05, 1]
+                }}
+                transition={{
+                    duration: 20,
+                    repeat: Infinity,
+                    ease: "linear"
+                }}
+                className="absolute inset-0 z-0"
+            >
+                <img
+                    src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=2560&auto=format&fit=crop"
+                    alt="Forest Background"
+                    className="w-full h-full object-cover opacity-60 mix-blend-luminosity"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent" />
+            </motion.div>
 
-            {/* Dashboard Container */}
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            {/* Content Container */}
+            <div className="relative z-10 w-full h-full flex">
+                {/* Sidebar UI */}
                 <motion.div
-                    initial={{ scale: 0.9, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    className="relative w-[75%] h-[75%] bg-stealth-black border border-white/10 rounded-2xl p-6 shadow-[0_0_50px_rgba(0,0,0,0.5)] z-20 overflow-hidden flex flex-col"
+                    initial={{ x: -20, opacity: 0 }}
+                    whileInView={{ x: 0, opacity: 1 }}
+                    viewport={{ once: true }}
+                    className={`relative z-10 h-full bg-black/60 backdrop-blur-xl p-8 flex flex-col transition-all duration-500 ${activeTab === 'gmail' ? 'w-24 overflow-hidden' : 'w-full'}`}
                 >
-                    {/* UI Header */}
-                    <div className="flex items-center justify-between mb-8 border-b border-white/5 pb-4">
+                    {/* Header */}
+                    <div className="flex items-center justify-between mb-10 min-w-[200px]">
                         <div className="flex items-center gap-3">
-                            <div className="w-8 h-8 bg-stealth-accent rounded-lg flex items-center justify-center">
-                                <Search size={16} className="text-black font-bold" />
-                            </div>
-                            <div className="flex flex-col">
-                                <span className="text-[10px] uppercase font-black tracking-widest text-white">Stealth Interface</span>
-                                <span className="text-[8px] font-mono text-neutral-500">Node Active: us-east-1</span>
+                            <motion.div
+                                whileHover={{ scale: 1.1, rotate: 5 }}
+                                className="w-10 h-10 bg-[#4a3aff] rounded-xl flex items-center justify-center shadow-lg"
+                            >
+                                <div className="w-5 h-5 text-white">
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                                    </svg>
+                                </div>
+                            </motion.div>
+                            <div className={activeTab === 'gmail' ? 'opacity-0' : 'opacity-100'}>
+                                <h3 className="text-sm font-bold text-white leading-none">Stealth AI</h3>
+                                <span className="text-[10px] text-neutral-500 font-medium tracking-tight">Personal</span>
                             </div>
                         </div>
-                        <div className="flex gap-2">
-                            <div className="px-3 py-1 bg-white/5 rounded-full border border-white/10 text-[8px] font-mono text-neutral-400">
-                                48 Contextual Feeds
-                            </div>
+                        <div className={`p-2 rounded-full bg-white/5 border border-white/10 ${activeTab === 'gmail' ? 'opacity-0' : 'opacity-100'}`}>
+                            <User size={14} className="text-neutral-400" />
                         </div>
                     </div>
 
-                    {/* Feed Content */}
-                    <div className="flex-grow space-y-4 overflow-hidden">
-                        <AnimatePresence>
-                            {actions.map((action, idx) => (
-                                <motion.div
-                                    key={action.id}
-                                    initial={{ x: -20, opacity: 0 }}
-                                    animate={{ x: 0, opacity: 1 }}
-                                    transition={{ delay: 0.5 + idx * 0.2 }}
-                                    className="p-4 bg-stealth-gray/50 border border-white/5 rounded-xl flex items-start gap-4 hover:border-stealth-accent/20 transition-all"
-                                >
-                                    <div className="w-10 h-10 rounded-lg bg-black flex items-center justify-center border border-white/5 shrink-0">
-                                        <action.icon size={18} className="text-stealth-accent" />
-                                    </div>
-                                    <div className="flex-grow min-w-0">
-                                        <div className="flex items-center justify-between mb-1">
-                                            <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-500">{action.type} • {action.app}</span>
-                                            <span className="text-[9px] font-mono text-neutral-600">{action.time}</span>
-                                        </div>
-                                        <h4 className="text-sm font-bold text-white mb-1 truncate">{action.title}</h4>
-                                        <p className="text-xs text-neutral-500 leading-relaxed truncate">{action.content}</p>
-                                    </div>
-                                    <div className="shrink-0 self-center">
-                                        <ArrowRight size={14} className="text-neutral-700" />
-                                    </div>
-                                </motion.div>
-                            ))}
-                        </AnimatePresence>
-                    </div>
-
-                    {/* Bottom Status */}
-                    <div className="mt-8 pt-4 border-t border-white/5 flex items-center justify-between text-[8px] font-mono uppercase tracking-[0.2em] text-neutral-600">
-                        <div className="flex items-center gap-2">
-                            <div className="w-1.5 h-1.5 rounded-full bg-stealth-accent animate-pulse" />
-                            Coordinating cross-app workflows
-                        </div>
-                        <span>v1.2.4-PROD</span>
-                    </div>
-                </motion.div>
-            </div>
-
-            {/* App Streams */}
-            <div className="absolute inset-0 z-10 pointer-events-none overflow-hidden">
-                <svg className="w-full h-full">
-                    {apps.map((app) => (
-                        <g key={app.id}>
-                            <motion.path
-                                d={`M ${parseFloat(app.position.left) * 10}% ${parseFloat(app.position.top) * 10}% Q 50 50, 50 50`}
-                                fill="none"
-                                stroke={app.color}
-                                strokeWidth="0.5"
-                                strokeOpacity="0.1"
-                                initial={{ pathLength: 0, opacity: 0 }}
-                                animate={{ pathLength: 1, opacity: 0.3 }}
-                                transition={{ duration: 2, repeat: Infinity, repeatType: 'loop', ease: 'linear' }}
-                            />
-                            {/* Animated particles along path (Simplified) */}
-                            <motion.circle
-                                r="1.5"
-                                fill={app.color}
-                                filter="blur(1px)"
-                                initial={{ opacity: 0 }}
-                                animate={{
-                                    opacity: [0, 1, 0],
-                                    cx: [`${parseFloat(app.position.left)}%`, "50%"],
-                                    cy: [`${parseFloat(app.position.top)}%`, "50%"]
-                                }}
-                                transition={{
-                                    duration: 3 + Math.random() * 2,
-                                    repeat: Infinity,
-                                    ease: 'linear',
-                                    delay: Math.random() * 3
-                                }}
-                            />
-                        </g>
-                    ))}
-                </svg>
-            </div>
-
-            {/* App Floating Icons */}
-            {apps.map((app) => (
-                <motion.div
-                    key={app.id}
-                    style={{ top: app.position.top, left: app.position.left }}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: Math.random() * 0.5 }}
-                    className="absolute z-30 group"
-                >
-                    <div className="relative">
-                        <div
-                            className="w-12 h-12 rounded-2xl bg-black border border-white/10 flex items-center justify-center shadow-xl group-hover:border-white/20 transition-all overflow-hidden"
-                        >
+                    {/* Navigation */}
+                    <div className="space-y-1 mb-10 min-w-[200px]">
+                        {[
+                            { icon: MessageSquare, label: 'Chat', active: true },
+                            { icon: Briefcase, label: 'Projects' },
+                            { icon: Calendar, label: 'Calendar' },
+                            { icon: CheckSquare, label: 'To-Dos' }
+                        ].map((item, idx) => (
                             <div
-                                className="absolute inset-0 opacity-10"
-                                style={{ backgroundColor: app.color }}
-                            />
-                            <app.icon size={20} className="text-white relative z-10 opaciy-80" />
+                                key={item.label}
+                                className={`relative flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors ${item.active ? 'bg-white/5 text-white' : 'text-neutral-400'}`}
+                            >
+                                <item.icon size={18} className={item.active ? 'text-[#4a3aff]' : ''} />
+                                <span className={`text-xs ${item.active ? 'font-semibold' : 'font-medium'} ${activeTab === 'gmail' ? 'opacity-0' : 'opacity-100'}`}>{item.label}</span>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Integrations */}
+                    <div className="mb-10 min-w-[200px]">
+                        <h4 className={`text-[10px] font-black tracking-widest text-neutral-600 uppercase mb-4 px-3 ${activeTab === 'gmail' ? 'opacity-0' : 'opacity-100'}`}>Integrations</h4>
+                        <div className="space-y-4 px-3">
+                            <div
+                                className={`flex items-center justify-between group/item transition-all duration-300 ${activeTab === 'gmail' ? 'scale-110' : ''}`}
+                            >
+                                <div className="flex items-center gap-3">
+                                    <motion.div
+                                        animate={demoPhase === 'clicked' ? { scale: [1, 0.9, 1] } : {}}
+                                        className={`w-5 h-5 bg-white/10 rounded flex items-center justify-center overflow-hidden transition-all ${activeTab === 'gmail' ? 'bg-[#4a3aff]/20 border border-[#4a3aff]/30' : ''}`}
+                                    >
+                                        <img src="https://www.google.com/favicon.ico" className="w-3 h-3 grayscale transition-all group-hover/item:grayscale-0" />
+                                    </motion.div>
+                                    <span className={`text-[11px] font-medium transition-colors ${activeTab === 'gmail' ? 'text-white' : 'text-neutral-300 group-hover/item:text-white'}`}>Google Workspace</span>
+                                </div>
+                                <div className={`w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)] ${activeTab === 'gmail' ? 'animate-ping' : ''}`} />
+                            </div>
+                            <div className="flex items-center justify-between opacity-50">
+                                <div className="flex items-center gap-3">
+                                    <div className="w-5 h-5 bg-white/10 rounded flex items-center justify-center p-1">
+                                        <svg viewBox="0 0 24 24" className="w-full h-full grayscale opacity-70" fill="currentColor">
+                                            <path d="M6 15a2 2 0 100 4 2 2 0 000-4zm4-4h2v2h-2v-2zm-6 0h2v2H4v-2zm8 4a2 2 0 100 4 2 2 0 000-4z" />
+                                        </svg>
+                                    </div>
+                                    <span className="text-[11px] font-medium text-neutral-300">Slack</span>
+                                </div>
+                                <div className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                            </div>
                         </div>
-                        <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 whitespace-nowrap">
-                            <span className="text-[9px] font-bold uppercase tracking-widest text-neutral-600 group-hover:text-neutral-400 transition-colors">
-                                {app.name}
-                            </span>
+                    </div>
+
+                    {/* AI Engine - Only show when expanded */}
+                    <div className={`mt-auto px-1 transition-opacity duration-300 ${activeTab === 'gmail' ? 'opacity-0' : 'opacity-100'}`}>
+                        <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/5">
+                            <div className="flex items-center justify-between mb-1">
+                                <span className="text-xs font-bold text-white tracking-tight">Auto (Robust)</span>
+                                <div className="w-2 h-2 rounded-full bg-[#00f5ff] animate-pulse" />
+                            </div>
+                            <p className="text-[10px] text-neutral-500 font-medium">Hybrid Reasoning</p>
                         </div>
                     </div>
                 </motion.div>
-            ))}
 
-            {/* Floating Popups/Status */}
-            <motion.div
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 2, duration: 1 }}
-                className="absolute bottom-8 right-8 z-40 bg-stealth-accent/10 border border-stealth-accent/30 rounded-lg p-3 backdrop-blur-md flex items-center gap-3"
-            >
-                <div className="w-6 h-6 rounded-full bg-stealth-accent flex items-center justify-center">
-                    <CheckCircle2 size={12} className="text-black" />
-                </div>
-                <div>
-                    <div className="text-[8px] font-bold uppercase text-white tracking-widest">Action Executed</div>
-                    <div className="text-[9px] text-stealth-accent/80 font-mono">Consolidated 12 unread Slack threads</div>
-                </div>
-            </motion.div>
+                {/* Gmail UI Overlay */}
+                <AnimatePresence>
+                    {activeTab === 'gmail' && (
+                        <motion.div
+                            initial={{ x: 200, opacity: 0 }}
+                            animate={{ x: 0, opacity: 1 }}
+                            exit={{ x: 200, opacity: 0 }}
+                            className="flex-grow h-full bg-[#1a1a1b] flex flex-col shadow-[-20px_0_50px_rgba(0,0,0,0.5)]"
+                        >
+                            {/* Gmail Header */}
+                            <div className="h-16 border-b border-white/5 flex items-center justify-between px-6 bg-[#0f0f10]">
+                                <div className="flex items-center gap-4 flex-grow max-w-2xl">
+                                    <div className="p-2 hover:bg-white/5 rounded-full text-neutral-400">
+                                        <ChevronLeft size={20} />
+                                    </div>
+                                    <div className="flex-grow relative">
+                                        <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-600" />
+                                        <input
+                                            placeholder="Search mail"
+                                            readOnly
+                                            className="w-full bg-white/5 border border-white/5 rounded-full py-2 pl-12 pr-4 text-sm text-white focus:outline-none"
+                                        />
+                                    </div>
+                                </div>
+                                <div className="flex items-center gap-4">
+                                    <div className="w-8 h-8 rounded-full bg-[#ea4335] flex items-center justify-center text-[10px] font-bold text-white shadow-lg">G</div>
+                                </div>
+                            </div>
 
-            <motion.div
-                initial={{ y: -20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 1.5, duration: 1 }}
-                className="absolute top-12 right-12 z-40 bg-stealth-gray border border-white/5 rounded-lg p-3 shadow-2xl flex items-center gap-3"
-            >
-                <Clock size={14} className="text-neutral-500" />
-                <div className="text-[9px] text-neutral-400 font-mono">Real-time syncing enabled</div>
-            </motion.div>
+                            <div className="flex flex-grow overflow-hidden relative">
+                                {/* Gmail Sidebar */}
+                                <div className="w-16 h-full border-r border-white/5 flex flex-col items-center py-6 gap-6 bg-[#0f0f10]">
+                                    <div className="p-3 bg-white/[0.03] rounded-2xl text-white shadow-lg"><Inbox size={20} /></div>
+                                    <div className="p-3 text-neutral-600"><Star size={20} /></div>
+                                    <div className="p-3 text-neutral-600"><Clock size={20} /></div>
+                                    <div className="p-3 text-neutral-600"><Send size={20} /></div>
+                                    <div className="mt-auto p-3 text-neutral-600"><Settings size={20} /></div>
+                                </div>
+
+                                {/* Inbox List */}
+                                <div className="flex-grow flex flex-col bg-[#141415]">
+                                    {/* Tabs */}
+                                    <div className="flex border-b border-white/5 px-4 h-14 items-center gap-8">
+                                        <div className="flex items-center gap-3 text-[#ea4335] text-xs font-bold border-b-2 border-[#ea4335] h-full px-2">
+                                            <Inbox size={14} /> Primary
+                                        </div>
+                                        <div className="flex items-center gap-3 text-neutral-600 text-xs font-medium h-full px-2">
+                                            <Tag size={14} /> Promotions
+                                        </div>
+                                        <div className="flex items-center gap-3 text-neutral-600 text-xs font-medium h-full px-2">
+                                            <Users size={14} /> Social
+                                        </div>
+                                    </div>
+
+                                    {/* Emails */}
+                                    <div className="flex-grow overflow-y-auto">
+                                        {gmailEmails.map((email) => (
+                                            <div
+                                                key={email.id}
+                                                className={`flex items-center gap-4 px-6 py-4 border-b border-white/5 ${email.unread ? 'bg-white/[0.02]' : ''}`}
+                                            >
+                                                <div className="text-neutral-700"><Star size={18} /></div>
+                                                <div className={`w-32 text-sm truncate ${email.unread ? 'font-bold text-white' : 'text-neutral-400'}`}>{email.sender}</div>
+                                                <div className="flex-grow min-w-0">
+                                                    <span className={`text-sm mr-2 ${email.unread ? 'font-bold text-white' : 'text-neutral-300'}`}>{email.subject}</span>
+                                                    <span className="text-sm text-neutral-500 truncate inline-block w-full">— {email.preview}</span>
+                                                </div>
+                                                <div className={`text-xs w-20 text-right ${email.unread ? 'font-bold text-[#ea4335]' : 'text-neutral-600'}`}>{email.time}</div>
+                                            </div>
+                                        ))}
+                                    </div>
+
+                                    {/* AI Overlay Suggestion */}
+                                    <motion.div
+                                        initial={{ y: 50, opacity: 0 }}
+                                        animate={{ y: 0, opacity: 1 }}
+                                        transition={{ delay: 1 }}
+                                        className="absolute bottom-8 right-8 left-8 p-6 bg-black/80 backdrop-blur-2xl border border-[#4a3aff]/30 rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.8)] z-50 flex items-center justify-between"
+                                    >
+                                        <div className="flex items-center gap-5">
+                                            <div className="w-12 h-12 bg-[#4a3aff] rounded-2xl flex items-center justify-center text-white shadow-[0_0_20px_rgba(74,58,255,0.4)]">
+                                                <Sparkles size={24} className="animate-pulse" />
+                                            </div>
+                                            <div>
+                                                <div className="text-[10px] font-black tracking-widest text-[#4a3aff] uppercase mb-1">Stealth Intelligent Action</div>
+                                                <div className="text-sm font-bold text-white">Consolidate roadmap updates?</div>
+                                            </div>
+                                        </div>
+                                        <button className="px-6 py-2 bg-[#4a3aff] text-white text-[10px] font-black uppercase tracking-[0.2em] rounded-xl shadow-[0_0_20px_rgba(74,58,255,0.3)]">
+                                            Execute
+                                        </button>
+                                    </motion.div>
+                                </div>
+                            </div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+            </div>
+
+            {/* Simulated Mouse Cursor */}
+            <AnimatePresence>
+                {demoPhase !== 'viewing' && (
+                    <motion.div
+                        initial={{ opacity: 0, x: 600, y: 400 }}
+                        animate={
+                            demoPhase === 'moving'
+                                ? { opacity: 1, x: 180, y: 345 } // Position of Google Workspace Integration
+                                : demoPhase === 'clicked'
+                                    ? { opacity: 1, x: 180, y: 345, scale: 0.8 }
+                                    : demoPhase === 'resetting'
+                                        ? { opacity: 0, x: 600, y: 400 }
+                                        : { opacity: 0 }
+                        }
+                        transition={{
+                            duration: demoPhase === 'moving' ? 1.5 : 0.3,
+                            ease: "easeInOut"
+                        }}
+                        className="absolute z-[100] pointer-events-none text-white drop-shadow-2xl"
+                        style={{ filter: 'drop-shadow(0 0 10px rgba(0,245,255,0.5))' }}
+                    >
+                        <MousePointer2 size={32} fill="white" stroke="black" strokeWidth={1} />
+                        <motion.div
+                            animate={{ scale: [1, 2, 1], opacity: [0, 0.5, 0] }}
+                            transition={{ duration: 0.5, repeat: demoPhase === 'clicked' ? 0 : Infinity }}
+                            className="absolute -top-1 -left-1 w-8 h-8 bg-[#4a3aff] rounded-full -z-10 blur-sm"
+                        />
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </div>
     );
 };

@@ -34,7 +34,7 @@ const UseCases = () => {
         <Section className="bg-neutral-900/10">
             <div className="flex flex-col md:flex-row gap-24 items-end mb-24">
                 <div className="max-w-xl">
-                    <h2 className="text-4xl md:text-6xl font-bold mb-8">Tailored for <br /> Builders.</h2>
+                    <h2 className="text-4xl md:text-6xl font-bold mb-8">Tailored for <br /> Project Managers.</h2>
                     <p className="text-neutral-500 text-xl leading-relaxed">
                         One utility, infinite workflows. Stealth adapts to the way you think and build.
                     </p>

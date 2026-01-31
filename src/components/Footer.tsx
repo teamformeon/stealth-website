@@ -22,7 +22,7 @@ const Footer = () => {
                             <span className="text-2xl font-black tracking-tighter uppercase">Stealth Technologies</span>
                         </Link>
                         <p className="text-neutral-500 text-lg leading-relaxed max-w-sm mb-10">
-                            Designed for high-performance builders who demand more from their professional workspace.
+                            Designed for high-performance project managers who demand more from their professional workspace.
                         </p>
                     </div>
 

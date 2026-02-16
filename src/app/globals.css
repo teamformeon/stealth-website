@@ -1,14 +1,14 @@
 @import "tailwindcss";
 
 @theme {
-  --color-background: #000000;
-  --color-foreground: #ffffff;
+  --color-background: #ffffff;
+  --color-foreground: #000000;
 
-  --color-stealth-black: #050505;
-  --color-stealth-gray: #111111;
-  --color-stealth-light-gray: #1a1a1a;
-  --color-stealth-accent: #00f5ff;
-  --color-stealth-subtle: rgba(255, 255, 255, 0.4);
+  --color-stealth-black: #ffffff;
+  --color-stealth-gray: #f5f5f5;
+  --color-stealth-light-gray: #ececec;
+  --color-stealth-accent: #000000;
+  --color-stealth-subtle: rgba(0, 0, 0, 0.4);
 
   --font-sans: "Inter", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", monospace;
@@ -17,8 +17,8 @@
 }
 
 :root {
-  --background: #000000;
-  --foreground: #ffffff;
+  --background: #ffffff;
+  --foreground: #000000;
 }
 
 body {
@@ -79,17 +79,17 @@ h4 {
 
 /* Premium Card */
 .premium-card {
-  background: #050505;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.05);
   border-radius: 24px;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
 }
 
 .premium-card:hover {
-  border-color: rgba(0, 245, 255, 0.3);
-  background: #080808;
+  border-color: rgba(0, 0, 0, 0.1);
   transform: translateY(-4px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
 }
 
 /* Animations */

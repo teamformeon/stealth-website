@@ -8,48 +8,48 @@ import { motion } from 'framer-motion';
 
 const features = [
     {
-        title: 'Context Awareness',
-        description: 'Stealth AI retains continuous memory across your entire desktop. It understands what you’re working on—whether it’s a Slack thread, a local spreadsheet, or a browser terminal—and acts accordingly.',
+        title: 'Instant Synthesis',
+        description: 'Upload 50 customer interviews, support tickets, or sales calls. Stealth identifies common patterns instantly, giving you a single source of truth for user pain points.',
         icon: <Layers size={24} />,
     },
     {
-        title: 'Cross-App Execution',
-        description: 'Beyond generation, it performs. Stealth drafts emails, updates CRM records, pulls data from dashboards, and coordinates tasks between tools without you lifting a finger.',
-        icon: <MousePointer2 size={24} />,
+        title: 'Living PRDs',
+        description: 'Generate comprehensive Product Requirements Docs that link directly to your source data. When the data changes, your specs update automatically.',
+        icon: <Command size={24} />,
     },
     {
-        title: 'Predictive Assistance',
-        description: 'By observing your workflows, Stealth anticipates your next move. It surfaces relevant information and drafts actions before you explicitly ask, reducing tool switching by 80%.',
+        title: 'Strategic Clarity',
+        description: 'Stealth connects the dots between usage metrics and qualitative feedback, highlighting exactly which feature will drive the most impact next.',
         icon: <Zap size={24} />,
     },
     {
-        title: 'Zero Prompting',
-        description: 'No prompt engineering. No complex command syntax. Stealth works silently in the background, executing intent rather than just following instructions.',
-        icon: <Command size={24} />,
+        title: 'Automated Discovery',
+        description: 'Let Stealth browse your linear tickets and github issues to find discrepancies between what was planned and what was built.',
+        icon: <MousePointer2 size={24} />,
     },
 ];
 
 const Features = () => {
     return (
-        <Section id="features">
-            <div className="max-w-2xl mb-24">
+        <Section id="features" className="bg-slate-50/50">
+            <div className="max-w-3xl mb-24">
                 <motion.h2
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="text-4xl md:text-6xl font-bold mb-8 uppercase"
+                    className="text-4xl md:text-5xl font-bold mb-6 tracking-tight text-black"
                 >
-                    Software that <br />
-                    <span className="text-stealth-accent">Executes.</span>
+                    From Gut Feeling to <br />
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Data-Driven Strategy.</span>
                 </motion.h2>
                 <motion.p
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.1 }}
-                    className="text-neutral-500 text-xl leading-relaxed max-w-xl"
+                    className="text-slate-500 text-lg leading-relaxed max-w-2xl font-light"
                 >
-                    Stealth Technologies isn’t another chatbot. It’s an execution layer designed for operators who need work done, not just text generated.
+                    Stop guessing what to build. Stealth ingests your customer feedback, market data, and usage metrics to reveal the truth about your product.
                 </motion.p>
             </div>
 

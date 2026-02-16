@@ -6,6 +6,7 @@ import AIFeatures from "@/components/AIFeatures";
 import ProductStory from "@/components/ProductStory";
 import UseCases from "@/components/UseCases";
 import Vision from "@/components/Vision";
+import BookDemo from "@/components/BookDemo";
 import FinalCTA from "@/components/FinalCTA";
 
 export default function Home() {
@@ -19,6 +20,7 @@ export default function Home() {
       <ProductStory />
       <UseCases />
       <Vision />
+      <BookDemo />
       <FinalCTA />
     </div>
   );

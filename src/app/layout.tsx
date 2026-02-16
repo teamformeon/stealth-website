@@ -16,8 +16,8 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Stealth | The Intelligent OS Layer",
-  description: "Experience the next generation of productivity with Stealth.",
+  title: "Stealth | AI Assistant That Understands Context",
+  description: "System-wide AI assistant that automatically analyzes your screen and suggests actions—no prompts needed. Integrates with email, calendar, tasks, Notion, Slack, and more.",
 };
 
 export default function RootLayout({
@@ -29,7 +29,7 @@ export default function RootLayout({
     <html lang="en" className="scroll-smooth">
       <body
         className={cn(
-          "min-h-screen bg-black font-sans text-white selection:bg-stealth-accent/30",
+          "min-h-screen bg-white font-sans text-black selection:bg-blue-100",
           inter.variable,
           jetbrainsMono.variable
         )}
@@ -38,8 +38,8 @@ export default function RootLayout({
 
         {/* Simplified Background Blobs */}
         <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
-          <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-stealth-accent/5 blur-[120px] rounded-full animate-glow" />
-          <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-purple-500/5 blur-[120px] rounded-full animate-glow" style={{ animationDelay: '-5s' }} />
+          <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-blue-100/30 blur-[120px] rounded-full animate-glow" />
+          <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-indigo-100/30 blur-[120px] rounded-full animate-glow" style={{ animationDelay: '-5s' }} />
         </div>
 
         <div className="relative z-10 flex flex-col min-h-screen">

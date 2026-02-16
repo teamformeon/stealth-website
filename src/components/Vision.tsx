@@ -7,43 +7,43 @@ import { motion } from 'framer-motion';
 
 const Vision = () => {
     return (
-        <Section id="vision" className="border-t border-white/5">
+        <Section id="vision" className="border-t border-slate-200 bg-white">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
                 <div>
-                    <h2 className="text-4xl md:text-6xl font-bold mb-10 tracking-tight uppercase">The <br /><span className="text-neutral-500 italic">Vision.</span></h2>
+                    <h2 className="text-4xl md:text-6xl font-bold mb-10 tracking-tight text-black">The <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Vision.</span></h2>
                     <div className="space-y-12">
                         <div className="flex gap-6">
-                            <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-stealth-light-gray flex items-center justify-center text-stealth-accent">
+                            <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600">
                                 <Activity size={20} />
                             </div>
                             <div>
-                                <h3 className="text-xl font-bold mb-2 uppercase tracking-widest text-[11px] text-neutral-400">Computational Trust</h3>
-                                <p className="text-neutral-500 leading-relaxed text-sm">We are building an AI coordination layer that understands work as deeply as you do, with zero-compromise on data sovereignty.</p>
+                                <h3 className="text-xl font-bold mb-2 text-black">Context-Aware Intelligence</h3>
+                                <p className="text-slate-600 leading-relaxed text-sm">Stealth automatically analyzes your screen, understands what you're working on, and suggests relevant actions—all without you writing a prompt.</p>
                             </div>
                         </div>
                         <div className="flex gap-6">
-                            <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-stealth-light-gray flex items-center justify-center text-stealth-accent">
+                            <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600">
                                 <Fingerprint size={20} />
                             </div>
                             <div>
-                                <h3 className="text-xl font-bold mb-2 uppercase tracking-widest text-[11px] text-neutral-400">Engineering First</h3>
-                                <p className="text-neutral-500 leading-relaxed text-sm">Born from deep user research, Stealth Technologies is built for practitioners who need tools that solve fragmentation, not just add to it.</p>
+                                <h3 className="text-xl font-bold mb-2 text-black">System-Wide Integration</h3>
+                                <p className="text-slate-600 leading-relaxed text-sm">Works across your entire workflow: email, calendar, tasks, notes, Notion, Slack, and more. Context flows seamlessly between tools.</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div className="premium-card p-12 bg-white/[0.02]">
+                <div className="premium-card p-12 bg-white border border-slate-200 shadow-lg">
                     <div className="flex flex-col items-center text-center gap-6">
-                        <Activity className="w-16 h-16 text-stealth-accent opacity-40 mb-4" />
-                        <h3 className="text-2xl font-bold uppercase tracking-tighter">Our Mission</h3>
-                        <p className="text-neutral-500 text-sm max-w-sm leading-relaxed">
-                            To reduce cognitive overhead at scale and create a world where software executes work, instead of just housing it.
+                        <Activity className="w-16 h-16 text-blue-600 mb-4" />
+                        <h3 className="text-2xl font-bold text-black">Our Mission</h3>
+                        <p className="text-slate-600 text-sm max-w-sm leading-relaxed">
+                            To build AI assistance that works automatically—understanding context, suggesting actions, and helping you be more productive without the friction of prompts.
                         </p>
-                        <div className="mt-8 pt-8 border-t border-white/5 w-full flex justify-center gap-8 opacity-40">
-                            <Activity size={16} />
-                            <Fingerprint size={16} />
-                            <Settings size={16} />
+                        <div className="mt-8 pt-8 border-t border-slate-200 w-full flex justify-center gap-8">
+                            <Activity size={16} className="text-blue-600" />
+                            <Fingerprint size={16} className="text-blue-600" />
+                            <Settings size={16} className="text-blue-600" />
                         </div>
                     </div>
                 </div>

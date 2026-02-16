@@ -3,51 +3,44 @@
 import React from 'react';
 import Section from './Section';
 import { motion } from 'framer-motion';
-import { Briefcase, UserCheck, Settings, Workflow } from 'lucide-react';
+
+import { Briefcase, Rocket, TrendingUp, CheckCircle2 } from 'lucide-react';
 
 const targets = [
     {
-        role: 'Product Managers',
-        context: 'Coordinate across design, engineering, and stakeholders without losing context in endless tabs.',
+        role: 'Knowledge Workers',
+        context: 'Get intelligent assistance across email, calendar, tasks, and notes. Stealth understands context and suggests actions automatically.',
         icon: <Briefcase size={20} />,
+        benefits: ['Email Management', 'Calendar Integration', 'Task Automation'],
     },
     {
-        role: 'Executive Assistants',
-        context: 'Manage complex schedules, draft communications, and stay ahead of executive needs automatically.',
-        icon: <UserCheck size={20} />,
-    },
-    {
-        role: 'RevOps / Sales Ops',
-        context: 'Maintain data integrity and automate cross-tool coordination for fast-moving sales teams.',
-        icon: <Settings size={20} />,
-    },
-    {
-        role: 'Operators',
-        context: 'Anyone managing high-complexity workflows where tool-switching is the bottleneck.',
-        icon: <Workflow size={20} />,
+        role: 'Product Teams',
+        context: 'Coordinate across tools without context switching. Stealth integrates with Notion, Slack, and your entire workflow.',
+        icon: <Rocket size={20} />,
+        benefits: ['Cross-Tool Context', 'Automated Summaries', 'Proactive Suggestions'],
     },
 ];
 
 const WhoItFor = () => {
     return (
-        <Section className="border-t border-white/5 bg-white/[0.01]">
+        <Section className="border-t border-slate-200 bg-slate-50">
             <div className="max-w-4xl mx-auto text-center mb-24">
                 <motion.h2
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="text-4xl md:text-5xl font-bold mb-8 uppercase tracking-tight"
+                    className="text-4xl md:text-5xl font-bold mb-8 text-black"
                 >
-                    Built for <span className="text-stealth-accent italic">Operators.</span>
+                    Built for <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Everyone.</span>
                 </motion.h2>
                 <motion.p
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.1 }}
-                    className="text-neutral-500 text-lg leading-relaxed"
+                    className="text-slate-600 text-lg leading-relaxed"
                 >
-                    Stealth Technologies is designed for those who manage complexity, not just conversations.
+                    Stealth works for anyone who wants AI assistance that understands context—no prompts, no manual setup, just intelligent help when you need it.
                 </motion.p>
             </div>
 
@@ -59,15 +52,23 @@ const WhoItFor = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: idx * 0.1 }}
-                        className="p-8 rounded-3xl bg-white/[0.02] border border-white/5 hover:bg-white/[0.04] transition-all group"
+                        className="p-8 rounded-3xl bg-white border border-slate-200 hover:border-blue-300 hover:shadow-lg transition-all group"
                     >
-                        <div className="w-10 h-10 rounded-xl bg-stealth-accent/10 border border-stealth-accent/20 flex items-center justify-center text-stealth-accent mb-6 group-hover:scale-110 transition-transform">
+                        <div className="w-12 h-12 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600 mb-6 group-hover:scale-110 transition-transform">
                             {target.icon}
                         </div>
-                        <h3 className="text-xl font-bold mb-4 uppercase tracking-wider">{target.role}</h3>
-                        <p className="text-neutral-500 leading-relaxed text-sm">
+                        <h3 className="text-2xl font-bold mb-4 text-black">{target.role}</h3>
+                        <p className="text-slate-600 leading-relaxed mb-6">
                             {target.context}
                         </p>
+                        <div className="space-y-2">
+                            {target.benefits?.map((benefit, i) => (
+                                <div key={i} className="flex items-center gap-2 text-slate-600">
+                                    <CheckCircle2 size={16} className="text-blue-600" />
+                                    <span className="text-sm">{benefit}</span>
+                                </div>
+                            ))}
+                        </div>
                     </motion.div>
                 ))}
             </div>

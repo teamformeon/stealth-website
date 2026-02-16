@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Logo from './Logo';
 
 const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -22,24 +23,21 @@ const Navbar = () => {
         <nav
             className={cn(
                 'fixed top-0 left-0 right-0 z-[60] transition-all duration-500',
-                isScrolled ? 'glass-nav py-4' : 'bg-transparent py-8'
+                isScrolled ? 'bg-white/80 backdrop-blur-xl border-b border-slate-200 py-4' : 'bg-transparent py-8'
             )}
         >
             <div className="container-wide flex items-center justify-between">
-                <Link href="/" className="flex items-center gap-3 active:scale-95 transition-transform">
-                    <div className="w-6 h-6 bg-white rounded-sm rotate-45 flex-shrink-0" />
-                    <span className="text-xl font-bold tracking-tighter uppercase">Stealth Technologies</span>
-                </Link>
+                <Logo showText={true} size="md" textColor={isScrolled ? "black" : "white"} />
 
                 {/* Desktop Links - Minimal & Spacious */}
                 <div className="hidden md:flex items-center gap-10">
-                    <div className="flex items-center gap-8 text-[13px] font-medium text-neutral-500 uppercase tracking-widest">
-                        <Link href="/#features" className="hover:text-white transition-colors">Features</Link>
-                        <Link href="/#how-it-works" className="hover:text-white transition-colors">Process</Link>
+                    <div className={cn("flex items-center gap-8 text-[13px] font-medium uppercase tracking-widest transition-colors", isScrolled ? "text-slate-600" : "text-white/80")}>
+                        <Link href="/#features" className={cn("hover:opacity-70 transition-opacity", isScrolled ? "hover:text-black" : "hover:text-white")}>Features</Link>
+                        <Link href="/#how-it-works" className={cn("hover:opacity-70 transition-opacity", isScrolled ? "hover:text-black" : "hover:text-white")}>Process</Link>
                     </div>
-                    <div className="h-4 w-px bg-white/10" />
+                    <div className={cn("h-4 w-px transition-colors", isScrolled ? "bg-slate-300" : "bg-white/20")} />
                     <div className="flex items-center gap-4">
-                        <Link href="/#explore" className="text-[13px] font-bold text-white uppercase tracking-widest hover:opacity-70 transition-opacity">
+                        <Link href="/#explore" className={cn("text-[13px] font-bold uppercase tracking-widest hover:opacity-70 transition-opacity", isScrolled ? "text-black" : "text-white")}>
                             Explore the Product
                         </Link>
                     </div>
@@ -47,7 +45,7 @@ const Navbar = () => {
 
                 {/* Mobile Toggle */}
                 <button
-                    className="md:hidden text-white p-2"
+                    className={cn("md:hidden p-2 transition-colors", isScrolled ? "text-black" : "text-white")}
                     onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 >
                     {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}

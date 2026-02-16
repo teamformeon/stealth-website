@@ -7,7 +7,7 @@ import ConsolidationVisual from './ConsolidationVisual';
 
 const ProductStory = () => {
     return (
-        <Section className="border-t border-white/5 bg-neutral-900/10 overflow-hidden flex flex-col items-center justify-center">
+        <Section className="border-t border-slate-200 bg-slate-50 overflow-hidden flex flex-col items-center justify-center">
             <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}

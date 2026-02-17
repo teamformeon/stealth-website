@@ -4,30 +4,12 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 const logos = [
-    {
-        name: 'Google',
-        url: 'https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg',
-    },
-    {
-        name: 'Uber',
-        url: 'https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.svg',
-    },
-    {
-        name: 'Underdog',
-        url: 'https://logo.clearbit.com/underdogfantasy.com',
-    },
-    {
-        name: 'Microsoft',
-        url: 'https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg',
-    },
-    {
-        name: 'Apple',
-        url: 'https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg',
-    },
-    {
-        name: 'Nintendo',
-        url: 'https://upload.wikimedia.org/wikipedia/commons/8/83/Nintendo_red_logo.svg',
-    }
+    { name: 'Google', url: '/logos/google.svg' },
+    { name: 'Uber', url: '/logos/uber.svg' },
+    { name: 'Underdog', url: '/logos/underdog.svg' },
+    { name: 'Microsoft', url: '/logos/microsoft.svg' },
+    { name: 'Apple', url: '/logos/apple.svg' },
+    { name: 'Nintendo', url: '/logos/nintendo.svg' },
 ];
 
 const CompanyLogos = () => {

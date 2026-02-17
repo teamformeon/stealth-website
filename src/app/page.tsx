@@ -1,9 +1,9 @@
 import Hero from "@/components/Hero";
+import CompanyLogos from "@/components/CompanyLogos";
 import ProblemStatement from "@/components/ProblemStatement";
 import Stats from "@/components/Stats";
 import VisionSection from "@/components/VisionSection";
 import AIFeatures from "@/components/AIFeatures";
-import ProductStory from "@/components/ProductStory";
 import UseCases from "@/components/UseCases";
 import Vision from "@/components/Vision";
 import BookDemo from "@/components/BookDemo";
@@ -13,11 +13,11 @@ export default function Home() {
   return (
     <div className="relative">
       <Hero />
+      <CompanyLogos />
       <ProblemStatement />
       <Stats />
       <VisionSection />
       <AIFeatures />
-      <ProductStory />
       <UseCases />
       <Vision />
       <BookDemo />

@@ -14,54 +14,64 @@ const Footer = () => {
     };
 
     return (
-        <footer className="bg-black pt-32 pb-16 px-6 border-t border-white/5">
+        <footer className="bg-slate-50 pt-32 pb-16 px-6 border-t border-slate-200">
             <div className="max-w-6xl mx-auto">
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-16 mb-24">
-                    <div className="md:col-span-5">
+                    <div className="md:col-span-4">
                         <div className="mb-8">
-                            <Logo showText={true} size="md" textColor="white" />
+                            <Logo showText={true} size="md" textColor="black" />
                         </div>
-                        <p className="text-neutral-500 text-lg leading-relaxed max-w-sm mb-10">
+                        <p className="text-slate-500 text-lg leading-relaxed max-w-sm mb-10">
                             Designed for high-performance project managers who demand more from their professional workspace.
                         </p>
                     </div>
 
                     <div className="md:col-span-2">
-                        <h4 className="text-[11px] font-bold text-white uppercase tracking-[0.2em] mb-8">Platform</h4>
-                        <ul className="space-y-4 text-sm text-neutral-500">
-                            <li><Link href="/#features" className="hover:text-white">Features</Link></li>
-                            <li><Link href="/#how-it-works" className="hover:text-white">Process</Link></li>
+                        <h4 className="text-[11px] font-bold text-slate-900 uppercase tracking-[0.2em] mb-8">Platform</h4>
+                        <ul className="space-y-4 text-sm text-slate-500">
+                            <li><Link href="/#features" className="hover:text-blue-600 transition-colors">Features</Link></li>
+                            <li><Link href="/#how-it-works" className="hover:text-blue-600 transition-colors">Process</Link></li>
                         </ul>
                     </div>
 
                     <div className="md:col-span-2">
-                        <h4 className="text-[11px] font-bold text-white uppercase tracking-[0.2em] mb-8">Company</h4>
-                        <ul className="space-y-4 text-sm text-neutral-500">
-                            <li><Link href="#" className="hover:text-white">About</Link></li>
-                            <li><Link href="/security" className="hover:text-white">Security</Link></li>
+                        <h4 className="text-[11px] font-bold text-slate-900 uppercase tracking-[0.2em] mb-8">Company</h4>
+                        <ul className="space-y-4 text-sm text-slate-500">
+                            <li><Link href="#" className="hover:text-blue-600 transition-colors">About</Link></li>
+                            <li><Link href="/security" className="hover:text-blue-600 transition-colors">Security</Link></li>
                         </ul>
                     </div>
 
-                    <div className="md:col-span-3">
-                        <h4 className="text-[11px] font-bold text-white uppercase tracking-[0.2em] mb-8">Support</h4>
+                    <div className="md:col-span-2">
+                        <h4 className="text-[11px] font-bold text-slate-900 uppercase tracking-[0.2em] mb-8">Legal</h4>
+                        <ul className="space-y-4 text-sm text-slate-500">
+                            <li><Link href="/privacy" className="hover:text-blue-600 transition-colors">Privacy Policy</Link></li>
+                            <li><Link href="/terms" className="hover:text-blue-600 transition-colors">Terms of Service</Link></li>
+                        </ul>
+                    </div>
+
+                    <div className="md:col-span-2">
+                        <h4 className="text-[11px] font-bold text-slate-900 uppercase tracking-[0.2em] mb-8">Support</h4>
                         <button
                             onClick={copyEmail}
-                            className="group flex items-center justify-between p-4 rounded-2xl bg-white/[0.05] border border-white/10 w-full hover:border-white/20 hover:bg-white/[0.08] transition-all"
+                            className="group flex items-center justify-between p-3 rounded-xl bg-white border border-slate-200 w-full hover:border-blue-300 hover:shadow-md transition-all"
                         >
-                            <div className="flex items-center gap-3">
-                                <Mail size={16} className="text-white" />
-                                <span className="text-sm text-white">stealthassistant1@gmail.com</span>
+                            <div className="flex items-center gap-2 overflow-hidden">
+                                <Mail size={16} className="text-slate-400 group-hover:text-blue-600 transition-colors flex-shrink-0" />
+                                <span className="text-xs text-slate-600 font-medium truncate">Email Us</span>
                             </div>
-                            <Copy size={14} className="text-white/70 group-hover:text-white transition-colors" />
+                            <Copy size={12} className="text-slate-300 group-hover:text-blue-600 transition-colors flex-shrink-0" />
                         </button>
                     </div>
                 </div>
 
-                <div className="flex flex-col md:flex-row items-center justify-between gap-8 text-[11px] font-bold text-neutral-700 uppercase tracking-widest pt-12 border-t border-white/5">
+                <div className="flex flex-col md:flex-row items-center justify-between gap-8 text-[11px] font-bold text-slate-400 uppercase tracking-widest pt-12 border-t border-slate-200">
                     <div>© {currentYear} Stealth Technologies Corp.</div>
                     <div className="flex gap-10">
-                        <span>Status: All Systems Go</span>
-                        <Link href="#" className="hover:text-white transition-colors">Press Kit</Link>
+                        <span className="flex items-center gap-2">
+                            <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                            All Systems Go
+                        </span>
                     </div>
                 </div>
             </div>

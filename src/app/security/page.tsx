@@ -35,21 +35,21 @@ const SecurityPage = () => {
     ];
 
     return (
-        <div className="pt-40 min-h-screen bg-black">
+        <div className="pt-40 min-h-screen bg-white">
             <Section className="py-20">
                 <div className="max-w-4xl mb-24">
                     <motion.h1
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="text-6xl md:text-8xl font-black mb-8 italic uppercase tracking-tighter"
+                        className="text-6xl md:text-8xl font-black mb-8 italic uppercase tracking-tighter text-black"
                     >
-                        Security <br /> <span className="text-stealth-accent underline decoration-white/10 underline-offset-8">Infrastructure.</span>
+                        Security <br /> <span className="text-stealth-accent underline decoration-slate-200 underline-offset-8">Infrastructure.</span>
                     </motion.h1>
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.1 }}
-                        className="text-neutral-500 text-xl leading-relaxed max-w-2xl"
+                        className="text-slate-600 text-xl leading-relaxed max-w-2xl"
                     >
                         Stealth Technologies is built on a foundation of trust. We prioritize the security of your professional workspace through rigorous engineering and transparent protocols.
                     </motion.p>
@@ -63,14 +63,14 @@ const SecurityPage = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: idx * 0.1 }}
-                            className="p-10 rounded-[2.5rem] bg-white/[0.02] border border-white/5 hover:bg-white/[0.04] transition-all group lg:min-h-[300px] flex flex-col justify-between"
+                            className="p-10 rounded-[2.5rem] bg-slate-50 border border-slate-200 hover:bg-slate-100 transition-all group lg:min-h-[300px] flex flex-col justify-between"
                         >
                             <div>
                                 <div className="w-12 h-12 rounded-2xl bg-stealth-accent/10 border border-stealth-accent/20 flex items-center justify-center text-stealth-accent mb-8 group-hover:scale-110 transition-transform">
                                     {feature.icon}
                                 </div>
-                                <h3 className="text-2xl font-bold mb-4 uppercase tracking-tight">{feature.title}</h3>
-                                <p className="text-neutral-500 leading-relaxed text-sm">
+                                <h3 className="text-2xl font-bold mb-4 uppercase tracking-tight text-black">{feature.title}</h3>
+                                <p className="text-slate-600 leading-relaxed text-sm">
                                     {feature.description}
                                 </p>
                             </div>
@@ -78,15 +78,15 @@ const SecurityPage = () => {
                     ))}
                 </div>
 
-                <div className="mt-32 p-12 rounded-[3.5rem] bg-stealth-gray border border-white/10 text-center relative overflow-hidden">
-                    <div className="absolute inset-0 bg-hero-gradient opacity-10 pointer-events-none" />
-                    <h2 className="text-3xl font-bold mb-6 uppercase">Questions about Security?</h2>
-                    <p className="text-neutral-400 mb-8 max-w-xl mx-auto">
+                <div className="mt-32 p-12 rounded-[3.5rem] bg-slate-50 border border-slate-200 text-center relative overflow-hidden">
+                    <div className="absolute inset-0 bg-hero-gradient opacity-5 pointer-events-none" />
+                    <h2 className="text-3xl font-bold mb-6 uppercase text-black">Questions about Security?</h2>
+                    <p className="text-slate-600 mb-8 max-w-xl mx-auto">
                         If you have specific questions about our security posture or require an enterprise security audit, please reach out directly.
                     </p>
                     <a
                         href="mailto:stealthassistant1@gmail.com"
-                        className="inline-block px-10 py-5 bg-white text-black font-black uppercase text-xs tracking-[0.2em] rounded-full hover:opacity-90 transition-all"
+                        className="inline-block px-10 py-5 bg-black text-white font-black uppercase text-xs tracking-[0.2em] rounded-full hover:bg-slate-800 transition-all"
                     >
                         Contact Security Team
                     </a>

@@ -6,10 +6,10 @@ import { motion } from 'framer-motion';
 const logos = [
     { name: 'Google', url: '/logos/google.svg' },
     { name: 'Uber', url: '/logos/uber.svg' },
-    { name: 'Underdog', url: '/logos/underdog.svg' },
+    { name: 'Underdog', url: '/logos/underdog.png', large: true },
     { name: 'Microsoft', url: '/logos/microsoft.svg' },
     { name: 'Apple', url: '/logos/apple.svg' },
-    { name: 'Nintendo', url: '/logos/nintendo.svg' },
+    { name: 'Nintendo', url: '/logos/nintendo.png', large: true },
 ];
 
 const CompanyLogos = () => {
@@ -44,12 +44,12 @@ const CompanyLogos = () => {
                     {[...logos, ...logos, ...logos].map((logo, idx) => (
                         <div
                             key={`${logo.name}-${idx}`}
-                            className="flex-shrink-0 flex items-center justify-center min-w-[100px]"
+                            className={`flex-shrink-0 flex items-center justify-center ${logo.large ? 'min-w-[220px]' : 'min-w-[140px]'}`}
                         >
                             <img
                                 src={logo.url}
                                 alt={`${logo.name} logo`}
-                                className="h-8 w-auto object-contain"
+                                className={`w-auto object-contain ${logo.large ? 'h-20' : 'h-12'}`}
                             />
                         </div>
                     ))}

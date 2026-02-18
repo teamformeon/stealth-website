@@ -2,16 +2,13 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Mail, Copy } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { Mail, Linkedin } from 'lucide-react';
 import Logo from './Logo';
 
 const Footer = () => {
     const currentYear = new Date().getFullYear();
-
-    const copyEmail = () => {
-        navigator.clipboard.writeText('stealthassistant1@gmail.com');
-    };
+    const email = 'stealthassistant1@gmail.com';
+    const linkedinUrl = 'https://www.linkedin.com/company/112389227/';
 
     return (
         <footer className="bg-slate-50 pt-32 pb-16 px-6 border-t border-slate-200">
@@ -52,14 +49,24 @@ const Footer = () => {
 
                     <div className="md:col-span-3">
                         <h4 className="text-[11px] font-bold text-slate-900 uppercase tracking-[0.2em] mb-8">Support</h4>
-                        <button
-                            onClick={copyEmail}
-                            className="group inline-flex items-center gap-2 p-3 rounded-xl bg-white border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all"
-                        >
-                            <Mail size={16} className="text-slate-400 group-hover:text-blue-600 transition-colors flex-shrink-0" />
-                            <span className="text-xs text-slate-600 font-medium whitespace-nowrap">stealthassistant1@gmail.com</span>
-                            <Copy size={12} className="text-slate-300 group-hover:text-blue-600 transition-colors flex-shrink-0" />
-                        </button>
+                        <div className="flex items-center gap-3">
+                            <a
+                                href={linkedinUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center justify-center w-11 h-11 rounded-xl bg-white border border-slate-200 hover:border-blue-300 hover:shadow-md hover:text-blue-600 transition-all"
+                                aria-label="Visit our LinkedIn"
+                            >
+                                <Linkedin size={20} className="text-black" />
+                            </a>
+                            <a
+                                href={`mailto:${email}`}
+                                className="flex items-center justify-center w-11 h-11 rounded-xl bg-white border border-slate-200 hover:border-blue-300 hover:shadow-md hover:text-blue-600 transition-all"
+                                aria-label={`Email us at ${email}`}
+                            >
+                                <Mail size={20} className="text-black" />
+                            </a>
+                        </div>
                     </div>
                 </div>
 

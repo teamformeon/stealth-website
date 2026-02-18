@@ -2,7 +2,6 @@ import Hero from "@/components/Hero";
 import CompanyLogos from "@/components/CompanyLogos";
 import ProductShowcase from "@/components/ProductShowcase";
 import ProblemStatement from "@/components/ProblemStatement";
-import Stats from "@/components/Stats";
 import VisionSection from "@/components/VisionSection";
 import AIFeatures from "@/components/AIFeatures";
 import UseCases from "@/components/UseCases";
@@ -17,7 +16,6 @@ export default function Home() {
       <CompanyLogos />
       <ProductShowcase />
       <ProblemStatement />
-      <Stats />
       <VisionSection />
       <AIFeatures />
       <UseCases />

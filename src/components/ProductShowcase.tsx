@@ -13,7 +13,7 @@ const ProductShowcase = () => {
     const [view, setView] = useState<'overlay' | 'launch'>('overlay');
 
     return (
-        <section className="py-24 bg-slate-50 border-y border-slate-200 overflow-hidden">
+        <section id="process" className="py-24 bg-slate-50 border-y border-slate-200 overflow-hidden">
             <div className="max-w-6xl mx-auto px-6">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}

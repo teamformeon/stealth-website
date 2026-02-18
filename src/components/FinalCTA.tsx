@@ -21,8 +21,8 @@ const FinalCTA = () => {
                         Available now: Choose prompt-free automatic suggestions or type commands—both modes work seamlessly
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <a href="/#explore" className="px-10 py-4 bg-black text-white text-sm font-semibold rounded-2xl hover:bg-neutral-800 transition-colors shadow-lg shadow-black/20 inline-block text-center">
-                            Join Waitlist
+                        <a href="/#book-demo" className="px-10 py-4 bg-black text-white text-sm font-semibold rounded-2xl hover:bg-neutral-800 transition-colors shadow-lg shadow-black/20 inline-block text-center">
+                            Try Stealth Out
                         </a>
                         <a href="/#vision" className="px-10 py-4 bg-white border border-slate-200 text-slate-900 text-sm font-semibold rounded-2xl hover:bg-slate-50 transition-colors hover:border-slate-300 inline-block text-center">
                             Learn More

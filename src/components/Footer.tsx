@@ -55,10 +55,10 @@ const Footer = () => {
                                 href={linkedinUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex items-center justify-center w-11 h-11 rounded-xl bg-white border border-slate-200 hover:border-blue-300 hover:shadow-md hover:text-blue-600 transition-all"
+                                className="flex items-center justify-center w-11 h-11 rounded-xl bg-white border border-slate-200 hover:border-blue-300 hover:shadow-md hover:text-blue-600 transition-all overflow-hidden"
                                 aria-label="Visit our LinkedIn"
                             >
-                                <Linkedin size={20} className="text-black" />
+                                <img src="/linkedin-icon.png" alt="LinkedIn" className="w-5 h-5 object-contain" />
                             </a>
                             <a
                                 href={`mailto:${email}`}

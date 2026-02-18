@@ -4,62 +4,91 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import { Menu, X } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useTransform, useSpring, useMotionValueEvent } from 'framer-motion';
 import Logo from './Logo';
 
 const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-    useEffect(() => {
-        const handleScroll = () => {
-            setIsScrolled(window.scrollY > 10);
-        };
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
+    // Smooth scroll-synced values
+    const { scrollY } = useScroll();
+
+    // We'll transition over a range of 0 to 100 pixels
+    const scrollRange = [0, 100];
+
+    // Use MotionValueEvent to update binary state at the end of the range
+    useMotionValueEvent(scrollY, "change", (latest) => {
+        if (latest > 10 && !isScrolled) setIsScrolled(true);
+        if (latest <= 10 && isScrolled) setIsScrolled(false);
+    });
+
+    // Transform values directly tied to scroll position for absolute smoothness
+    const rawPaddingTop = useTransform(scrollY, scrollRange, [0, 16]);
+    const rawPaddingSide = useTransform(scrollY, scrollRange, [0, 16]);
+    const rawBorderRadius = useTransform(scrollY, scrollRange, ['0px', '9999px']);
+    const rawBorderWidth = useTransform(scrollY, scrollRange, ['0px', '1px']);
+    const rawBgOpacity = useTransform(scrollY, scrollRange, [0, 0.95]);
+    const rawBlur = useTransform(scrollY, scrollRange, [0, 16]);
+    const rawInnerPaddingX = useTransform(scrollY, scrollRange, [32, 24]);
+    const rawInnerPaddingY = useTransform(scrollY, scrollRange, [24, 12]);
+    const rawShadowOpacity = useTransform(scrollY, scrollRange, [0, 0.05]);
+    const rawBorderBottomOpacity = useTransform(scrollY, [0, 20, 100], [0.1, 0, 0]);
+    const rawFullBorderOpacity = useTransform(scrollY, [0, 20, 100], [0, 1, 1]);
+
+    // Use springs to smooth out the scroll input
+    const springConfig = { stiffness: 100, damping: 30, mass: 0.8 };
+    const paddingTop = useSpring(rawPaddingTop, springConfig);
+    const paddingLeft = useSpring(rawPaddingSide, springConfig);
+    const paddingRight = useSpring(rawPaddingSide, springConfig);
+    const innerPaddingX = useSpring(rawInnerPaddingX, springConfig);
+    const innerPaddingY = useSpring(rawInnerPaddingY, springConfig);
+    const borderRadius = useSpring(rawBorderRadius, { stiffness: 120, damping: 30 });
 
     return (
         <motion.div
-            animate={{
-                paddingTop: isScrolled ? '16px' : '0px',
-                paddingLeft: isScrolled ? '16px' : '0px',
-                paddingRight: isScrolled ? '16px' : '0px',
-            }}
-            transition={{
-                type: "spring",
-                stiffness: 80,
-                damping: 25
+            style={{
+                paddingTop,
+                paddingLeft,
+                paddingRight,
             }}
             className="fixed top-0 left-0 right-0 z-[60] flex justify-center pointer-events-none"
         >
             <motion.nav
                 layout
-                initial={false}
-                animate={{
-                    width: isScrolled ? 'auto' : '100%',
-                    backgroundColor: isScrolled ? 'rgba(255, 255, 255, 0.95)' : 'rgba(255, 255, 255, 0)',
-                    backdropFilter: isScrolled ? 'blur(16px)' : 'blur(0px)',
-                    borderRadius: isScrolled ? '9999px' : '0px',
-                    borderWidth: isScrolled ? '1px' : '0px',
-                    paddingLeft: isScrolled ? '24px' : '32px',
-                    paddingRight: isScrolled ? '24px' : '32px',
-                    paddingTop: isScrolled ? '12px' : '24px',
-                    paddingBottom: isScrolled ? '12px' : '24px',
+                style={{
+                    width: isScrolled ? 'fit-content' : '100%',
+                    backgroundColor: useTransform(rawBgOpacity, (o) => `rgba(255, 255, 255, ${o})`),
+                    backdropFilter: useTransform(rawBlur, (b) => `blur(${b}px)`),
+                    borderRadius,
+                    borderStyle: 'solid',
+                    borderColor: useTransform(scrollY, [0, 20, 100], [
+                        'rgba(226, 232, 240, 0.1)', // Subtle Slate-200 at top
+                        'rgba(226, 232, 240, 0.6)',
+                        'rgba(226, 232, 240, 0.6)'
+                    ]),
+                    borderWidth: useTransform(scrollY, [0, 1, 20, 100], [
+                        '0px 0px 1px 0px', // Only bottom border at top
+                        '1px 1px 1px 1px', // Quickly switch to full border for pill shape
+                        '1px 1px 1px 1px',
+                        '1px 1px 1px 1px'
+                    ]),
+                    boxShadow: useTransform(rawShadowOpacity, (o) => `0 20px 25px -5px rgba(0, 0, 0, ${o}), 0 8px 10px -6px rgba(0, 0, 0, ${o})`),
+                    paddingLeft: innerPaddingX,
+                    paddingRight: innerPaddingX,
+                    paddingTop: innerPaddingY,
+                    paddingBottom: innerPaddingY,
                 }}
                 transition={{
                     type: "spring",
-                    stiffness: 90,
-                    damping: 22,
-                    mass: 1
+                    stiffness: 100,
+                    damping: 30,
+                    mass: 0.8
                 }}
                 className={cn(
-                    'pointer-events-auto border-slate-200/60 shadow-xl shadow-black/5 flex items-center justify-center',
-                    !isScrolled && 'container-wide w-full'
+                    'pointer-events-auto flex items-center justify-center overflow-hidden',
+                    !isScrolled && 'container-wide w-full px-0'
                 )}
-                style={{
-                    maxWidth: isScrolled ? 'fit-content' : '100%',
-                }}
             >
                 <div className={cn(
                     "flex items-center justify-between w-full whitespace-nowrap",

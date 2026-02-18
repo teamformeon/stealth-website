@@ -17,7 +17,7 @@ const Footer = () => {
         <footer className="bg-slate-50 pt-32 pb-16 px-6 border-t border-slate-200">
             <div className="max-w-6xl mx-auto">
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-16 mb-24">
-                    <div className="md:col-span-4">
+                    <div className="md:col-span-3">
                         <div className="mb-8">
                             <Logo showText={true} size="md" textColor="black" />
                         </div>
@@ -50,16 +50,14 @@ const Footer = () => {
                         </ul>
                     </div>
 
-                    <div className="md:col-span-2">
+                    <div className="md:col-span-3">
                         <h4 className="text-[11px] font-bold text-slate-900 uppercase tracking-[0.2em] mb-8">Support</h4>
                         <button
                             onClick={copyEmail}
-                            className="group flex items-center justify-between p-3 rounded-xl bg-white border border-slate-200 w-full hover:border-blue-300 hover:shadow-md transition-all"
+                            className="group inline-flex items-center gap-2 p-3 rounded-xl bg-white border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all"
                         >
-                            <div className="flex items-center gap-2 overflow-hidden">
-                                <Mail size={16} className="text-slate-400 group-hover:text-blue-600 transition-colors flex-shrink-0" />
-                                <span className="text-xs text-slate-600 font-medium truncate">Email Us</span>
-                            </div>
+                            <Mail size={16} className="text-slate-400 group-hover:text-blue-600 transition-colors flex-shrink-0" />
+                            <span className="text-xs text-slate-600 font-medium whitespace-nowrap">stealthassistant1@gmail.com</span>
                             <Copy size={12} className="text-slate-300 group-hover:text-blue-600 transition-colors flex-shrink-0" />
                         </button>
                     </div>

@@ -1,5 +1,6 @@
 import Hero from "@/components/Hero";
 import CompanyLogos from "@/components/CompanyLogos";
+import ProductShowcase from "@/components/ProductShowcase";
 import ProblemStatement from "@/components/ProblemStatement";
 import Stats from "@/components/Stats";
 import VisionSection from "@/components/VisionSection";
@@ -14,6 +15,7 @@ export default function Home() {
     <div className="relative">
       <Hero />
       <CompanyLogos />
+      <ProductShowcase />
       <ProblemStatement />
       <Stats />
       <VisionSection />

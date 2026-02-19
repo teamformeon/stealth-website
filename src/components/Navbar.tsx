@@ -87,12 +87,12 @@ const Navbar = () => {
                 }}
                 className={cn(
                     'pointer-events-auto flex items-center justify-center overflow-hidden',
-                    !isScrolled && 'container-wide w-full px-0'
+                    !isScrolled && 'w-full px-0'
                 )}
             >
                 <div className={cn(
                     "flex items-center justify-between w-full whitespace-nowrap",
-                    isScrolled ? "gap-12" : ""
+                    isScrolled ? "gap-12" : "container-wide"
                 )}>
                     <div className="flex-shrink-0 flex items-center">
                         <Logo showText={!isScrolled} size="md" textColor="black" />

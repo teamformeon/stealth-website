@@ -14,21 +14,21 @@ const ScrollRevealSection = () => {
         offset: ["start start", "end end"]
     });
 
-    // Create smooth progress
+    // Create more reactive progress for fast scrolling
     const smoothProgress = useSpring(scrollYProgress, {
-        stiffness: 100,
-        damping: 30,
+        stiffness: 400,  // Increased from 100
+        damping: 40,    // Adjusted for stability at high stiffness
         restDelta: 0.001
     });
 
-    // Transform scroll progress into various animation states
-    const opacity1 = useTransform(smoothProgress, [0, 0.2], [0, 1]);
-    const opacity2 = useTransform(smoothProgress, [0.25, 0.45], [0.1, 1]);
-    const opacity3 = useTransform(smoothProgress, [0.5, 0.7], [0.1, 1]);
+    // Transform scroll progress into various animation states over a larger range
+    const opacity1 = useTransform(smoothProgress, [0.1, 0.25], [0, 1]);
+    const opacity2 = useTransform(smoothProgress, [0.35, 0.55], [0.1, 1]);
+    const opacity3 = useTransform(smoothProgress, [0.65, 0.85], [0.1, 1]);
 
-    const scale1 = useTransform(smoothProgress, [0, 0.2], [0.95, 1]);
-    const scale2 = useTransform(smoothProgress, [0.25, 0.45], [0.95, 1]);
-    const scale3 = useTransform(smoothProgress, [0.5, 0.7], [0.95, 1]);
+    const scale1 = useTransform(smoothProgress, [0.1, 0.25], [0.9, 1]);
+    const scale2 = useTransform(smoothProgress, [0.35, 0.55], [0.9, 1]);
+    const scale3 = useTransform(smoothProgress, [0.65, 0.85], [0.9, 1]);
 
     const items = [
         {
@@ -52,7 +52,7 @@ const ScrollRevealSection = () => {
     ];
 
     return (
-        <div ref={containerRef} className="relative h-[300vh] bg-slate-900">
+        <div ref={containerRef} className="relative h-[600vh] bg-slate-900">
             {/* Sticky viewport content */}
             <div className="sticky top-0 h-screen flex flex-col items-center justify-center overflow-hidden">
                 <div className="max-w-4xl px-6 w-full">

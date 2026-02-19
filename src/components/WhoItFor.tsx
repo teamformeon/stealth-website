@@ -1,4 +1,4 @@
-'use client';
+w'use client';
 
 import React from 'react';
 import Section from './Section';

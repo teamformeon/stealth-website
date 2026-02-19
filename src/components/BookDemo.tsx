@@ -6,14 +6,54 @@ import { motion } from 'framer-motion';
 import { Check, ChevronRight, Send } from 'lucide-react';
 
 const BookDemo = () => {
-    const [formState, setFormState] = useState<'idle' | 'submitting' | 'success'>('idle');
+    const [formState, setFormState] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
+    const [formData, setFormData] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        company: '',
+        message: ''
+    });
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setFormState('submitting');
-        // Simulate API call
-        await new Promise(resolve => setTimeout(resolve, 1500));
-        setFormState('success');
+        setErrorMessage(null);
+
+        try {
+            const response = await fetch('/api/send', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+
+            const result = await response.json();
+
+            if (!response.ok) {
+                setErrorMessage(result.error?.message || result.error || 'Failed to send request');
+                throw new Error('Failed to send request');
+            }
+
+            setFormState('success');
+            setFormData({
+                firstName: '',
+                lastName: '',
+                email: '',
+                company: '',
+                message: ''
+            });
+        } catch (error) {
+            console.error('Error submitting form:', error);
+            setFormState('error');
+        }
+    };
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const { name, value } = e.target;
+        setFormData(prev => ({ ...prev, [name]: value }));
     };
 
     return (
@@ -88,11 +128,19 @@ const BookDemo = () => {
                             </div>
                         ) : (
                             <form onSubmit={handleSubmit} className="space-y-5">
+                                {formState === 'error' && (
+                                    <div className="p-4 bg-red-50 border border-red-100 rounded-xl text-red-600 text-sm mb-4 text-center font-medium">
+                                        {errorMessage || 'Something went wrong. Please try again.'}
+                                    </div>
+                                )}
                                 <div className="grid grid-cols-2 gap-5">
                                     <div className="space-y-1.5">
                                         <label className="text-xs font-semibold text-slate-500 uppercase tracking-wider ml-1">First Name</label>
                                         <input
                                             required
+                                            name="firstName"
+                                            value={formData.firstName}
+                                            onChange={handleInputChange}
                                             type="text"
                                             className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-slate-900 placeholder:text-slate-400"
                                             placeholder="Jane"
@@ -102,6 +150,9 @@ const BookDemo = () => {
                                         <label className="text-xs font-semibold text-slate-500 uppercase tracking-wider ml-1">Last Name</label>
                                         <input
                                             required
+                                            name="lastName"
+                                            value={formData.lastName}
+                                            onChange={handleInputChange}
                                             type="text"
                                             className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-slate-900 placeholder:text-slate-400"
                                             placeholder="Doe"
@@ -113,6 +164,9 @@ const BookDemo = () => {
                                     <label className="text-xs font-semibold text-slate-500 uppercase tracking-wider ml-1">Work Email</label>
                                     <input
                                         required
+                                        name="email"
+                                        value={formData.email}
+                                        onChange={handleInputChange}
                                         type="email"
                                         className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-slate-900 placeholder:text-slate-400"
                                         placeholder="jane@company.com"
@@ -122,6 +176,9 @@ const BookDemo = () => {
                                 <div className="space-y-1.5">
                                     <label className="text-xs font-semibold text-slate-500 uppercase tracking-wider ml-1">Company</label>
                                     <input
+                                        name="company"
+                                        value={formData.company}
+                                        onChange={handleInputChange}
                                         type="text"
                                         className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-slate-900 placeholder:text-slate-400"
                                         placeholder="Acme Inc."
@@ -131,6 +188,9 @@ const BookDemo = () => {
                                 <div className="space-y-1.5">
                                     <label className="text-xs font-semibold text-slate-500 uppercase tracking-wider ml-1">Message <span className="text-slate-300 font-normal normal-case tracking-normal">(Optional)</span></label>
                                     <textarea
+                                        name="message"
+                                        value={formData.message}
+                                        onChange={handleInputChange}
                                         rows={3}
                                         className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-slate-900 placeholder:text-slate-400 resize-none"
                                         placeholder="Tell us about your team's needs..."

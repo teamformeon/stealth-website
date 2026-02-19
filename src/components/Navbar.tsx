@@ -63,13 +63,13 @@ const Navbar = () => {
                     borderRadius,
                     borderStyle: 'solid',
                     borderColor: useTransform(scrollY, [0, 20, 100], [
-                        'rgba(226, 232, 240, 0.1)', // Subtle Slate-200 at top
+                        'rgba(226, 232, 240, 0.8)', // Clear separator at top
                         'rgba(226, 232, 240, 0.6)',
                         'rgba(226, 232, 240, 0.6)'
                     ]),
                     borderWidth: useTransform(scrollY, [0, 1, 20, 100], [
                         '0px 0px 1px 0px', // Only bottom border at top
-                        '1px 1px 1px 1px', // Quickly switch to full border for pill shape
+                        '1px 1px 1px 1px',
                         '1px 1px 1px 1px',
                         '1px 1px 1px 1px'
                     ]),

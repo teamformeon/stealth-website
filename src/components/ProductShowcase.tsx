@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { cn } from '@/lib/utils';
 import LaunchLeftPanel from './product/LaunchLeftPanel';
 import LaunchRightPanel from './product/LaunchRightPanel';
 
@@ -29,26 +30,36 @@ const ProductShowcase = () => {
                     </p>
                 </motion.div>
 
-                {/* View Toggle */}
-                <div className="flex justify-center gap-2 mb-12">
-                    <button
-                        onClick={() => setView('overlay')}
-                        className={`px-6 py-2.5 rounded-xl text-sm font-bold transition-all ${view === 'overlay'
-                            ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg shadow-blue-600/25'
-                            : 'bg-white border border-slate-200 text-slate-600 hover:border-slate-300'
-                            }`}
-                    >
-                        Command Overlay
-                    </button>
-                    <button
-                        onClick={() => setView('launch')}
-                        className={`px-6 py-2.5 rounded-xl text-sm font-bold transition-all ${view === 'launch'
-                            ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg shadow-blue-600/25'
-                            : 'bg-white border border-slate-200 text-slate-600 hover:border-slate-300'
-                            }`}
-                    >
-                        Launch Screen
-                    </button>
+                {/* View Toggle - Circular indicators */}
+                <div className="flex justify-center gap-4 mb-12">
+                    {(['overlay', 'launch'] as const).map((v) => (
+                        <button
+                            key={v}
+                            onClick={() => setView(v)}
+                            className="relative flex items-center justify-center p-2 group"
+                            aria-label={`Switch to ${v} view`}
+                        >
+                            <motion.div
+                                animate={{
+                                    scale: view === v ? 1 : 0.8,
+                                    opacity: view === v ? 1 : 0.4,
+                                }}
+                                className={cn(
+                                    "w-4 h-4 rounded-full transition-all duration-300",
+                                    view === v
+                                        ? "bg-gradient-to-r from-blue-600 to-indigo-600 shadow-[0_0_15px_rgba(37,99,235,0.5)]"
+                                        : "bg-slate-300 group-hover:bg-slate-400"
+                                )}
+                            />
+                            {view === v && (
+                                <motion.div
+                                    layoutId="active-circle"
+                                    className="absolute inset-0 border-2 border-blue-600/30 rounded-full"
+                                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                                />
+                            )}
+                        </button>
+                    ))}
                 </div>
 
                 {/* Demo Container */}

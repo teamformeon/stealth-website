@@ -144,6 +144,7 @@ const BookDemo = () => {
                                             type="text"
                                             className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-slate-900 placeholder:text-slate-400"
                                             placeholder="Jane"
+                                            suppressHydrationWarning
                                         />
                                     </div>
                                     <div className="space-y-1.5">
@@ -156,6 +157,7 @@ const BookDemo = () => {
                                             type="text"
                                             className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-slate-900 placeholder:text-slate-400"
                                             placeholder="Doe"
+                                            suppressHydrationWarning
                                         />
                                     </div>
                                 </div>
@@ -170,6 +172,7 @@ const BookDemo = () => {
                                         type="email"
                                         className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-slate-900 placeholder:text-slate-400"
                                         placeholder="jane@company.com"
+                                        suppressHydrationWarning
                                     />
                                 </div>
 
@@ -182,6 +185,7 @@ const BookDemo = () => {
                                         type="text"
                                         className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-slate-900 placeholder:text-slate-400"
                                         placeholder="Acme Inc."
+                                        suppressHydrationWarning
                                     />
                                 </div>
 
@@ -194,6 +198,7 @@ const BookDemo = () => {
                                         rows={3}
                                         className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-slate-900 placeholder:text-slate-400 resize-none"
                                         placeholder="Tell us about your team's needs..."
+                                        suppressHydrationWarning
                                     />
                                 </div>
 

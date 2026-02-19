@@ -17,7 +17,7 @@ const CompanyLogos = () => {
         <section className="py-10 bg-white border-b border-slate-100 overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 mb-6">
                 <p className="text-center text-sm font-semibold text-slate-400 uppercase tracking-widest">
-                    Trusted by product teams at
+                    Curated with the help of teams at
                 </p>
             </div>
 

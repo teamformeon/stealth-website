@@ -8,16 +8,16 @@ import { Briefcase, Rocket, TrendingUp, CheckCircle2 } from 'lucide-react';
 
 const targets = [
     {
-        role: 'Knowledge Workers',
-        context: 'Get intelligent assistance across email, calendar, tasks, and notes. Stealth understands context and suggests actions automatically.',
+        role: 'Product Managers',
+        context: 'Draft PRDs, sync Jira tickets, and summarize Slack threads without leaving your focus. Stealth understands your product context.',
         icon: <Briefcase size={20} />,
-        benefits: ['Email Management', 'Calendar Integration', 'Task Automation'],
+        benefits: ['PRD Generation', 'Jira Syncing', 'Slack Recap'],
     },
     {
         role: 'Product Teams',
-        context: 'Coordinate across tools without context switching. Stealth integrates with Notion, Slack, and your entire workflow.',
+        context: 'Align across tools with zero context switching. Perfect for engineering syncs and cross-functional handoffs.',
         icon: <Rocket size={20} />,
-        benefits: ['Cross-Tool Context', 'Automated Summaries', 'Proactive Suggestions'],
+        benefits: ['Cross-Tool Alignment', 'Automated Daily Briefs', 'Native Integration'],
     },
 ];
 
@@ -31,16 +31,16 @@ const WhoItFor = () => {
                     viewport={{ once: true }}
                     className="text-4xl md:text-5xl font-bold mb-8 text-black"
                 >
-                    Built for <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Everyone.</span>
+                    Built for <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Product Velocity.</span>
                 </motion.h2>
                 <motion.p
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.1 }}
-                    className="text-slate-600 text-lg leading-relaxed"
+                    className="text-slate-600 text-lg leading-relaxed font-medium"
                 >
-                    Stealth works for anyone who wants AI assistance that understands context—no prompts, no manual setup, just intelligent help when you need it.
+                    No prompts. No manual setup. Just absolute focus for PMs.
                 </motion.p>
             </div>
 
@@ -58,7 +58,7 @@ const WhoItFor = () => {
                             {target.icon}
                         </div>
                         <h3 className="text-2xl font-bold mb-4 text-black">{target.role}</h3>
-                        <p className="text-slate-600 leading-relaxed mb-6">
+                        <p className="text-slate-600 leading-relaxed mb-6 font-medium">
                             {target.context}
                         </p>
                         <div className="space-y-2">

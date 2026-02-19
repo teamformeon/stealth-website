@@ -3,6 +3,7 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import CursorFollower from "@/components/ui/CursorFollower";
 import { cn } from "@/lib/utils";
 
 const inter = Inter({
@@ -34,6 +35,7 @@ export default function RootLayout({
           jetbrainsMono.variable
         )}
       >
+        <CursorFollower />
         <div className="noise-overlay" />
 
         {/* Simplified Background Blobs */}

@@ -77,20 +77,20 @@ const BookDemo = () => {
                         </div>
 
                         <h2 className="text-4xl md:text-5xl font-black tracking-tight mb-6 text-black leading-tight">
-                            Transform Your <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Productivity Today.</span>
+                            Ship faster with <br />
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Product Intelligence.</span>
                         </h2>
 
-                        <p className="text-lg text-slate-600 mb-8 leading-relaxed">
-                            Ready to see how Stealth can streamline your workflow? Book a personalized demo with our team to explore:
+                        <p className="text-lg text-slate-600 mb-8 leading-relaxed font-medium">
+                            Book a demo to see how Stealth consolidates Jira, Slack, and your entire PM workflow.
                         </p>
 
                         <ul className="space-y-4 mb-10">
                             {[
-                                'Deep dive into context-aware AI features',
-                                'Custom integration setup for your tools',
-                                'Enterprise security and privacy controls',
-                                'Priority roadmap access'
+                                'Jira & Slack deep-integration setup',
+                                'PRD generation and syncing',
+                                'Team-wide productivity insights',
+                                'Priority early access'
                             ].map((item, i) => (
                                 <li key={i} className="flex items-start gap-3 text-slate-700">
                                     <div className="mt-1 w-5 h-5 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 text-blue-600">

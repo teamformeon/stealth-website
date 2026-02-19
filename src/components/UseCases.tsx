@@ -10,33 +10,33 @@ import { FileText, MessageSquare, BarChart3, Users, Calendar, Mail, Zap, CheckSq
 
 const cases = [
     {
-        title: 'Email Management',
-        desc: 'Draft replies, summarize emails, and manage Gmail and Outlook—all with natural language commands.',
-        icon: <Mail size={20} />,
+        title: 'PRD Generation',
+        desc: 'Convert Slack threads and meeting notes into structured PRDs in seconds.',
+        icon: <FileText size={20} />,
     },
     {
-        title: 'Calendar & Scheduling',
-        desc: 'Check upcoming events, plan your day, and get morning briefings automatically based on your calendar.',
-        icon: <Calendar size={20} />,
+        title: 'Jira & Backlog',
+        desc: 'Sync updates, summarize tickets, and manage your backlog with zero tab switching.',
+        icon: <Zap size={20} />,
     },
     {
-        title: 'Task & Note Management',
-        desc: 'Create tasks, save notes, and search your memory—all integrated with your workflow.',
-        icon: <CheckSquare size={20} />,
+        title: 'Slack Recap',
+        desc: 'Get native desktop summaries of missed Slack context from your PM team.',
+        icon: <MessageSquare size={20} />,
     },
     {
-        title: 'Screen Analysis',
-        desc: 'Automatically analyze what\'s on your screen and get summaries, suggestions, and actions.',
-        icon: <BarChart3 size={20} />,
-    },
-    {
-        title: 'Integrations',
-        desc: 'Works with Notion, Slack, Google Drive, and more. Context flows seamlessly across tools.',
+        title: 'Native Coordination',
+        desc: 'Stealth lives on the desktop, unifying your entire product stack.',
         icon: <Users size={20} />,
     },
     {
-        title: 'Natural Language',
-        desc: 'Type anything in natural language. Stealth\'s NLU layer maps it to the right action automatically.',
+        title: 'Context-Aware AI',
+        desc: 'Zero prompts. Stealth understands your screen context and suggests the next move.',
+        icon: <CheckSquare size={20} />,
+    },
+    {
+        title: 'One Hotkey',
+        desc: 'Absolute focus for PMs. No another tab, no another website.',
         icon: <Zap size={20} />,
     },
 ];
@@ -46,9 +46,9 @@ const UseCases = () => {
         <Section className="bg-white">
             <div className="flex flex-col md:flex-row gap-24 items-end mb-24">
                 <div className="max-w-xl">
-                    <h2 className="text-4xl md:text-6xl font-bold mb-8 text-black">System-Wide <br /> Productivity.</h2>
-                    <p className="text-slate-600 text-xl leading-relaxed">
-                        From email to calendar to tasks—Stealth integrates with your entire workflow and understands context across all your tools.
+                    <h2 className="text-4xl md:text-6xl font-bold mb-8 text-black">Productivity <br /> for PMs.</h2>
+                    <p className="text-slate-600 text-xl leading-relaxed font-medium">
+                        No more context-switching. Stealth integrates your entire toolstack into one native layer.
                     </p>
                 </div>
             </div>

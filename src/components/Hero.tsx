@@ -21,12 +21,13 @@ const Hero = () => {
                     </div>
 
                     <h1 className="text-6xl md:text-8xl font-black tracking-tight mb-8 leading-[0.95] text-balance text-black">
-                        AI That <br />
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Knows Your Context.</span>
+                        The Productivity Layer <br />
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">for Product Managers.</span>
                     </h1>
 
                     <p className="text-xl md:text-2xl text-slate-500 mb-12 max-w-2xl leading-relaxed text-balance font-light">
-                        A system-wide AI assistant that works two ways: automatically analyze your screen and get suggestions, or type natural language commands. Press a hotkey, get intelligent help.
+                        Desktop Native. Zero Tabs. <br />
+                        Context-Aware AI that lives where you work.
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-4 mb-16">

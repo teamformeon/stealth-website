@@ -28,10 +28,10 @@ const AIFeatures = () => {
                         Two Ways to Work
                     </div>
                     <h2 className="text-4xl md:text-6xl font-black mb-6 text-black leading-tight">
-                        AI That Adapts to <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Your Workflow</span>
+                        Native AI <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Everywhere.</span>
                     </h2>
                     <p className="text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
-                        Use Stealth with automatic context analysis, or type natural language commands. Choose what works best for you.
+                        No plugins. No setup. Stealth works across Jira, Slack, Teams, and your entire toolstack.
                     </p>
                 </motion.div>
 
@@ -49,15 +49,15 @@ const AIFeatures = () => {
                             </div>
                             <h3 className="text-2xl font-bold text-black">Prompt-Free Mode</h3>
                         </div>
-                        <p className="text-slate-600 leading-relaxed mb-6">
-                            When you open Stealth, it automatically captures your screen, analyzes the content, and suggests 1-3 high-value actions based on what you're looking at—all without you writing a prompt.
+                        <p className="text-slate-600 leading-relaxed mb-6 font-medium">
+                            Stealth analyzes your screen—whether it's a Jira ticket or a Slack thread—and suggests the next move instantly.
                         </p>
                         <div className="space-y-3">
                             {[
-                                'Automatic screen content analysis',
-                                'Context-aware action suggestions',
-                                'Time-based suggestions (morning brief, daily wrap-up)',
-                                'App focus monitoring for productivity apps'
+                                'Jira ticket summarization & syncing',
+                                'Slack thread to PRD conversion',
+                                'Real-time context analysis',
+                                'Teams coordination, zero tabs'
                             ].map((feature, idx) => (
                                 <motion.div
                                     key={idx}
@@ -85,17 +85,17 @@ const AIFeatures = () => {
                             <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center">
                                 <MessageSquare size={24} className="text-white" />
                             </div>
-                            <h3 className="text-2xl font-bold text-black">Natural Language Commands</h3>
+                            <h3 className="text-2xl font-bold text-black">Natural Commands</h3>
                         </div>
-                        <p className="text-slate-600 leading-relaxed mb-6">
-                            Type anything in natural language. Stealth's NLU layer understands your intent and maps it to the right action. Perfect for when you know exactly what you want.
+                        <p className="text-slate-600 leading-relaxed mb-6 font-medium">
+                            Sync data across tools in plain English. No more manual copy-pasting between browser tabs.
                         </p>
                         <div className="space-y-3">
                             {[
-                                'Type commands in plain English',
-                                'NLU maps intent to actions automatically',
-                                'Works with email, calendar, tasks, and more',
-                                'Full control over what gets executed'
+                                'Draft PRDs in seconds',
+                                'Move Slack actions to Jira',
+                                'Summarize internal documentation',
+                                'Full desktop automation'
                             ].map((feature, idx) => (
                                 <motion.div
                                     key={idx}

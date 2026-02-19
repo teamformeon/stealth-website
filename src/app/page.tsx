@@ -6,6 +6,7 @@ import VisionSection from "@/components/VisionSection";
 import AIFeatures from "@/components/AIFeatures";
 import UseCases from "@/components/UseCases";
 import Vision from "@/components/Vision";
+import ScrollRevealSection from "@/components/ScrollRevealSection";
 import BookDemo from "@/components/BookDemo";
 import FinalCTA from "@/components/FinalCTA";
 
@@ -19,6 +20,7 @@ export default function Home() {
       <VisionSection />
       <AIFeatures />
       <UseCases />
+      <ScrollRevealSection />
       <Vision />
       <BookDemo />
       <FinalCTA />

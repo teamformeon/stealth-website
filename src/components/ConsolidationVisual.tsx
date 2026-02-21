@@ -19,12 +19,26 @@ import {
     Tag,
     ChevronLeft,
     Sparkles,
-    MousePointer2
+    MousePointer2,
+    Type,
+    Paperclip,
+    Smile,
+    Trash2,
+    MoreVertical,
+    Image as ImageIcon,
+    Type as Font
 } from 'lucide-react';
 
 const ConsolidationVisual = () => {
     const [activeTab, setActiveTab] = useState<'sidebar' | 'gmail'>('sidebar');
     const [demoPhase, setDemoPhase] = useState<'idle' | 'moving' | 'clicked' | 'viewing' | 'resetting'>('idle');
+    const [isComposing, setIsComposing] = useState(true);
+    const [composeData, setComposeData] = useState({
+        to: 'team@stealth.ai',
+        subject: 'Q1 Product Roadmap Updates',
+        body: "Hey team,\n\nI've consolidated the latest feedback from our beta users. The main focus for Q1 will be on deep integration with Gmail and Slack.\n\nBest,\nSanit"
+    });
+    const [isSaving, setIsSaving] = useState(false);
 
     // Automated Demo Logic
     useEffect(() => {
@@ -216,6 +230,85 @@ const ConsolidationVisual = () => {
 
                                 {/* Inbox List */}
                                 <div className="flex-grow flex flex-col bg-[#141415]">
+                                    {/* Compose Box */}
+                                    <AnimatePresence>
+                                        {isComposing && (
+                                            <motion.div
+                                                initial={{ height: 0, opacity: 0 }}
+                                                animate={{ height: 'auto', opacity: 1 }}
+                                                exit={{ height: 0, opacity: 0 }}
+                                                className="border-b border-white/5 bg-[#1a1a1b] overflow-hidden"
+                                            >
+                                                <div className="p-6 space-y-4">
+                                                    <div className="flex items-center gap-4 text-sm">
+                                                        <span className="text-neutral-500 w-12">To</span>
+                                                        <input
+                                                            value={composeData.to}
+                                                            onChange={(e) => setComposeData({ ...composeData, to: e.target.value })}
+                                                            className="flex-grow bg-transparent border-none outline-none text-white font-medium"
+                                                            placeholder="Recipients"
+                                                        />
+                                                    </div>
+                                                    <div className="h-px bg-white/5" />
+                                                    <div className="flex items-center gap-4 text-sm">
+                                                        <span className="text-neutral-500 w-12">Subject</span>
+                                                        <input
+                                                            value={composeData.subject}
+                                                            onChange={(e) => setComposeData({ ...composeData, subject: e.target.value })}
+                                                            className="flex-grow bg-transparent border-none outline-none text-white font-medium"
+                                                            placeholder="Subject"
+                                                        />
+                                                    </div>
+                                                    <div className="h-px bg-white/5" />
+                                                    <textarea
+                                                        value={composeData.body}
+                                                        onChange={(e) => {
+                                                            setComposeData({ ...composeData, body: e.target.value });
+                                                            setIsSaving(true);
+                                                            setTimeout(() => setIsSaving(false), 1000);
+                                                        }}
+                                                        onKeyDown={(e) => {
+                                                            if (e.key === 'Enter' && !e.shiftKey) {
+                                                                e.preventDefault();
+                                                                setIsComposing(false);
+                                                            }
+                                                        }}
+                                                        className="w-full h-32 bg-transparent border-none outline-none text-white text-sm resize-none leading-relaxed"
+                                                        placeholder="Compose your email..."
+                                                    />
+
+                                                    <div className="flex items-center justify-between pt-2">
+                                                        <div className="flex items-center gap-1">
+                                                            <button
+                                                                onClick={() => setIsComposing(false)}
+                                                                className="px-6 py-2.5 bg-[#4a3aff] hover:bg-[#5a4aff] text-white text-xs font-bold rounded-full transition-colors flex items-center gap-2"
+                                                            >
+                                                                Send <Send size={14} />
+                                                            </button>
+                                                            <div className="flex items-center gap-1 ml-4 text-neutral-500">
+                                                                <button className="p-2 hover:bg-white/5 rounded-lg transition-colors"><Font size={16} /></button>
+                                                                <button className="p-2 hover:bg-white/5 rounded-lg transition-colors"><Paperclip size={16} /></button>
+                                                                <button className="p-2 hover:bg-white/5 rounded-lg transition-colors"><Smile size={16} /></button>
+                                                                <button className="p-2 hover:bg-white/5 rounded-lg transition-colors"><ImageIcon size={16} /></button>
+                                                            </div>
+                                                        </div>
+                                                        <div className="flex items-center gap-3">
+                                                            <span className="text-[10px] text-neutral-600 font-medium">
+                                                                {isSaving ? 'Saving...' : 'Draft saved'}
+                                                            </span>
+                                                            <button
+                                                                onClick={() => setIsComposing(false)}
+                                                                className="p-2 text-neutral-600 hover:text-white hover:bg-white/5 rounded-lg transition-all"
+                                                            >
+                                                                <Trash2 size={18} />
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </motion.div>
+                                        )}
+                                    </AnimatePresence>
+
                                     {/* Tabs */}
                                     <div className="flex border-b border-white/5 px-4 h-14 items-center gap-8">
                                         <div className="flex items-center gap-3 text-[#ea4335] text-xs font-bold border-b-2 border-[#ea4335] h-full px-2">

@@ -10,6 +10,7 @@ const logos = [
     { name: 'Microsoft', url: '/logos/microsoft.svg' },
     { name: 'Apple', url: '/logos/apple.svg' },
     { name: 'Nintendo', url: '/logos/nintendo.png', large: true },
+    { name: 'Capital One', url: '/logos/capital-one.png', large: true },
 ];
 
 const CompanyLogos = () => {

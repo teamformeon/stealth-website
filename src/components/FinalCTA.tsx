@@ -15,7 +15,7 @@ const FinalCTA = () => {
                         Ready for AI That <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Adapts to You?</span>
                     </h2>
                     <p className="text-slate-600 text-xl mb-6 leading-relaxed">
-                        Stealth is a system-wide AI assistant with two ways to work: automatic screen analysis with suggestions, or natural language commands. Press a hotkey, get intelligent help your way.
+                        Stealth is system-wide AI with two ways to work: automatic screen analysis with suggestions, or natural language commands. Press a hotkey, get intelligent help your way.
                     </p>
                     <p className="text-blue-600 text-lg mb-12 font-semibold">
                         Available now: Choose prompt-free automatic suggestions or type commands—both modes work seamlessly

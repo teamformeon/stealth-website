@@ -74,7 +74,7 @@ const MorningBriefDemo = () => {
                                     <Sparkles size={20} className="text-white" />
                                 </div>
                                 <div className="flex-grow">
-                                    <div className="text-xs font-black tracking-widest text-[#4a3aff] uppercase mb-1">Stealth Assistant</div>
+                                    <div className="text-xs font-black tracking-widest text-[#4a3aff] uppercase mb-1">Stealth</div>
                                     <div className="text-lg font-medium text-white/90">
                                         {typedText}
                                         <motion.span

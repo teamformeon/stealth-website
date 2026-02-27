@@ -586,69 +586,123 @@ const LaunchScreenAnimation = () => {
     );
 };
 
-/** Cursor positions (x, y) and click moments for Discovery animation. Container 1000x560. */
-const DISCOVERY_CURSOR = {
-    pipeline: [
-        { x: 75, y: 98, label: 'Pipeline' },
-        { x: 358, y: 268, label: 'Research Intake — add files', click: true },
-        { x: 355, y: 318, label: 'Synthesize Insights', click: true },
-        { x: 520, y: 285, label: 'Synthesis Output' },
-        { x: 720, y: 348, label: 'Delegate to Engineers', click: true },
-    ],
-    prd: [
-        { x: 75, y: 148, label: 'PRD & Specs', click: true },
-        { x: 480, y: 208, label: 'Generate full PRD', click: true },
-        { x: 580, y: 320, label: 'PRD content' },
-    ],
-    delegate: [
-        { x: 570, y: 340, label: 'Select tasks' },
-        { x: 570, y: 418, label: 'Delegate 2 Tasks', click: true },
-    ],
+const PRD_TEXT = `1. Problem & Opportunity
+   Single search across tools; users waste time switching context.
+
+2. Users & Use Cases
+   PMs, engineers, support — one query for docs, tickets, and messages.
+
+3. Success Metrics
+   Time-to-answer -40%; search usage +25%.
+
+4. Scope
+   In: full-text search, filters, saved views. Out: real-time sync in v1.`;
+
+type DiscoveryStep =
+    | 'pipelineBrowse'
+    | 'filesMenu'
+    | 'synthesizeButton'
+    | 'showSynthesis'
+    | 'gotoPrdTab'
+    | 'gotoGeneratePrd'
+    | 'pdfGenerating'
+    | 'pdfScroll'
+    | 'done';
+
+/** Linear script for the Discovery animation – one pass, then stop. */
+const DISCOVERY_STEPS: DiscoveryStep[] = [
+    'pipelineBrowse',      // Move to "Browse Files"
+    'filesMenu',           // Show file dropdown of files
+    'synthesizeButton',    // Click "Synthesize Insights"
+    'showSynthesis',       // Pause on synthesis output
+    'gotoPrdTab',          // Click "PRD & Specs" in sidebar
+    'gotoGeneratePrd',     // Click "Generate full PRD"
+    'pdfGenerating',       // Show generating state
+    'pdfScroll',           // Scroll through generated PRD
+    'done',                // Hold final PDF view
+];
+
+const STEP_DELAYS: Record<DiscoveryStep, number> = {
+    pipelineBrowse: 1600,
+    filesMenu: 2200,
+    synthesizeButton: 1600,
+    showSynthesis: 2200,
+    gotoPrdTab: 1500,
+    gotoGeneratePrd: 1600,
+    pdfGenerating: 1800,
+    pdfScroll: 6000,
+    done: 4000,
+};
+
+/** Cursor positions (x, y) and labels for each scripted step. Container ~1000x560. */
+const DISCOVERY_CURSOR: Record<DiscoveryStep, { x: number; y: number; label: string; click?: boolean }> = {
+    pipelineBrowse: { x: 360, y: 310, label: 'Browse Files', click: true },
+    filesMenu: { x: 380, y: 270, label: 'Choose source files' },
+    synthesizeButton: { x: 520, y: 348, label: 'Synthesize Insights', click: true },
+    showSynthesis: { x: 700, y: 300, label: 'Review synthesized output' },
+    gotoPrdTab: { x: 75, y: 148, label: 'PRD & Specs', click: true },
+    gotoGeneratePrd: { x: 480, y: 208, label: 'Generate full PRD', click: true },
+    pdfGenerating: { x: 640, y: 230, label: 'Generating PRD PDF…' },
+    pdfScroll: { x: 620, y: 280, label: 'Scroll through PRD', click: true },
+    done: { x: 620, y: 320, label: 'Final PRD ready' },
 };
 
 /** Discovery Hub animation - PRD generation & delegate to engineers. Matches app: src/renderer/components/DiscoveryHub.tsx */
 const DiscoveryAnimation = () => {
-    const [step, setStep] = useState<'pipeline' | 'prd' | 'delegate'>('pipeline');
-    const [cursorIndex, setCursorIndex] = useState(0);
+    const [stepIndex, setStepIndex] = useState(0);
     const [showClick, setShowClick] = useState(false);
 
-    const cursorSteps = DISCOVERY_CURSOR[step];
-    const cursorPos = cursorSteps[cursorIndex] ?? cursorSteps[0];
-    const isClick = cursorPos?.click ?? false;
-    const intakeHasFiles = step === 'pipeline' && cursorIndex >= 2;
+    const currentStep: DiscoveryStep = DISCOVERY_STEPS[stepIndex] ?? 'pipelineBrowse';
+    const cursorPos = DISCOVERY_CURSOR[currentStep];
+
+    const isPipelineView =
+        currentStep === 'pipelineBrowse' ||
+        currentStep === 'filesMenu' ||
+        currentStep === 'synthesizeButton' ||
+        currentStep === 'showSynthesis';
+    const isPrdView = !isPipelineView;
+
+    const intakeHasFiles =
+        currentStep === 'filesMenu' ||
+        currentStep === 'synthesizeButton' ||
+        currentStep === 'showSynthesis' ||
+        currentStep === 'gotoPrdTab' ||
+        currentStep === 'gotoGeneratePrd' ||
+        currentStep === 'pdfGenerating' ||
+        currentStep === 'pdfScroll' ||
+        currentStep === 'done';
+
+    const showFileDropdown = currentStep === 'filesMenu';
+    const isPdfGenerating = currentStep === 'pdfGenerating';
+    const isPdfPhase = currentStep === 'pdfScroll' || currentStep === 'done';
 
     React.useEffect(() => {
-        setCursorIndex(0);
-        setShowClick(false);
-    }, [step]);
+        let cancelled = false;
 
-    React.useEffect(() => {
-        const t = 2400;
-        const timer = setInterval(() => {
-            setShowClick(false);
-            setCursorIndex((i) => {
-                const steps = DISCOVERY_CURSOR[step];
-                const next = i + 1;
-                if (next >= steps.length) {
-                    if (step === 'pipeline') setStep('prd');
-                    else if (step === 'prd') setStep('delegate');
-                    else setStep('pipeline');
-                    return 0;
-                }
-                return next;
-            });
-        }, t);
-        return () => clearInterval(timer);
-    }, [step]);
+        const run = async () => {
+            for (let i = 0; i < DISCOVERY_STEPS.length; i++) {
+                if (cancelled) return;
+                setStepIndex(i);
+                const name = DISCOVERY_STEPS[i];
+                const delay = STEP_DELAYS[name] ?? 2200;
+                // eslint-disable-next-line no-await-in-loop
+                await new Promise((r) => setTimeout(r, delay));
+            }
+        };
 
-    // Show click ripple when landing on a click target
+        run();
+        return () => {
+            cancelled = true;
+        };
+    }, []);
+
     React.useEffect(() => {
         if (cursorPos?.click) {
             setShowClick(true);
             const id = setTimeout(() => setShowClick(false), 500);
             return () => clearTimeout(id);
         }
-    }, [step, cursorIndex]);
+    }, [currentStep, cursorPos?.click]);
 
     const bg = '#1a1a1a';
     return (
@@ -661,7 +715,12 @@ const DiscoveryAnimation = () => {
                     { id: 'prd', label: 'PRD & Specs', d: 'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z' },
                     { id: 'share', label: 'Share & Comments', d: 'M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z' },
                 ].map((item) => {
-                    const isActive = item.id === 'prd' ? step === 'prd' : item.id === 'pipeline';
+                    const isActive =
+                        item.id === 'pipeline'
+                            ? isPipelineView
+                            : item.id === 'prd'
+                                ? isPrdView
+                                : false;
                     return (
                         <div
                             key={item.id}
@@ -691,7 +750,7 @@ const DiscoveryAnimation = () => {
                 </div>
 
                 <AnimatePresence mode="wait">
-                    {(step === 'pipeline' || step === 'delegate') && (
+                    {isPipelineView && (
                         <motion.div
                             key="pipeline"
                             initial={{ opacity: 0, x: 8 }}
@@ -730,7 +789,36 @@ const DiscoveryAnimation = () => {
                                                 <svg className="w-8 h-8 text-white/20 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" /></svg>
                                                 <span className="text-sm font-medium text-white/35">Drop research data, transcripts, or logs</span>
                                                 <span className="text-[10px] text-white/20 mt-2 uppercase tracking-wide mb-3">Supports .txt, .json, .csv, .pdf, .doc, .md, .xlsx</span>
-                                                <div className="px-4 py-2 rounded-lg bg-blue-600/20 border border-blue-500/30 text-xs font-medium text-blue-400">Browse Files</div>
+                                                <div className="relative">
+                                                    <div className="px-4 py-2 rounded-lg bg-blue-600/20 border border-blue-500/30 text-xs font-medium text-blue-400">
+                                                        Browse Files
+                                                    </div>
+                                                    {showFileDropdown && (
+                                                        <div className="absolute left-0 mt-2 w-60 rounded-lg bg-slate-950/95 border border-white/10 shadow-2xl text-[10px] text-white/80 z-20">
+                                                            <div className="px-3 py-2 border-b border-white/10 text-[9px] font-bold uppercase tracking-wider text-white/40">
+                                                                This Mac
+                                                            </div>
+                                                            <ul className="max-h-40 overflow-hidden divide-y divide-white/5">
+                                                                <li className="px-3 py-2 flex items-center justify-between">
+                                                                    <span>Design_review_notes.pdf</span>
+                                                                    <span className="text-white/30">PDF</span>
+                                                                </li>
+                                                                <li className="px-3 py-2 flex items-center justify-between">
+                                                                    <span>User_interviews_raw.md</span>
+                                                                    <span className="text-white/30">MD</span>
+                                                                </li>
+                                                                <li className="px-3 py-2 flex items-center justify-between">
+                                                                    <span>Support_tickets_export.csv</span>
+                                                                    <span className="text-white/30">CSV</span>
+                                                                </li>
+                                                                <li className="px-3 py-2 flex items-center justify-between">
+                                                                    <span>Search_latency_logs.json</span>
+                                                                    <span className="text-white/30">JSON</span>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    )}
+                                                </div>
                                             </>
                                         )}
                                     </div>
@@ -768,7 +856,7 @@ const DiscoveryAnimation = () => {
                         </motion.div>
                     )}
 
-                    {step === 'prd' && (
+                    {isPrdView && (
                         <motion.div
                             key="prd"
                             initial={{ opacity: 0, x: 8 }}
@@ -784,78 +872,45 @@ const DiscoveryAnimation = () => {
                             <div className="flex flex-wrap gap-2">
                                 <div className="px-3 py-2 rounded-lg bg-blue-600 text-white text-xs font-medium border border-blue-500/30 flex items-center gap-2">
                                     <span className="w-3 h-3 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                                    Generate full PRD
+                                    {isPdfGenerating
+                                        ? 'Generating PDF from docs'
+                                        : isPdfPhase
+                                            ? 'Generated from attached docs'
+                                            : 'Generate full PRD'}
                                 </div>
                                 <div className="px-3 py-2 rounded-lg bg-blue-600 text-white text-xs font-medium border border-blue-500/30">Generate user stories & ACs</div>
                             </div>
                             <div className="flex-1 min-h-0 overflow-hidden rounded-xl border border-white/10 bg-white/[0.03] p-4">
-                                <div className="text-[9px] font-bold uppercase tracking-wider text-white/50 mb-2">PRD</div>
-                                <pre className="text-[10px] text-white/75 whitespace-pre-wrap font-sans leading-relaxed overflow-y-auto max-h-full">
-{`1. Problem & Opportunity
-   Single search across tools; users waste time switching context.
-
-2. Users & Use Cases
-   PMs, engineers, support — one query for docs, tickets, and messages.
-
-3. Success Metrics
-   Time-to-answer -40%; search usage +25%.
-
-4. Scope
-   In: full-text search, filters, saved views. Out: real-time sync in v1.`}
-                                </pre>
+                                <div className="text-[9px] font-bold uppercase tracking-wider text-white/50 mb-2">
+                                    {isPdfGenerating || isPdfPhase ? 'Generated PRD (PDF preview)' : 'PRD'}
+                                </div>
+                                {isPdfGenerating ? (
+                                    <div className="text-[10px] text-white/60 font-mono">
+                                        Preparing PDF preview from attached research…
+                                    </div>
+                                ) : isPdfPhase ? (
+                                    <motion.div
+                                        key={currentStep === 'pdfScroll' ? 'pdf-scroll' : 'pdf-static'}
+                                        initial={{ y: currentStep === 'pdfScroll' ? 0 : -40 }}
+                                        animate={currentStep === 'pdfScroll' ? { y: [-4, -24, -40] } : { y: -40 }}
+                                        transition={currentStep === 'pdfScroll' ? { duration: 6, ease: 'easeInOut' } : { duration: 0 }}
+                                        className="h-full"
+                                    >
+                                        <pre className="text-[10px] text-white/75 whitespace-pre-wrap font-sans leading-relaxed overflow-y-hidden">
+                                            {PRD_TEXT}
+                                        </pre>
+                                    </motion.div>
+                                ) : (
+                                    <pre className="text-[10px] text-white/75 whitespace-pre-wrap font-sans leading-relaxed overflow-y-auto max-h-full">
+                                        {PRD_TEXT}
+                                    </pre>
+                                )}
                             </div>
                         </motion.div>
                     )}
 
                 </AnimatePresence>
             </div>
-
-            {/* Delegate modal overlay - covers full mock, positioned in outer container */}
-            <AnimatePresence>
-                {step === 'delegate' && (
-                    <motion.div
-                        key="delegate-overlay"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.25 }}
-                        className="absolute inset-0 z-20 flex items-center justify-center rounded-2xl bg-black/60"
-                    >
-                        <motion.div
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.1 }}
-                            className="w-[340px] rounded-xl border border-white/10 shadow-xl overflow-hidden flex flex-col"
-                            style={{ background: bg }}
-                        >
-                            <div className="flex items-center justify-between p-4 border-b border-white/[0.08]">
-                                <h3 className="text-sm font-bold text-white">Select Tasks to Delegate</h3>
-                                <span className="text-white/40 text-lg leading-none">×</span>
-                            </div>
-                            <div className="p-4 space-y-3">
-                                <div className="p-2 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center gap-2">
-                                    <div className="w-2 h-2 rounded-full bg-emerald-400" />
-                                    <span className="text-xs font-medium text-white/80">Jira Connected</span>
-                                </div>
-                                <div className="text-[10px] font-medium text-white/50">Select Tasks</div>
-                                {['Add search API endpoint', 'Build filter UI', 'Saved views backend'].map((task, i) => (
-                                    <div key={i} className="flex items-center gap-2 p-2 rounded-lg bg-white/[0.04] border border-white/[0.08]">
-                                        <div className={cn('w-3.5 h-3.5 rounded border flex-shrink-0', i < 2 ? 'bg-blue-500 border-blue-400' : 'border-white/20')} />
-                                        <span className="text-xs text-white/80">{task}</span>
-                                    </div>
-                                ))}
-                            </div>
-                            <div className="flex gap-2 p-4 border-t border-white/[0.06]">
-                                <div className="flex-1 py-2 rounded-lg bg-white/[0.04] border border-white/[0.08] text-xs font-medium text-white/60 text-center">Cancel</div>
-                                <div className="flex-1 py-2 rounded-lg bg-blue-600 text-white text-xs font-bold border border-blue-500/30 flex items-center justify-center gap-2">
-                                    <span className="w-3 h-3 border-2 border-white/20 border-t-white rounded-full animate-spin" />
-                                    Delegate 2 Tasks
-                                </div>
-                            </div>
-                        </motion.div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
 
             {/* Scripted cursor - so users can track where and what's happening */}
             <motion.div
@@ -885,7 +940,7 @@ const DiscoveryAnimation = () => {
                 <motion.div
                     initial={{ opacity: 0, y: 4 }}
                     animate={{ opacity: 1, y: 0 }}
-                    key={`${step}-${cursorIndex}`}
+                    key={currentStep}
                     className="absolute top-6 left-0 whitespace-nowrap px-2.5 py-1.5 rounded-lg bg-slate-900/95 text-white text-[11px] font-medium shadow-lg border border-white/10"
                 >
                     {cursorPos?.label ?? '—'}

@@ -5,6 +5,7 @@ import Section from '@/components/Section';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import MagneticButton from '@/components/ui/MagneticButton';
+import DownloadButton from '@/components/DownloadButton';
 
 const Hero = () => {
     return (
@@ -30,7 +31,7 @@ const Hero = () => {
                         Context-Aware AI that lives where you work.
                     </p>
 
-                    <div className="flex flex-col sm:flex-row gap-4 mb-16">
+                    <div className="flex flex-col sm:flex-row gap-4 mb-6">
                         <MagneticButton href="/#book-demo" className="px-10 py-4 bg-black text-white text-sm font-semibold rounded-2xl hover:bg-neutral-800 transition-colors shadow-lg shadow-black/20">
                             Try Stealth Out
                         </MagneticButton>
@@ -38,6 +39,15 @@ const Hero = () => {
                             See How It Works
                         </MagneticButton>
                     </div>
+
+                    <motion.div
+                        initial={{ opacity: 0, y: 15 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                        className="mb-16"
+                    >
+                        <DownloadButton />
+                    </motion.div>
                 </motion.div>
             </div>
         </Section>

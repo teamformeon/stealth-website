@@ -126,3 +126,12 @@ h4 {
 .animate-glow {
   animation: soft-glow 10s ease-in-out infinite;
 }
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}

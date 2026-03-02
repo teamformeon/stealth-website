@@ -36,11 +36,13 @@ export async function POST(req: Request) {
         if (userEmail) {
             console.log(`💰 Payment succeeded for: ${userEmail}`);
 
-            // Update the user's profile to is_paid = true
+            // Use upsert to ensure the profile is marked as paid even if the user hasn't signed up yet
             const { error } = await supabaseAdmin
                 .from('profiles')
-                .update({ is_paid: true })
-                .eq('email', userEmail);
+                .upsert(
+                    { email: userEmail, is_paid: true },
+                    { onConflict: 'email' }
+                );
 
             if (error) {
                 console.error('Error updating supabase profile:', error);

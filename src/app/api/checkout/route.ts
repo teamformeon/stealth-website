@@ -22,10 +22,10 @@ export async function POST(req: Request) {
                     price_data: {
                         currency: 'usd',
                         product_data: {
-                            name: 'Stealth AI - Lifetime Access',
-                            description: 'System-wide AI that adapts to you.',
+                            name: 'Stealth AI - 1 Month Access',
+                            description: 'Full access to Stealth AI for 30 days.',
                         },
-                        unit_amount: 5000, // $50.00
+                        unit_amount: 2500, // $25.00
                     },
                     quantity: 1,
                 },
@@ -38,6 +38,7 @@ export async function POST(req: Request) {
             metadata: {
                 user_email: email,
             },
+            allow_promotion_codes: true,
         });
 
         return NextResponse.json({ url: session.url });

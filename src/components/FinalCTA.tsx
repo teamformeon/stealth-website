@@ -5,6 +5,36 @@ import Section from './Section';
 import { motion } from 'framer-motion';
 
 const FinalCTA = () => {
+    const [loading, setLoading] = React.useState(false);
+
+    const handleCheckout = async () => {
+        setLoading(true);
+        const email = prompt("Enter your email to receive the download link and access:");
+        if (!email) {
+            setLoading(false);
+            return;
+        }
+
+        try {
+            const res = await fetch('/api/checkout', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email }),
+            });
+            const data = await res.json();
+            if (data.url) {
+                window.location.href = data.url;
+            } else {
+                alert('Checkout failed. Please try again.');
+            }
+        } catch (err) {
+            console.error(err);
+            alert('An error occurred. Please try again.');
+        } finally {
+            setLoading(false);
+        }
+    };
+
     return (
         <Section id="explore" className="pb-48">
             <div className="relative p-12 md:p-32 rounded-[3rem] bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-100 overflow-hidden text-center">
@@ -21,9 +51,13 @@ const FinalCTA = () => {
                         Available now: Choose prompt-free automatic suggestions or type commands—both modes work seamlessly
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <a href="/#book-demo" className="px-10 py-4 bg-black text-white text-sm font-semibold rounded-2xl hover:bg-neutral-800 transition-colors shadow-lg shadow-black/20 inline-block text-center">
-                            Try Stealth Out
-                        </a>
+                        <button
+                            onClick={handleCheckout}
+                            disabled={loading}
+                            className="px-10 py-4 bg-black text-white text-sm font-semibold rounded-2xl hover:bg-neutral-800 transition-colors shadow-lg shadow-black/20 inline-block text-center disabled:opacity-50"
+                        >
+                            {loading ? 'Processing...' : 'Buy Stealth Limited Access'}
+                        </button>
                         <a href="/#vision" className="px-10 py-4 bg-white border border-slate-200 text-slate-900 text-sm font-semibold rounded-2xl hover:bg-slate-50 transition-colors hover:border-slate-300 inline-block text-center">
                             Learn More
                         </a>

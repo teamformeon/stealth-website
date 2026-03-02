@@ -20,7 +20,7 @@ const VisionSection = () => {
                         How It <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Works</span>
                     </h2>
                     <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
-                        Stealth runs in the background, monitoring your activity. When you press the global hotkey, it instantly analyzes your screen and suggests relevant actions—all automatically.
+                        Upload meeting transcripts and logs, then delegate tasks to engineers via Jira. Stealth runs on your desktop and connects to your tools—one hotkey, no tab-switching.
                     </p>
                 </motion.div>
 
@@ -35,23 +35,23 @@ const VisionSection = () => {
                             iconColor: 'text-blue-600'
                         },
                         {
-                            icon: <Sparkles size={24} />,
-                            title: 'Auto-Analyze',
-                            description: 'AI captures and analyzes your screen automatically',
+                            icon: <Upload size={24} />,
+                            title: 'Upload Transcripts & Logs',
+                            description: 'PMs drop meeting transcripts or logs into Stealth',
                             iconBg: 'bg-indigo-50',
                             iconColor: 'text-indigo-600'
                         },
                         {
                             icon: <MessageSquare size={24} />,
-                            title: 'Get Suggestions',
-                            description: 'Context-aware actions appear instantly',
+                            title: 'Get Actions',
+                            description: 'Summarize, extract tasks, or draft PRDs from context',
                             iconBg: 'bg-purple-50',
                             iconColor: 'text-purple-600'
                         },
                         {
                             icon: <Code size={24} />,
-                            title: 'Execute Actions',
-                            description: 'Click to run, or type natural language commands',
+                            title: 'Delegate to Engineers',
+                            description: 'Create and assign Jira tickets to SWEs in one flow',
                             iconBg: 'bg-pink-50',
                             iconColor: 'text-pink-600'
                         }
@@ -98,20 +98,20 @@ const VisionSection = () => {
                         </p>
                         <div className="grid md:grid-cols-2 gap-4 mt-8">
                             <div className="p-4 bg-white/5 rounded-xl border border-white/10">
-                                <div className="text-sm font-semibold text-blue-400 mb-2">Screen Analysis</div>
-                                <div className="text-slate-300 text-sm">Automatically analyzes what's on your screen and suggests relevant actions</div>
+                                <div className="text-sm font-semibold text-blue-400 mb-2">Upload Transcripts & Logs</div>
+                                <div className="text-slate-300 text-sm">PMs drop meeting transcripts or research logs; Stealth extracts tasks and context for Jira and docs.</div>
+                            </div>
+                            <div className="p-4 bg-white/5 rounded-xl border border-white/10">
+                                <div className="text-sm font-semibold text-blue-400 mb-2">Delegate to SWEs via Jira</div>
+                                <div className="text-slate-300 text-sm">Turn action items into Jira tickets and assign to engineers without leaving your flow.</div>
                             </div>
                             <div className="p-4 bg-white/5 rounded-xl border border-white/10">
                                 <div className="text-sm font-semibold text-blue-400 mb-2">Time-Based Suggestions</div>
                                 <div className="text-slate-300 text-sm">Morning briefs, daily wrap-ups, and contextual prompts based on time of day</div>
                             </div>
                             <div className="p-4 bg-white/5 rounded-xl border border-white/10">
-                                <div className="text-sm font-semibold text-blue-400 mb-2">App Focus Monitoring</div>
-                                <div className="text-slate-300 text-sm">Detects when you switch to focus apps and suggests productivity actions</div>
-                            </div>
-                            <div className="p-4 bg-white/5 rounded-xl border border-white/10">
                                 <div className="text-sm font-semibold text-blue-400 mb-2">Natural Language Commands</div>
-                                <div className="text-slate-300 text-sm">Type anything—Stealth's NLU layer maps it to the right action</div>
+                                <div className="text-slate-300 text-sm">Type anything—Stealth maps it to the right action across Jira, Slack, and docs.</div>
                             </div>
                         </div>
                     </div>

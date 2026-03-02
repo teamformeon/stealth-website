@@ -47,17 +47,17 @@ const AIFeatures = () => {
                             <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-500 flex items-center justify-center">
                                 <Brain size={24} className="text-white" />
                             </div>
-                            <h3 className="text-2xl font-bold text-black">Prompt-Free Mode</h3>
+                            <h3 className="text-2xl font-bold text-black">Upload Transcripts & Logs</h3>
                         </div>
                         <p className="text-slate-600 leading-relaxed mb-6 font-medium">
-                            Stealth analyzes your screen—whether it's a Jira ticket or a Slack thread—and suggests the next move instantly.
+                            PMs drop meeting transcripts or research logs into Stealth. The AI extracts tasks and context for Jira and PRDs.
                         </p>
                         <div className="space-y-3">
                             {[
-                                'Jira ticket summarization & syncing',
+                                'Jira ticket creation from action items',
                                 'Slack thread to PRD conversion',
-                                'Real-time context analysis',
-                                'Teams coordination, zero tabs'
+                                'Transcripts and logs in one place',
+                                'Delegate to SWEs without tab-switching'
                             ].map((feature, idx) => (
                                 <motion.div
                                     key={idx}
@@ -135,9 +135,9 @@ const AIFeatures = () => {
                         >
                             <Sparkles size={48} className="mx-auto mb-6 text-blue-200" />
                         </motion.div>
-                        <h3 className="text-3xl font-black mb-4">Choose Your Workflow</h3>
+                        <h3 className="text-3xl font-black mb-4">Upload Once. Delegate to Jira.</h3>
                         <p className="text-xl text-blue-100 leading-relaxed max-w-2xl mx-auto mb-8">
-                            Whether you prefer automatic suggestions or explicit commands, Stealth adapts to how you work. Both modes are available now.
+                            Whether you prefer uploading transcripts and logs or typing natural language commands, Stealth helps PMs delegate to engineers via Jira—all from the desktop.
                         </p>
                         <motion.div
                             initial={{ opacity: 0, y: 10 }}

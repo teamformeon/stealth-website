@@ -17,8 +17,8 @@ const Vision = () => {
                                 <Activity size={20} />
                             </div>
                             <div>
-                                <h3 className="text-xl font-bold mb-2 text-black">Context-Aware Intelligence</h3>
-                                <p className="text-slate-600 leading-relaxed text-sm">Stealth automatically analyzes your screen, understands what you're working on, and suggests relevant actions—all without you writing a prompt.</p>
+                                <h3 className="text-xl font-bold mb-2 text-black">Upload & Delegate</h3>
+                                <p className="text-slate-600 leading-relaxed text-sm">PMs upload meeting transcripts or logs. Stealth extracts tasks and creates Jira tickets you can assign to engineers—all from one place.</p>
                             </div>
                         </div>
                         <div className="flex gap-6">
@@ -38,7 +38,7 @@ const Vision = () => {
                         <Activity className="w-16 h-16 text-blue-600 mb-4" />
                         <h3 className="text-2xl font-bold text-black">Our Mission</h3>
                         <p className="text-slate-600 text-sm max-w-sm leading-relaxed">
-                            To build AI assistance that works automatically—understanding context, suggesting actions, and helping you be more productive without the friction of prompts.
+                            To build AI that helps PMs move faster: upload transcripts and logs, delegate to engineers via Jira, and keep everything in one workflow—without the friction of scattered tabs.
                         </p>
                         <div className="mt-8 pt-8 border-t border-slate-200 w-full flex justify-center gap-8">
                             <Activity size={16} className="text-blue-600" />

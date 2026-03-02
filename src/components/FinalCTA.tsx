@@ -45,10 +45,10 @@ const FinalCTA = () => {
                         Ready for AI That <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Adapts to You?</span>
                     </h2>
                     <p className="text-slate-600 text-xl mb-6 leading-relaxed">
-                        Stealth is system-wide AI with two ways to work: automatic screen analysis with suggestions, or natural language commands. Press a hotkey, get intelligent help your way.
+                        Stealth gives PMs one place to upload meeting transcripts and logs, then delegate tasks straight to engineers via Jira. System-wide AI with natural language—press a hotkey and get moving.
                     </p>
                     <p className="text-blue-600 text-lg mb-12 font-semibold">
-                        Available now: Choose prompt-free automatic suggestions or type commands—both modes work seamlessly
+                        Upload transcripts & logs · Delegate to SWEs via Jira · One hotkey, zero context loss
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
                         <button

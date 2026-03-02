@@ -19,7 +19,7 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: "Stealth | AI That Understands Context",
-  description: "System-wide AI that automatically analyzes your screen and suggests actions—no prompts needed. Integrates with email, calendar, tasks, Notion, Slack, and more.",
+  description: "System-wide AI for PMs: upload transcripts and logs, delegate tasks to engineers via Jira. Integrates with email, calendar, Slack, Jira, and more.",
 };
 
 export default function RootLayout({

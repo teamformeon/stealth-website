@@ -32,20 +32,20 @@ const ScrollRevealSection = () => {
 
     const items = [
         {
-            title: "Context-Aware",
-            text: "Stealth reads your screen to understand exactly what you're working on.",
+            title: "Upload Transcripts & Logs",
+            text: "PMs drop meeting transcripts or research logs into Stealth. AI extracts tasks and context for Jira and docs.",
             opacity: opacity1,
             scale: scale1
         },
         {
-            title: "Prompt-Free",
-            text: "No more engineering complex prompts. AI suggests the next move automatically.",
+            title: "Delegate to Engineers via Jira",
+            text: "Turn action items into Jira tickets and assign to SWEs in one flow. No tab-switching.",
             opacity: opacity2,
             scale: scale2
         },
         {
             title: "Native Speed",
-            text: "Built for macOS and Windows. Zero tabs. Zero lag. Absolute focus.",
+            text: "Built for macOS and Windows. One hotkey. Jira, Slack, and your tools in one place.",
             opacity: opacity3,
             scale: scale3
         }

@@ -53,10 +53,10 @@ const ProblemStatement = () => {
                             <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center">
                                 <Lightbulb size={20} className="text-blue-600" />
                             </div>
-                            <h3 className="text-xl font-bold text-black">Prompt-Free Productivity</h3>
+                            <h3 className="text-xl font-bold text-black">From Transcripts to Jira</h3>
                         </div>
                         <p className="text-slate-600 leading-relaxed">
-                            Stop wasting time engineering prompts. Stealth understands your screen context—whether it's a Slack thread or a Jira ticket—and suggests the next move instantly.
+                            Upload meeting transcripts or logs. Stealth extracts tasks and turns them into Jira tickets you can assign to engineers—no copy-paste, no tab chaos.
                         </p>
                     </motion.div>
                 </div>

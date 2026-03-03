@@ -14,10 +14,10 @@ export default function Home() {
       <CompanyLogos />
       <ProductShowcase />
       <ProblemStatement />
+      <FinalCTA />
       <VisionSection />
       <ScrollRevealSection />
       <BookDemo />
-      <FinalCTA />
     </div>
   );
 }

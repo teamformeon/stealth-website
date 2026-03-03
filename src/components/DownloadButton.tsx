@@ -3,7 +3,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-const DOWNLOAD_URL = 'https://github.com/alakhjagtap/stealthpublicreleases/releases/latest/download/Stealth-Setup-1.0.0.exe';
+const PURCHASED_SESSION_STORAGE_KEY = 'stealth_paid_session_id';
+const DEFAULT_LOCK_MESSAGE = 'Complete payment to unlock the Windows download.';
 
 const WindowsIcon = () => (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" className="shrink-0">
@@ -11,76 +12,224 @@ const WindowsIcon = () => (
     </svg>
 );
 
+const LockIcon = () => (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="3" y="11" width="18" height="10" rx="2" />
+        <path d="M7 11V8a5 5 0 1 1 10 0v3" />
+    </svg>
+);
+
+type VerificationResponse = {
+    success?: boolean;
+    url?: string;
+    error?: string;
+};
+
+type VerifiedSessionResponse = {
+    success: true;
+    url: string;
+};
+
 const DownloadButton = () => {
+    const [status, setStatus] = React.useState<'checking' | 'locked' | 'ready'>('checking');
+    const [sessionId, setSessionId] = React.useState<string | null>(null);
+    const [statusMessage, setStatusMessage] = React.useState<string>(DEFAULT_LOCK_MESSAGE);
+    const [isDownloading, setIsDownloading] = React.useState(false);
+    const [isCheckoutRedirecting, setIsCheckoutRedirecting] = React.useState(false);
+
+    const verifySession = React.useCallback(async (id: string): Promise<VerifiedSessionResponse> => {
+        const res = await fetch('/api/verify-purchase', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ session_id: id }),
+        });
+
+        const data: VerificationResponse = await res.json();
+        if (!res.ok || !data.success || !data.url) {
+            throw new Error(data.error || 'Unable to verify your purchase.');
+        }
+
+        return { success: true, url: data.url };
+    }, []);
+
+    React.useEffect(() => {
+        const runVerification = async () => {
+            const params = new URLSearchParams(window.location.search);
+            const querySessionId = params.get('session_id');
+            const successFlag = params.get('success') === 'true';
+            const storedSessionId = window.localStorage.getItem(PURCHASED_SESSION_STORAGE_KEY);
+            const activeSessionId = querySessionId || storedSessionId;
+
+            if (!activeSessionId) {
+                setStatus('locked');
+                return;
+            }
+
+            try {
+                await verifySession(activeSessionId);
+                setSessionId(activeSessionId);
+                setStatus('ready');
+                setStatusMessage('Payment verified. Your download is unlocked.');
+                window.localStorage.setItem(PURCHASED_SESSION_STORAGE_KEY, activeSessionId);
+            } catch (error) {
+                console.error('Purchase verification failed:', error);
+                window.localStorage.removeItem(PURCHASED_SESSION_STORAGE_KEY);
+                setSessionId(null);
+                setStatus('locked');
+                setStatusMessage(DEFAULT_LOCK_MESSAGE);
+            } finally {
+                if (querySessionId || successFlag) {
+                    const cleanedUrl = new URL(window.location.href);
+                    cleanedUrl.searchParams.delete('success');
+                    cleanedUrl.searchParams.delete('session_id');
+                    window.history.replaceState({}, '', cleanedUrl.toString());
+                }
+            }
+        };
+
+        void runVerification();
+    }, [verifySession]);
+
+    const handleDownload = async () => {
+        if (status === 'checking' || isDownloading || isCheckoutRedirecting) {
+            return;
+        }
+
+        if (status !== 'ready' || !sessionId) {
+            setStatusMessage('Redirecting to secure checkout...');
+            setIsCheckoutRedirecting(true);
+            try {
+                const res = await fetch('/api/checkout', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({}),
+                });
+
+                const data = (await res.json()) as { url?: string; error?: string };
+                if (data.url) {
+                    window.location.href = data.url;
+                    return;
+                }
+
+                setStatusMessage(data.error || 'Unable to start checkout. Please try again.');
+            } catch (error) {
+                console.error('Checkout redirect failed:', error);
+                setStatusMessage('Unable to start checkout. Please try again.');
+            } finally {
+                setIsCheckoutRedirecting(false);
+            }
+            return;
+        }
+
+        setIsDownloading(true);
+        try {
+            const result = await verifySession(sessionId);
+            window.location.href = result.url;
+        } catch (error) {
+            console.error('Download validation failed:', error);
+            window.localStorage.removeItem(PURCHASED_SESSION_STORAGE_KEY);
+            setSessionId(null);
+            setStatus('locked');
+            setStatusMessage(DEFAULT_LOCK_MESSAGE);
+        } finally {
+            setIsDownloading(false);
+        }
+    };
+
+    const isReady = status === 'ready';
+    const isBusy = status === 'checking' || isDownloading || isCheckoutRedirecting;
+    const isDisabled = status === 'checking' || isDownloading || isCheckoutRedirecting;
+    const canInteract = !isDisabled;
+
     return (
-        <motion.a
-            href={DOWNLOAD_URL}
-            download
-            className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-2xl font-semibold text-sm text-white overflow-hidden cursor-pointer no-underline"
-            style={{
-                background: 'linear-gradient(135deg, #0078D4 0%, #005A9E 50%, #003F72 100%)',
-                boxShadow: '0 0 0 1px rgba(255,255,255,0.1) inset, 0 4px 20px rgba(0,120,212,0.25), 0 1px 3px rgba(0,0,0,0.2)',
-            }}
-            whileHover={{
-                scale: 1.03,
-                boxShadow: '0 0 0 1px rgba(255,255,255,0.2) inset, 0 8px 40px rgba(0,120,212,0.45), 0 2px 8px rgba(0,0,0,0.3)',
-            }}
-            whileTap={{ scale: 0.97 }}
-            transition={{ type: 'spring', stiffness: 400, damping: 17 }}
-        >
-            {/* Animated shimmer overlay */}
-            <div
-                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+        <div className="inline-flex flex-col items-start gap-3">
+            <motion.button
+                type="button"
+                onClick={handleDownload}
+                disabled={isDisabled}
+                className={`group relative inline-flex items-center gap-3 px-8 py-4 rounded-2xl font-semibold text-sm text-white overflow-hidden no-underline transition-opacity ${
+                    canInteract ? 'cursor-pointer' : 'cursor-not-allowed opacity-90'
+                } ${isBusy ? 'opacity-70' : ''}`}
                 style={{
-                    background: 'linear-gradient(105deg, transparent 20%, rgba(255,255,255,0.15) 45%, rgba(255,255,255,0.25) 50%, rgba(255,255,255,0.15) 55%, transparent 80%)',
-                    animation: 'shimmer 2s ease-in-out infinite',
+                    background: 'linear-gradient(135deg, #0078D4 0%, #005A9E 50%, #003F72 100%)',
+                    boxShadow: '0 0 0 1px rgba(255,255,255,0.1) inset, 0 4px 20px rgba(0,120,212,0.25), 0 1px 3px rgba(0,0,0,0.2)',
                 }}
-            />
+                whileHover={
+                    canInteract
+                        ? {
+                              scale: 1.03,
+                              boxShadow: '0 0 0 1px rgba(255,255,255,0.2) inset, 0 8px 40px rgba(0,120,212,0.45), 0 2px 8px rgba(0,0,0,0.3)',
+                          }
+                        : undefined
+                }
+                whileTap={canInteract ? { scale: 0.97 } : undefined}
+                transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+            >
+                <div
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                    style={{
+                        background: 'linear-gradient(105deg, transparent 20%, rgba(255,255,255,0.15) 45%, rgba(255,255,255,0.25) 50%, rgba(255,255,255,0.15) 55%, transparent 80%)',
+                        animation: isReady ? 'shimmer 2s ease-in-out infinite' : 'none',
+                    }}
+                />
 
-            {/* Glow ring on hover */}
-            <div
-                className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                style={{
-                    background: 'radial-gradient(ellipse at 50% 0%, rgba(100,180,255,0.2) 0%, transparent 60%)',
-                }}
-            />
+                <div
+                    className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                    style={{
+                        background: 'radial-gradient(ellipse at 50% 0%, rgba(100,180,255,0.2) 0%, transparent 60%)',
+                    }}
+                />
 
-            {/* Content */}
-            <div className="relative z-10 flex items-center gap-3">
-                <div className="relative">
-                    <WindowsIcon />
-                    {/* Subtle glow behind icon */}
-                    <div
-                        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-md"
-                        style={{ background: 'rgba(100,180,255,0.6)' }}
-                    />
+                <div className="relative z-10 flex items-center gap-3">
+                    <div className="relative">
+                        <WindowsIcon />
+                        <div
+                            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-md"
+                            style={{ background: 'rgba(100,180,255,0.6)' }}
+                        />
+                    </div>
+
+                    <div className="flex flex-col items-start leading-tight">
+                        <span className="text-[13px] font-bold tracking-wide">
+                            {status === 'checking' ? 'Checking purchase...' : isReady ? 'Download for Windows' : 'Purchase Required'}
+                        </span>
+                        <span className="text-[10px] text-blue-200/70 font-medium">
+                            {isReady ? 'v1.0.0 · Windows 10+' : 'Click to pay via Stripe'}
+                        </span>
+                    </div>
+
+                    {status === 'checking' || isDownloading || isCheckoutRedirecting ? (
+                        <div className="ml-1 h-4 w-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                    ) : isReady ? (
+                        <motion.svg
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            className="ml-1 opacity-60 group-hover:opacity-100 transition-opacity"
+                            animate={{ y: [0, 2, 0] }}
+                            transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+                        >
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                            <polyline points="7 10 12 15 17 10" />
+                            <line x1="12" y1="15" x2="12" y2="3" />
+                        </motion.svg>
+                    ) : (
+                        <div className="ml-1 opacity-80">
+                            <LockIcon />
+                        </div>
+                    )}
                 </div>
+            </motion.button>
 
-                <div className="flex flex-col items-start leading-tight">
-                    <span className="text-[13px] font-bold tracking-wide">Download for Windows</span>
-                    <span className="text-[10px] text-blue-200/70 font-medium">v1.0.0 · Windows 10+</span>
-                </div>
-
-                {/* Download arrow icon */}
-                <motion.svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="ml-1 opacity-60 group-hover:opacity-100 transition-opacity"
-                    animate={{ y: [0, 2, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-                >
-                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                    <polyline points="7 10 12 15 17 10" />
-                    <line x1="12" y1="15" x2="12" y2="3" />
-                </motion.svg>
-            </div>
-        </motion.a>
+            <p className={`text-xs ${isReady ? 'text-emerald-400' : 'text-slate-500'}`}>
+                {statusMessage}
+            </p>
+        </div>
     );
 };
 

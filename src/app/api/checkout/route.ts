@@ -2,19 +2,26 @@ import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-    // @ts-ignore
-    apiVersion: '2025-01-27.acacia',
+    apiVersion: '2025-01-27.acacia' as Stripe.LatestApiVersion,
 });
+
+type CheckoutRequest = {
+    email?: string;
+};
 
 export async function POST(req: Request) {
     try {
-        const { email } = await req.json();
+        let payload: CheckoutRequest = {};
 
-        if (!email) {
-            return NextResponse.json({ error: 'Email is required' }, { status: 400 });
+        try {
+            payload = (await req.json()) as CheckoutRequest;
+        } catch {
+            payload = {};
         }
 
-        // Create Stripe Checkout Session
+        const email = typeof payload.email === 'string' ? payload.email.trim() : '';
+        const origin = req.headers.get('origin') || process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
             line_items: [
@@ -25,25 +32,22 @@ export async function POST(req: Request) {
                             name: 'Stealth AI - 1 Month Access',
                             description: 'Full access to Stealth AI for 30 days.',
                         },
-                        unit_amount: 2500, // $25.00
+                        unit_amount: 2500,
                     },
                     quantity: 1,
                 },
             ],
             mode: 'payment',
-            success_url: `${req.headers.get('origin')}/?success=true`,
-            cancel_url: `${req.headers.get('origin')}/?canceled=true`,
-            customer_email: email,
-            // We pass the email in metadata so the webhook knows who paid
-            metadata: {
-                user_email: email,
-            },
+            success_url: `${origin}/?success=true&session_id={CHECKOUT_SESSION_ID}`,
+            cancel_url: `${origin}/?canceled=true`,
+            customer_email: email || undefined,
+            metadata: email ? { user_email: email } : undefined,
             allow_promotion_codes: true,
         });
 
         return NextResponse.json({ url: session.url });
-    } catch (err: any) {
-        console.error('Stripe Checkout Error:', err);
-        return NextResponse.json({ error: err.message }, { status: 500 });
+    } catch (error: unknown) {
+        console.error('Stripe Checkout Error:', error);
+        return NextResponse.json({ error: 'Unable to start checkout.' }, { status: 500 });
     }
 }

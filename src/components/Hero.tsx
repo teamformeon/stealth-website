@@ -2,7 +2,6 @@
 
 import React from 'react';
 import Section from '@/components/Section';
-import Link from 'next/link';
 import { motion } from 'framer-motion';
 import MagneticButton from '@/components/ui/MagneticButton';
 import DownloadButton from '@/components/DownloadButton';
@@ -32,8 +31,8 @@ const Hero = () => {
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-4 mb-6">
-                        <MagneticButton href="/#book-demo" className="px-10 py-4 bg-black text-white text-sm font-semibold rounded-2xl hover:bg-neutral-800 transition-colors shadow-lg shadow-black/20">
-                            Try Stealth Out
+                        <MagneticButton href="/#pricing" className="px-10 py-4 bg-black text-white text-sm font-semibold rounded-2xl hover:bg-neutral-800 transition-colors shadow-lg shadow-black/20">
+                            View Pricing
                         </MagneticButton>
                         <MagneticButton href="/#vision" className="px-10 py-4 bg-white border border-slate-200 text-slate-900 text-sm font-semibold rounded-2xl hover:bg-slate-50 transition-colors hover:border-slate-300">
                             See How It Works

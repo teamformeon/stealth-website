@@ -69,12 +69,12 @@ export async function POST(request: Request) {
     }
 
     const { data, error } = await resend.emails.send({
-      from: `Stealth Demo <${process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev'}>`,
+      from: `Stealth Enterprise <${process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev'}>`,
       to: [process.env.RESEND_TO_EMAIL || 'stealthassistant1@gmail.com'],
-      subject: `New Demo Request: ${firstName} ${lastName}`,
+      subject: `New Enterprise Inquiry: ${firstName} ${lastName}`,
       html: `
         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e2e8f0; border-radius: 12px; background-color: #ffffff;">
-          <h2 style="color: #1e293b; border-bottom: 2px solid #3b82f6; padding-bottom: 10px; margin-bottom: 20px;">New Demo Request</h2>
+          <h2 style="color: #1e293b; border-bottom: 2px solid #3b82f6; padding-bottom: 10px; margin-bottom: 20px;">New Enterprise Inquiry</h2>
           
           <div style="margin-bottom: 24px;">
             <p style="margin: 4px 0; color: #64748b; font-size: 14px; text-transform: uppercase; font-weight: 600; letter-spacing: 0.05em;">Contact Information</p>
@@ -95,7 +95,7 @@ export async function POST(request: Request) {
           </div>
 
           <p style="font-size: 12px; color: #94a3b8; margin-top: 40px; text-align: center; border-top: 1px solid #f1f5f9; pt-20">
-            This request was sent from the Stealth website demo form.
+            This request was sent from the Stealth website enterprise inquiry form.
           </p>
         </div>
       `,

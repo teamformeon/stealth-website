@@ -110,10 +110,10 @@ const Navbar = () => {
                         <div className="h-4 w-px bg-slate-200" />
                         <div className="flex items-center">
                             <Link
-                                href="/#book-demo"
+                                href="/#pricing"
                                 className="text-[13px] font-bold uppercase tracking-widest hover:opacity-70 transition-opacity whitespace-nowrap text-black"
                             >
-                                Try Stealth Out
+                                View Pricing
                             </Link>
                         </div>
                     </div>
@@ -152,11 +152,11 @@ const Navbar = () => {
 
                             <div className="mt-16 w-full max-w-xs space-y-4">
                                 <Link
-                                    href="/#book-demo"
+                                    href="/#pricing"
                                     onClick={() => setMobileMenuOpen(false)}
                                     className="block w-full text-center py-4 bg-white text-black text-xs font-bold uppercase tracking-widest"
                                 >
-                                    Try Stealth Out
+                                    View Pricing
                                 </Link>
                             </div>
                         </motion.div>

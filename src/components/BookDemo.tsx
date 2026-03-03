@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Section from './Section';
 import { motion } from 'framer-motion';
-import { Check, ChevronRight, Send } from 'lucide-react';
+import { Check, ChevronRight } from 'lucide-react';
 
 const BookDemo = () => {
     const [formState, setFormState] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
@@ -57,7 +57,7 @@ const BookDemo = () => {
     };
 
     return (
-        <Section id="book-demo" className="relative overflow-hidden">
+        <Section id="company-inquiry" className="relative overflow-hidden pb-48">
             {/* Background Gradients */}
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-100/30 rounded-full blur-[100px] -z-10 translate-x-1/2 -translate-y-1/2" />
             <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-indigo-100/30 rounded-full blur-[100px] -z-10 -translate-x-1/2 translate-y-1/2" />
@@ -73,24 +73,24 @@ const BookDemo = () => {
                     >
                         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 text-blue-600 text-[11px] font-medium tracking-wide mb-6 uppercase">
                             <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
-                            Schedule a Call
+                            For Companies
                         </div>
 
                         <h2 className="text-4xl md:text-5xl font-black tracking-tight mb-6 text-black leading-tight">
-                            Ship faster with <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Product Intelligence.</span>
+                            Need a custom plan for <br />
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">your company?</span>
                         </h2>
 
                         <p className="text-lg text-slate-600 mb-8 leading-relaxed font-medium">
-                            Book a demo to see how Stealth consolidates Jira, Slack, and your entire PM workflow.
+                            Tell us about your team and requirements. We will follow up with enterprise pricing and rollout options.
                         </p>
 
                         <ul className="space-y-4 mb-10">
                             {[
-                                'Jira & Slack deep-integration setup',
-                                'PRD generation and syncing',
-                                'Team-wide productivity insights',
-                                'Priority early access'
+                                'Custom enterprise pricing',
+                                'Security and compliance review',
+                                'Dedicated onboarding support',
+                                'Procurement and deployment assistance'
                             ].map((item, i) => (
                                 <li key={i} className="flex items-start gap-3 text-slate-700">
                                     <div className="mt-1 w-5 h-5 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 text-blue-600">
@@ -117,13 +117,13 @@ const BookDemo = () => {
                                 <div className="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
                                     <Check size={32} />
                                 </div>
-                                <h3 className="text-2xl font-bold text-slate-900 mb-2">Request Received!</h3>
-                                <p className="text-slate-500">We&apos;ll be in touch shortly to schedule your demo.</p>
+                                <h3 className="text-2xl font-bold text-slate-900 mb-2">Inquiry Received!</h3>
+                                <p className="text-slate-500">We&apos;ll reach out shortly with enterprise details.</p>
                                 <button
                                     onClick={() => setFormState('idle')}
                                     className="mt-8 text-sm text-blue-600 font-semibold hover:text-blue-700"
                                 >
-                                    Send another request
+                                    Send another inquiry
                                 </button>
                             </div>
                         ) : (
@@ -211,7 +211,7 @@ const BookDemo = () => {
                                         <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                                     ) : (
                                         <>
-                                            Schedule Demo
+                                            Send Enterprise Inquiry
                                             <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />
                                         </>
                                     )}

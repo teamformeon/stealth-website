@@ -43,9 +43,10 @@ const Hero = () => {
                         initial={{ opacity: 0, y: 15 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                        className="mb-16"
+                        className="mb-16 flex flex-wrap gap-6"
                     >
-                        <DownloadButton />
+                        <DownloadButton platform="windows" />
+                        <DownloadButton platform="mac" />
                     </motion.div>
                 </motion.div>
             </div>

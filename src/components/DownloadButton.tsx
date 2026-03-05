@@ -159,7 +159,7 @@ const DownloadButton = ({ platform = 'windows' }: DownloadButtonProps) => {
     const canInteract = !isDisabled;
 
     const platformName = platform === 'mac' ? 'macOS' : 'Windows';
-    const platformDisplay = platform === 'mac' ? 'v1.0.6 · macOS (Apple Silicon)' : 'v1.0.6 · Windows 10+';
+    const platformDisplay = platform === 'mac' ? 'v1.0.8.1 · macOS (Apple Silicon)' : 'v1.0.8.1 · Windows 10+';
 
     return (
         <div className="inline-flex flex-col items-start gap-3">

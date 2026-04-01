@@ -46,7 +46,6 @@ const Hero = () => {
                         className="mb-16 flex flex-wrap gap-6"
                     >
                         <DownloadButton platform="windows" />
-                        <DownloadButton platform="mac" />
                     </motion.div>
                 </motion.div>
             </div>

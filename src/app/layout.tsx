@@ -5,6 +5,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CursorFollower from "@/components/ui/CursorFollower";
+import AuthRedirector from "@/components/AuthRedirector";
 import { cn } from "@/lib/utils";
 
 const inter = Inter({
@@ -37,6 +38,7 @@ export default function RootLayout({
         )}
       >
         <CursorFollower />
+        <AuthRedirector />
         <div className="noise-overlay" />
 
         {/* Simplified Background Blobs */}

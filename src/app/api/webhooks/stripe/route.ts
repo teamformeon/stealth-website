@@ -31,7 +31,8 @@ export async function POST(req: Request) {
     // Handle the event
     if (event.type === 'checkout.session.completed') {
         const session = event.data.object as Stripe.Checkout.Session;
-        const userEmail = session.metadata?.user_email;
+        // Attempt to get the user email from metadata, then fallback to the Stripe customer details email
+        const userEmail = session.metadata?.user_email || session.customer_details?.email;
 
         if (userEmail) {
             console.log(`💰 Payment succeeded for: ${userEmail}`);

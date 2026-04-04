@@ -113,7 +113,7 @@ const Navbar = () => {
                                 href="/#pricing"
                                 className="text-[13px] font-bold uppercase tracking-widest hover:opacity-70 transition-opacity whitespace-nowrap text-black"
                             >
-                                View Pricing
+                                Pricing
                             </Link>
                         </div>
                     </div>

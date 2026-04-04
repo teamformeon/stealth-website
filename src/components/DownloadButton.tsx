@@ -42,121 +42,18 @@ type VerifiedSessionResponse = {
     };
 };
 
+const WINDOWS_DOWNLOAD_URL = 'https://github.com/alakhjagtap/stealthpublicreleases/releases/download/v9/Stealth-Setup-1.0.17.exe';
+const MAC_DOWNLOAD_URL = 'https://github.com/alakhjagtap/stealthpublicreleases/releases/latest/download/Stealth-1.0.11-arm64.dmg';
+
 interface DownloadButtonProps {
     platform?: 'windows' | 'mac';
 }
 
 const DownloadButton = ({ platform = 'windows' }: DownloadButtonProps) => {
-    const [status, setStatus] = React.useState<'checking' | 'locked' | 'ready'>('checking');
-    const [sessionId, setSessionId] = React.useState<string | null>(null);
-    const [statusMessage, setStatusMessage] = React.useState<string>(DEFAULT_LOCK_MESSAGE);
-    const [isDownloading, setIsDownloading] = React.useState(false);
-    const [isCheckoutRedirecting, setIsCheckoutRedirecting] = React.useState(false);
-
-    const verifySession = React.useCallback(async (id: string): Promise<VerifiedSessionResponse> => {
-        const res = await fetch('/api/verify-purchase', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ session_id: id }),
-        });
-
-        const data: VerificationResponse = await res.json();
-        if (!res.ok || !data.success || !data.urls) {
-            throw new Error(data.error || 'Unable to verify your purchase.');
-        }
-
-        return { success: true, urls: data.urls };
-    }, []);
-
-    React.useEffect(() => {
-        const runVerification = async () => {
-            const params = new URLSearchParams(window.location.search);
-            const querySessionId = params.get('session_id');
-            const successFlag = params.get('success') === 'true';
-            const storedSessionId = window.localStorage.getItem(PURCHASED_SESSION_STORAGE_KEY);
-            const activeSessionId = querySessionId || storedSessionId;
-
-            if (!activeSessionId) {
-                setStatus('locked');
-                return;
-            }
-
-            try {
-                await verifySession(activeSessionId);
-                setSessionId(activeSessionId);
-                setStatus('ready');
-                setStatusMessage('Payment verified. Your download is unlocked.');
-                window.localStorage.setItem(PURCHASED_SESSION_STORAGE_KEY, activeSessionId);
-            } catch (error) {
-                console.error('Purchase verification failed:', error);
-                window.localStorage.removeItem(PURCHASED_SESSION_STORAGE_KEY);
-                setSessionId(null);
-                setStatus('locked');
-                setStatusMessage(DEFAULT_LOCK_MESSAGE);
-            } finally {
-                if (querySessionId || successFlag) {
-                    const cleanedUrl = new URL(window.location.href);
-                    cleanedUrl.searchParams.delete('success');
-                    cleanedUrl.searchParams.delete('session_id');
-                    window.history.replaceState({}, '', cleanedUrl.toString());
-                }
-            }
-        };
-
-        void runVerification();
-    }, [verifySession]);
-
-    const handleDownload = async () => {
-        if (status === 'checking' || isDownloading || isCheckoutRedirecting) {
-            return;
-        }
-
-        if (status !== 'ready' || !sessionId) {
-            setStatusMessage('Redirecting to secure checkout...');
-            setIsCheckoutRedirecting(true);
-            try {
-                const res = await fetch('/api/checkout', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({}),
-                });
-
-                const data = (await res.json()) as { url?: string; error?: string };
-                if (data.url) {
-                    window.location.href = data.url;
-                    return;
-                }
-
-                setStatusMessage(data.error || 'Unable to start checkout. Please try again.');
-            } catch (error) {
-                console.error('Checkout redirect failed:', error);
-                setStatusMessage('Unable to start checkout. Please try again.');
-            } finally {
-                setIsCheckoutRedirecting(false);
-            }
-            return;
-        }
-
-        setIsDownloading(true);
-        try {
-            const result = await verifySession(sessionId);
-            const downloadUrl = platform === 'mac' ? result.urls.mac : result.urls.windows;
-            window.location.href = downloadUrl;
-        } catch (error) {
-            console.error('Download validation failed:', error);
-            window.localStorage.removeItem(PURCHASED_SESSION_STORAGE_KEY);
-            setSessionId(null);
-            setStatus('locked');
-            setStatusMessage(DEFAULT_LOCK_MESSAGE);
-        } finally {
-            setIsDownloading(false);
-        }
+    const handleDownload = () => {
+        const downloadUrl = platform === 'mac' ? MAC_DOWNLOAD_URL : WINDOWS_DOWNLOAD_URL;
+        window.location.href = downloadUrl;
     };
-
-    const isReady = status === 'ready';
-    const isBusy = status === 'checking' || isDownloading || isCheckoutRedirecting;
-    const isDisabled = status === 'checking' || isDownloading || isCheckoutRedirecting;
-    const canInteract = !isDisabled;
 
     const platformName = platform === 'mac' ? 'macOS' : 'Windows';
     const platformDisplay = platform === 'mac' ? 'v1.0.11 · macOS (Apple Silicon)' : 'v1.0.17 · Windows 10+';
@@ -166,9 +63,7 @@ const DownloadButton = ({ platform = 'windows' }: DownloadButtonProps) => {
             <motion.button
                 type="button"
                 onClick={handleDownload}
-                disabled={isDisabled}
-                className={`group relative inline-flex items-center gap-3 px-8 py-4 rounded-2xl font-semibold text-sm text-white overflow-hidden no-underline transition-opacity ${canInteract ? 'cursor-pointer' : 'cursor-not-allowed opacity-90'
-                    } ${isBusy ? 'opacity-70' : ''}`}
+                className={`group relative inline-flex items-center gap-3 px-8 py-4 rounded-2xl font-semibold text-sm text-white overflow-hidden no-underline transition-opacity cursor-pointer`}
                 style={{
                     background: platform === 'mac'
                         ? 'linear-gradient(135deg, #333333 0%, #1a1a1a 50%, #000000 100%)'
@@ -177,24 +72,20 @@ const DownloadButton = ({ platform = 'windows' }: DownloadButtonProps) => {
                         ? '0 0 0 1px rgba(255,255,255,0.1) inset, 0 4px 20px rgba(0,0,0,0.4), 0 1px 3px rgba(0,0,0,0.2)'
                         : '0 0 0 1px rgba(255,255,255,0.1) inset, 0 4px 20px rgba(0,120,212,0.25), 0 1px 3px rgba(0,0,0,0.2)',
                 }}
-                whileHover={
-                    canInteract
-                        ? {
-                            scale: 1.03,
-                            boxShadow: platform === 'mac'
-                                ? '0 0 0 1px rgba(255,255,255,0.2) inset, 0 8px 40px rgba(0,0,0,0.6), 0 2px 8px rgba(0,0,0,0.3)'
-                                : '0 0 0 1px rgba(255,255,255,0.2) inset, 0 8px 40px rgba(0,120,212,0.45), 0 2px 8px rgba(0,0,0,0.3)',
-                        }
-                        : undefined
-                }
-                whileTap={canInteract ? { scale: 0.97 } : undefined}
+                whileHover={{
+                    scale: 1.03,
+                    boxShadow: platform === 'mac'
+                        ? '0 0 0 1px rgba(255,255,255,0.2) inset, 0 8px 40px rgba(0,0,0,0.6), 0 2px 8px rgba(0,0,0,0.3)'
+                        : '0 0 0 1px rgba(255,255,255,0.2) inset, 0 8px 40px rgba(0,120,212,0.45), 0 2px 8px rgba(0,0,0,0.3)',
+                }}
+                whileTap={{ scale: 0.97 }}
                 transition={{ type: 'spring', stiffness: 400, damping: 17 }}
             >
                 <div
                     className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                     style={{
                         background: 'linear-gradient(105deg, transparent 20%, rgba(255,255,255,0.15) 45%, rgba(255,255,255,0.25) 50%, rgba(255,255,255,0.15) 55%, transparent 80%)',
-                        animation: isReady ? 'shimmer 2s ease-in-out infinite' : 'none',
+                        animation: 'shimmer 2s ease-in-out infinite',
                     }}
                 />
 
@@ -218,44 +109,32 @@ const DownloadButton = ({ platform = 'windows' }: DownloadButtonProps) => {
 
                     <div className="flex flex-col items-start leading-tight">
                         <span className="text-[13px] font-bold tracking-wide">
-                            {status === 'checking' ? 'Checking purchase...' : isReady ? `Download for ${platformName}` : 'Purchase Required'}
+                            Download for {platformName}
                         </span>
                         <span className={`text-[10px] font-medium ${platform === 'mac' ? 'text-slate-400' : 'text-blue-200/70'}`}>
-                            {isReady ? platformDisplay : 'Click to pay via Stripe'}
+                            {platformDisplay}
                         </span>
                     </div>
 
-                    {status === 'checking' || isDownloading || isCheckoutRedirecting ? (
-                        <div className="ml-1 h-4 w-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                    ) : isReady ? (
-                        <motion.svg
-                            width="16"
-                            height="16"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2.5"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            className="ml-1 opacity-60 group-hover:opacity-100 transition-opacity"
-                            animate={{ y: [0, 2, 0] }}
-                            transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-                        >
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                            <polyline points="7 10 12 15 17 10" />
-                            <line x1="12" y1="15" x2="12" y2="3" />
-                        </motion.svg>
-                    ) : (
-                        <div className="ml-1 opacity-80">
-                            <LockIcon />
-                        </div>
-                    )}
+                    <motion.svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="ml-1 opacity-60 group-hover:opacity-100 transition-opacity"
+                        animate={{ y: [0, 2, 0] }}
+                        transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+                    >
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                        <polyline points="7 10 12 15 17 10" />
+                        <line x1="12" y1="15" x2="12" y2="3" />
+                    </motion.svg>
                 </div>
             </motion.button>
-
-            <p className={`text-xs ${isReady ? 'text-emerald-400' : 'text-slate-500'}`}>
-                {statusMessage}
-            </p>
         </div>
     );
 };

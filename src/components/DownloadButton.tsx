@@ -42,7 +42,7 @@ type VerifiedSessionResponse = {
     };
 };
 
-const WINDOWS_DOWNLOAD_URL = 'https://github.com/alakhjagtap/stealthpublicreleases/releases/download/v9/Stealth-Setup-1.0.17.exe';
+const WINDOWS_DOWNLOAD_URL = 'https://github.com/alakhjagtap/stealthpublicreleases/releases/download/v10/Formeon-Setup-1.0.19.exe';
 const MAC_DOWNLOAD_URL = 'https://github.com/alakhjagtap/stealthpublicreleases/releases/latest/download/Stealth-1.0.11-arm64.dmg';
 
 interface DownloadButtonProps {
@@ -56,7 +56,7 @@ const DownloadButton = ({ platform = 'windows' }: DownloadButtonProps) => {
     };
 
     const platformName = platform === 'mac' ? 'macOS' : 'Windows';
-    const platformDisplay = platform === 'mac' ? 'v1.0.11 · macOS (Apple Silicon)' : 'v1.0.17 · Windows 10+';
+    const platformDisplay = platform === 'mac' ? 'v1.0.11 · macOS (Apple Silicon)' : 'v1.0.19 · Windows 10+';
 
     return (
         <div className="inline-flex flex-col items-start gap-3">

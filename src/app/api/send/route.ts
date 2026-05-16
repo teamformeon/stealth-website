@@ -1,7 +1,7 @@
 import { Resend } from 'resend';
 import { NextResponse } from 'next/server';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = new Resend(process.env.RESEND_API_KEY || 're_123');
 
 /**
  * Detects if a string is likely gibberish (random characters, no spaces, etc.)
@@ -69,8 +69,8 @@ export async function POST(request: Request) {
     }
 
     const { data, error } = await resend.emails.send({
-      from: `Stealth Enterprise <${process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev'}>`,
-      to: [process.env.RESEND_TO_EMAIL || 'stealthassistant1@gmail.com'],
+      from: `Formeon Enterprise <${process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev'}>`,
+      to: [process.env.RESEND_TO_EMAIL || 'formeonassistant1@gmail.com'],
       subject: `New Enterprise Inquiry: ${firstName} ${lastName}`,
       html: `
         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e2e8f0; border-radius: 12px; background-color: #ffffff;">
@@ -95,7 +95,7 @@ export async function POST(request: Request) {
           </div>
 
           <p style="font-size: 12px; color: #94a3b8; margin-top: 40px; text-align: center; border-top: 1px solid #f1f5f9; pt-20">
-            This request was sent from the Stealth website enterprise inquiry form.
+            This request was sent from the Formeon website enterprise inquiry form.
           </p>
         </div>
       `,

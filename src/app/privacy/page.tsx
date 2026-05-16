@@ -18,7 +18,7 @@ export default function PrivacyPage() {
 
                     <h3>1. Introduction</h3>
                     <p>
-                        Welcome to Stealth ("we", "our", or "us"). We respect your privacy and are committed to protecting your personal data. This privacy policy will inform you as to how we look after your personal data when you visit our website and use our application.
+                        Welcome to Formeon ("we", "our", or "us"). We respect your privacy and are committed to protecting your personal data. This privacy policy will inform you as to how we look after your personal data when you visit our website and use our application.
                     </p>
 
                     <h3>2. Data We Collect</h3>
@@ -47,7 +47,7 @@ export default function PrivacyPage() {
 
                     <h3>5. Contact Us</h3>
                     <p>
-                        If you have any questions about this privacy policy or our privacy practices, please contact us at stealthassistant1@gmail.com.
+                        If you have any questions about this privacy policy or our privacy practices, please contact us at formeonassistant1@gmail.com.
                     </p>
                 </div>
             </Section>

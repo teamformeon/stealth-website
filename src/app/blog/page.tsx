@@ -19,7 +19,7 @@ const BlogPage = () => {
                         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                     >
                         <h1 className="text-6xl md:text-8xl font-black tracking-tight mb-8">
-                            Insights <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Coming Soon.</span>
+                            Insights <span className="text-slate-400">Coming Soon.</span>
                         </h1>
                         <p className="text-xl md:text-2xl text-slate-500 leading-relaxed max-w-2xl mx-auto font-medium">
                             Deep dives into AI, product management, and the future of work are on the way.
@@ -32,7 +32,7 @@ const BlogPage = () => {
                         transition={{ delay: 0.5, duration: 1 }}
                         className="mt-16 flex flex-col items-center"
                     >
-                        <div className="w-px h-24 bg-gradient-to-b from-blue-600 to-transparent opacity-20" />
+                        <div className="w-px h-24 bg-neutral-900 opacity-20" />
                         <span className="mt-6 text-[11px] font-bold text-slate-400 uppercase tracking-[0.3em]">
                             Stay Tuned
                         </span>

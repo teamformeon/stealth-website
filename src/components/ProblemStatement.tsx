@@ -7,7 +7,7 @@ import { Code, Lightbulb, ArrowRight, Zap, FileText, Users, BarChart3 } from 'lu
 
 const ProblemStatement = () => {
     return (
-        <Section className="bg-gradient-to-b from-white to-slate-50 py-24">
+        <Section id="problem" className="bg-slate-50 py-24">
             <div className="max-w-5xl mx-auto">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -21,7 +21,7 @@ const ProblemStatement = () => {
                     </div>
                     <h2 className="text-4xl md:text-6xl font-black mb-6 text-black leading-tight">
                         Stop killing your focus <br />
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">switching tabs.</span>
+                        <span className="text-slate-500">switching tabs.</span>
                     </h2>
                 </motion.div>
 
@@ -39,7 +39,7 @@ const ProblemStatement = () => {
                             <h3 className="text-xl font-bold text-black">Context-Switching is the Enemy</h3>
                         </div>
                         <p className="text-slate-600 leading-relaxed">
-                            PMs spend 40% of their day moving between Jira, Slack, and PRDs. Every new tab is a distraction. Stealth lives on your desktop, bringing the tools to you.
+                            PMs spend 40% of their day moving between Jira, Slack, and PRDs. Every new tab is a distraction. Formeon lives on your desktop, bringing the tools to you.
                         </p>
                     </motion.div>
 
@@ -56,7 +56,7 @@ const ProblemStatement = () => {
                             <h3 className="text-xl font-bold text-black">From Transcripts to Jira</h3>
                         </div>
                         <p className="text-slate-600 leading-relaxed">
-                            Upload meeting transcripts or logs. Stealth extracts tasks and turns them into Jira tickets you can assign to engineers—no copy-paste, no tab chaos.
+                            Upload meeting transcripts or logs. Formeon extracts tasks and turns them into Jira tickets you can assign to engineers—no copy-paste, no tab chaos.
                         </p>
                     </motion.div>
                 </div>
@@ -66,11 +66,11 @@ const ProblemStatement = () => {
                     whileInView={{ opacity: 1, y: 0, scale: 1 }}
                     viewport={{ once: true, margin: "-50px" }}
                     transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                    className="p-10 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-3xl border border-blue-100"
+                    className="p-10 bg-white rounded-3xl border border-slate-200 shadow-sm"
                 >
                     <h3 className="text-2xl font-bold text-black mb-6">The Desktop Native Edge</h3>
                     <p className="text-slate-700 text-lg leading-relaxed mb-4">
-                        Stealth isn't another tab. It's a system-wide productivity layer that integrates Jira, Slack, and Teams into your native macOS/Windows experience.
+                        Formeon isn't another tab. It's a system-wide productivity layer that integrates Jira, Slack, and Teams into your native macOS/Windows experience.
                     </p>
                     <p className="text-slate-600 leading-relaxed mb-8 font-medium italic">
                         "Draft PRD from this Slack thread", "Summarize last 10 Jira comments", "Sync this update to Teams" — one hotkey, zero context loss.

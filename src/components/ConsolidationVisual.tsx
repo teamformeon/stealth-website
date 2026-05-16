@@ -34,7 +34,7 @@ const ConsolidationVisual = () => {
     const [demoPhase, setDemoPhase] = useState<'idle' | 'moving' | 'clicked' | 'viewing' | 'resetting'>('idle');
     const [isComposing, setIsComposing] = useState(true);
     const [composeData, setComposeData] = useState({
-        to: 'team@stealth.ai',
+        to: 'team@formeon.ai',
         subject: 'Q1 Product Roadmap Updates',
         body: "Hey team,\n\nI've consolidated the latest feedback from our beta users. The main focus for Q1 will be on deep integration with Gmail and Slack.\n\nBest,\nSanit"
     });
@@ -66,14 +66,14 @@ const ConsolidationVisual = () => {
     }, []);
 
     const gmailEmails = [
-        { id: 1, sender: 'Product Hunt', subject: 'Your launch is trending! 🚀', time: '10:42 AM', preview: "Hey! Just wanted to let you know that Stealth Technologies is currently #1...", labels: ['Primary'], unread: true },
+        { id: 1, sender: 'Product Hunt', subject: 'Your launch is trending! 🚀', time: '10:42 AM', preview: "Hey! Just wanted to let you know that Formeon Technologies is currently #1...", labels: ['Primary'], unread: true },
         { id: 2, sender: 'Slack', subject: 'New login from Chrome on Windows', time: '9:15 AM', preview: "A new login was detected on your account. If this wasn't you, please...", labels: ['Social'], unread: false },
-        { id: 3, sender: 'Vercel', subject: 'Deployment Successful: stealth-web', time: 'Yesterday', preview: "Your project was successfully deployed to production. Click to view...", labels: ['Updates'], unread: false },
+        { id: 3, sender: 'Vercel', subject: 'Deployment Successful: formeon-web', time: 'Yesterday', preview: "Your project was successfully deployed to production. Click to view...", labels: ['Updates'], unread: false },
         { id: 4, sender: 'GitHub', subject: '[GitHub] Security Alert: vulnerability found', time: 'Yesterday', preview: "We found a potential security vulnerability in one of your dependencies...", labels: ['Promotions'], unread: true }
     ];
 
     return (
-        <div className="relative w-full h-full rounded-3xl overflow-hidden border border-white/5 shadow-2xl group bg-[#0a0a0a]">
+        <div className="relative w-full h-full rounded-3xl overflow-hidden border border-white/5 shadow-md group bg-[#0a0a0a]">
             {/* Real Backdrop Background (Forest/Nature) with Parallax */}
             <motion.div
                 animate={{
@@ -102,7 +102,7 @@ const ConsolidationVisual = () => {
                     initial={{ x: -20, opacity: 0 }}
                     whileInView={{ x: 0, opacity: 1 }}
                     viewport={{ once: true }}
-                    className={`relative z-10 h-full bg-black/60 backdrop-blur-xl p-8 flex flex-col transition-all duration-500 ${activeTab === 'gmail' ? 'w-24 overflow-hidden' : 'w-full'}`}
+                    className={`relative z-10 h-full bg-black/60  p-8 flex flex-col transition-all duration-500 ${activeTab === 'gmail' ? 'w-24 overflow-hidden' : 'w-full'}`}
                 >
                     {/* Header */}
                     <div className="flex items-center justify-between mb-10 min-w-[200px]">
@@ -118,7 +118,7 @@ const ConsolidationVisual = () => {
                                 </div>
                             </motion.div>
                             <div className={activeTab === 'gmail' ? 'opacity-0' : 'opacity-100'}>
-                                <h3 className="text-sm font-bold text-white leading-none">Stealth AI</h3>
+                                <h3 className="text-sm font-bold text-white leading-none">Formeon AI</h3>
                                 <span className="text-[10px] text-neutral-500 font-medium tracking-tight">Personal</span>
                             </div>
                         </div>
@@ -161,7 +161,7 @@ const ConsolidationVisual = () => {
                                     </motion.div>
                                     <span className={`text-[11px] font-medium transition-colors ${activeTab === 'gmail' ? 'text-white' : 'text-neutral-300 group-hover/item:text-white'}`}>Google Workspace</span>
                                 </div>
-                                <div className={`w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)] ${activeTab === 'gmail' ? 'animate-ping' : ''}`} />
+                                <div className={`w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-sm ${activeTab === 'gmail' ? 'animate-ping' : ''}`} />
                             </div>
                             <div className="flex items-center justify-between opacity-50">
                                 <div className="flex items-center gap-3">
@@ -182,7 +182,7 @@ const ConsolidationVisual = () => {
                         <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/5">
                             <div className="flex items-center justify-between mb-1">
                                 <span className="text-xs font-bold text-white tracking-tight">Auto (Robust)</span>
-                                <div className="w-2 h-2 rounded-full bg-[#00f5ff] animate-pulse" />
+                                <div className="w-2 h-2 rounded-full bg-[#00f5ff] " />
                             </div>
                             <p className="text-[10px] text-neutral-500 font-medium">Hybrid Reasoning</p>
                         </div>
@@ -279,24 +279,24 @@ const ConsolidationVisual = () => {
 
                                                     <div className="flex items-center justify-between pt-2">
                                                         <div className="flex items-center gap-1">
-                                                            <button
+                                                            <button suppressHydrationWarning
                                                                 onClick={() => setIsComposing(false)}
                                                                 className="px-6 py-2.5 bg-[#4a3aff] hover:bg-[#5a4aff] text-white text-xs font-bold rounded-full transition-colors flex items-center gap-2"
                                                             >
                                                                 Send <Send size={14} />
                                                             </button>
                                                             <div className="flex items-center gap-1 ml-4 text-neutral-500">
-                                                                <button className="p-2 hover:bg-white/5 rounded-lg transition-colors"><Font size={16} /></button>
-                                                                <button className="p-2 hover:bg-white/5 rounded-lg transition-colors"><Paperclip size={16} /></button>
-                                                                <button className="p-2 hover:bg-white/5 rounded-lg transition-colors"><Smile size={16} /></button>
-                                                                <button className="p-2 hover:bg-white/5 rounded-lg transition-colors"><ImageIcon size={16} /></button>
+                                                                <button suppressHydrationWarning className="p-2 hover:bg-white/5 rounded-lg transition-colors"><Font size={16} /></button>
+                                                                <button suppressHydrationWarning className="p-2 hover:bg-white/5 rounded-lg transition-colors"><Paperclip size={16} /></button>
+                                                                <button suppressHydrationWarning className="p-2 hover:bg-white/5 rounded-lg transition-colors"><Smile size={16} /></button>
+                                                                <button suppressHydrationWarning className="p-2 hover:bg-white/5 rounded-lg transition-colors"><ImageIcon size={16} /></button>
                                                             </div>
                                                         </div>
                                                         <div className="flex items-center gap-3">
                                                             <span className="text-[10px] text-neutral-600 font-medium">
                                                                 {isSaving ? 'Saving...' : 'Draft saved'}
                                                             </span>
-                                                            <button
+                                                            <button suppressHydrationWarning
                                                                 onClick={() => setIsComposing(false)}
                                                                 className="p-2 text-neutral-600 hover:text-white hover:bg-white/5 rounded-lg transition-all"
                                                             >
@@ -345,18 +345,18 @@ const ConsolidationVisual = () => {
                                         initial={{ y: 50, opacity: 0 }}
                                         animate={{ y: 0, opacity: 1 }}
                                         transition={{ delay: 1 }}
-                                        className="absolute bottom-8 right-8 left-8 p-6 bg-black/80 backdrop-blur-2xl border border-[#4a3aff]/30 rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.8)] z-50 flex items-center justify-between"
+                                        className="absolute bottom-8 right-8 left-8 p-6 bg-black/80  border border-[#4a3aff]/30 rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.8)] z-50 flex items-center justify-between"
                                     >
                                         <div className="flex items-center gap-5">
-                                            <div className="w-12 h-12 bg-[#4a3aff] rounded-2xl flex items-center justify-center text-white shadow-[0_0_20px_rgba(74,58,255,0.4)]">
-                                                <Sparkles size={24} className="animate-pulse" />
+                                            <div className="w-12 h-12 bg-[#4a3aff] rounded-2xl flex items-center justify-center text-white shadow-sm">
+                                                <Sparkles size={24} className="" />
                                             </div>
                                             <div>
-                                                <div className="text-[10px] font-black tracking-widest text-[#4a3aff] uppercase mb-1">Stealth Intelligent Action</div>
+                                                <div className="text-[10px] font-black tracking-widest text-[#4a3aff] uppercase mb-1">Formeon Intelligent Action</div>
                                                 <div className="text-sm font-bold text-white">Consolidate roadmap updates?</div>
                                             </div>
                                         </div>
-                                        <button className="px-6 py-2 bg-[#4a3aff] text-white text-[10px] font-black uppercase tracking-[0.2em] rounded-xl shadow-[0_0_20px_rgba(74,58,255,0.3)]">
+                                        <button suppressHydrationWarning className="px-6 py-2 bg-[#4a3aff] text-white text-[10px] font-black uppercase tracking-[0.2em] rounded-xl shadow-sm">
                                             Execute
                                         </button>
                                     </motion.div>
@@ -385,7 +385,7 @@ const ConsolidationVisual = () => {
                             duration: demoPhase === 'moving' ? 1.5 : 0.3,
                             ease: "easeInOut"
                         }}
-                        className="absolute z-[100] pointer-events-none text-white drop-shadow-2xl"
+                        className="absolute z-[100] pointer-events-none text-white drop-shadow-md"
                         style={{ filter: 'drop-shadow(0 0 10px rgba(0,245,255,0.5))' }}
                     >
                         <MousePointer2 size={32} fill="white" stroke="black" strokeWidth={1} />

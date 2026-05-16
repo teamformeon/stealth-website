@@ -43,7 +43,7 @@ const SecurityPage = () => {
                         animate={{ opacity: 1, y: 0 }}
                         className="text-6xl md:text-8xl font-black mb-8 italic uppercase tracking-tighter text-black"
                     >
-                        Security <br /> <span className="text-stealth-accent underline decoration-slate-200 underline-offset-8">Infrastructure.</span>
+                        Security <br /> <span className="text-formeon-accent underline decoration-slate-200 underline-offset-8">Infrastructure.</span>
                     </motion.h1>
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
@@ -51,7 +51,7 @@ const SecurityPage = () => {
                         transition={{ delay: 0.1 }}
                         className="text-slate-600 text-xl leading-relaxed max-w-2xl"
                     >
-                        Stealth Technologies is built on a foundation of trust. We prioritize the security of your professional workspace through rigorous engineering and transparent protocols.
+                        Formeon Technologies is built on a foundation of trust. We prioritize the security of your professional workspace through rigorous engineering and transparent protocols.
                     </motion.p>
                 </div>
 
@@ -66,7 +66,7 @@ const SecurityPage = () => {
                             className="p-10 rounded-[2.5rem] bg-slate-50 border border-slate-200 hover:bg-slate-100 transition-all group lg:min-h-[300px] flex flex-col justify-between"
                         >
                             <div>
-                                <div className="w-12 h-12 rounded-2xl bg-stealth-accent/10 border border-stealth-accent/20 flex items-center justify-center text-stealth-accent mb-8 group-hover:scale-110 transition-transform">
+                                <div className="w-12 h-12 rounded-2xl bg-formeon-accent/10 border border-formeon-accent/20 flex items-center justify-center text-formeon-accent mb-8 group-hover:scale-110 transition-transform">
                                     {feature.icon}
                                 </div>
                                 <h3 className="text-2xl font-bold mb-4 uppercase tracking-tight text-black">{feature.title}</h3>
@@ -85,7 +85,7 @@ const SecurityPage = () => {
                         If you have specific questions about our security posture or require an enterprise security audit, please reach out directly.
                     </p>
                     <a
-                        href="mailto:stealthassistant1@gmail.com"
+                        href="mailto:formeonassistant1@gmail.com"
                         className="inline-block px-10 py-5 bg-black text-white font-black uppercase text-xs tracking-[0.2em] rounded-full hover:bg-slate-800 transition-all"
                     >
                         Contact Security Team

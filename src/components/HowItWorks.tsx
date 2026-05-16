@@ -34,7 +34,7 @@ const HowItWorks = () => {
             <div className="max-w-2xl mb-24">
                 <h2 className="text-4xl md:text-6xl font-bold mb-8 italic">The Process.</h2>
                 <p className="text-neutral-500 text-xl leading-relaxed">
-                    Setup in seconds. Performance for life. Stealth lives exactly where you need it most.
+                    Setup in seconds. Performance for life. Formeon lives exactly where you need it most.
                 </p>
             </div>
 
@@ -48,10 +48,10 @@ const HowItWorks = () => {
                         transition={{ delay: idx * 0.1, duration: 0.5 }}
                         className="flex flex-col gap-6"
                     >
-                        <div className="text-stealth-accent/40 font-mono text-sm tracking-widest font-bold">
+                        <div className="text-formeon-accent/40 font-mono text-sm tracking-widest font-bold">
                             STEP 0{idx + 1}
                         </div>
-                        <div className="w-12 h-12 rounded-xl bg-stealth-light-gray flex items-center justify-center text-white">
+                        <div className="w-12 h-12 rounded-xl bg-formeon-light-gray flex items-center justify-center text-white">
                             {step.icon}
                         </div>
                         <h3 className="text-2xl font-bold">{step.title}</h3>

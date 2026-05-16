@@ -10,7 +10,7 @@ const Vision = () => {
         <Section id="vision" className="border-t border-slate-200 bg-white">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
                 <div>
-                    <h2 className="text-4xl md:text-6xl font-bold mb-10 tracking-tight text-black">The <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Vision.</span></h2>
+                    <h2 className="text-4xl md:text-6xl font-bold mb-10 tracking-tight text-black">The <br /><span className="text-slate-400">Vision.</span></h2>
                     <div className="space-y-12">
                         <div className="flex gap-6">
                             <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600">
@@ -18,7 +18,7 @@ const Vision = () => {
                             </div>
                             <div>
                                 <h3 className="text-xl font-bold mb-2 text-black">Upload & Delegate</h3>
-                                <p className="text-slate-600 leading-relaxed text-sm">PMs upload meeting transcripts or logs. Stealth extracts tasks and creates Jira tickets you can assign to engineers—all from one place.</p>
+                                <p className="text-slate-600 leading-relaxed text-sm">PMs upload meeting transcripts or logs. Formeon extracts tasks and creates Jira tickets you can assign to engineers—all from one place.</p>
                             </div>
                         </div>
                         <div className="flex gap-6">

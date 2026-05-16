@@ -9,7 +9,7 @@ import { Briefcase, Rocket, TrendingUp, CheckCircle2 } from 'lucide-react';
 const targets = [
     {
         role: 'Product Managers',
-        context: 'Draft PRDs, sync Jira tickets, and summarize Slack threads without leaving your focus. Stealth understands your product context.',
+        context: 'Draft PRDs, sync Jira tickets, and summarize Slack threads without leaving your focus. Formeon understands your product context.',
         icon: <Briefcase size={20} />,
         benefits: ['PRD Generation', 'Jira Syncing', 'Slack Recap'],
     },
@@ -31,7 +31,7 @@ const WhoItFor = () => {
                     viewport={{ once: true }}
                     className="text-4xl md:text-5xl font-bold mb-8 text-black"
                 >
-                    Built for <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Product Velocity.</span>
+                    Built for <span className="text-slate-400">Product Velocity.</span>
                 </motion.h2>
                 <motion.p
                     initial={{ opacity: 0, y: 20 }}

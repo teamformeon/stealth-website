@@ -3,7 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-const PURCHASED_SESSION_STORAGE_KEY = 'stealth_paid_session_id';
+const PURCHASED_SESSION_STORAGE_KEY = 'formeon_paid_session_id';
 const DEFAULT_LOCK_MESSAGE = 'Complete payment to unlock the download.';
 
 const WindowsIcon = () => (
@@ -60,7 +60,7 @@ const DownloadButton = ({ platform = 'windows' }: DownloadButtonProps) => {
 
     return (
         <div className="inline-flex flex-col items-start gap-3">
-            <motion.button
+            <motion.button suppressHydrationWarning
                 type="button"
                 onClick={handleDownload}
                 className={`group relative inline-flex items-center gap-3 px-8 py-4 rounded-2xl font-semibold text-sm text-white overflow-hidden no-underline transition-opacity cursor-pointer`}

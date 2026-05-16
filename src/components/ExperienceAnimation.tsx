@@ -64,7 +64,7 @@ const ExperienceAnimation = () => {
                         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
                     >
                         <div
-                            className="p-4 rounded-2xl bg-black border border-white/10 shadow-2xl backdrop-blur-md"
+                            className="p-4 rounded-2xl bg-black border border-white/10 shadow-md "
                             style={{ boxShadow: `0 0 30px ${app.color}20` }}
                         >
                             <app.Icon size={32} style={{ color: app.color }} />
@@ -73,7 +73,7 @@ const ExperienceAnimation = () => {
                 ))}
             </div>
 
-            {/* Stealth AI Intervention */}
+            {/* Formeon AI Intervention */}
             <motion.div
                 animate={{
                     scale: [0, 1.2, 1, 0],
@@ -87,8 +87,8 @@ const ExperienceAnimation = () => {
                 }}
                 className="relative z-20"
             >
-                <div className="w-24 h-24 bg-[#4a3aff] rounded-full flex items-center justify-center shadow-[0_0_80px_rgba(74,58,255,0.6)]">
-                    <Sparkles size={40} className="text-white animate-pulse" />
+                <div className="w-24 h-24 bg-[#4a3aff] rounded-full flex items-center justify-center shadow-sm">
+                    <Sparkles size={40} className="text-white " />
                 </div>
             </motion.div>
 
@@ -105,15 +105,15 @@ const ExperienceAnimation = () => {
                     repeat: Infinity,
                     times: [0.4, 0.5, 0.8, 1], // Appears after chaos (40%), stays until 80%
                 }}
-                className="absolute z-30 w-[80%] max-w-2xl bg-stealth-black border border-white/10 rounded-2xl p-8 shadow-2xl overflow-hidden"
+                className="absolute z-30 w-[80%] max-w-2xl bg-formeon-black border border-white/10 rounded-2xl p-8 shadow-md overflow-hidden"
             >
                 <div className="flex items-center gap-4 mb-8 border-b border-white/5 pb-4">
-                    <div className="w-8 h-8 bg-stealth-accent rounded-lg flex items-center justify-center">
+                    <div className="w-8 h-8 bg-formeon-accent rounded-lg flex items-center justify-center">
                         <CheckCircle2 size={16} className="text-black" />
                     </div>
                     <div>
                         <div className="text-[10px] font-black tracking-widest text-[#4a3aff] uppercase">Unified Context</div>
-                        <div className="text-[10px] text-neutral-500 font-mono">Stealth AI Operational</div>
+                        <div className="text-[10px] text-neutral-500 font-mono">Formeon AI Operational</div>
                     </div>
                 </div>
 
@@ -145,7 +145,7 @@ const ExperienceAnimation = () => {
                                 <div className="text-[10px] font-bold text-white mb-1 uppercase tracking-tight">{item.title}</div>
                                 <div className="text-xs text-neutral-500">{item.text}</div>
                             </div>
-                            <Sparkles size={14} className="text-stealth-accent/40" />
+                            <Sparkles size={14} className="text-formeon-accent/40" />
                         </motion.div>
                     ))}
                 </div>
@@ -153,7 +153,7 @@ const ExperienceAnimation = () => {
 
             {/* User Avatar & Emotion */}
             <motion.div
-                className="absolute bottom-12 z-40 bg-white/5 backdrop-blur-md border border-white/10 px-6 py-4 rounded-full flex items-center gap-4 shadow-xl"
+                className="absolute bottom-12 z-40 bg-white/5  border border-white/10 px-6 py-4 rounded-full flex items-center gap-4 shadow-sm"
                 animate={{
                     y: [0, -5, 0],
                     opacity: [1, 1, 1, 1]
@@ -208,7 +208,7 @@ const ExperienceAnimation = () => {
             <motion.div
                 animate={{ opacity: [0, 1, 1, 0] }}
                 transition={{ duration: 5, repeat: Infinity, times: [0.5, 0.6, 0.9, 1] }}
-                className="absolute bottom-8 right-8 z-50 flex items-center gap-3 bg-black/40 backdrop-blur-md px-4 py-2 border border-white/10 rounded-xl"
+                className="absolute bottom-8 right-8 z-50 flex items-center gap-3 bg-black/40  px-4 py-2 border border-white/10 rounded-xl"
             >
                 <div className="w-5 h-5 bg-[#4a3aff] rounded rotate-45 flex items-center justify-center">
                     <div className="w-2.5 h-2.5 text-white -rotate-45">
@@ -217,7 +217,7 @@ const ExperienceAnimation = () => {
                         </svg>
                     </div>
                 </div>
-                <span className="text-[10px] font-black uppercase tracking-widest text-white">Stealth Technologies</span>
+                <span className="text-[10px] font-black uppercase tracking-widest text-white">Formeon Technologies</span>
             </motion.div>
 
             <style jsx>{`

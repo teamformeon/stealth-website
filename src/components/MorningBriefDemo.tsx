@@ -52,11 +52,11 @@ const MorningBriefDemo = () => {
     }, []);
 
     return (
-        <div className="relative w-full h-full min-h-[500px] flex flex-col items-center justify-center p-8 bg-[#0a0a0b] rounded-[3rem] border border-white/5 shadow-2xl overflow-hidden group">
+        <div className="relative w-full h-full min-h-[500px] flex flex-col items-center justify-center p-8 bg-[#0a0a0b] rounded-[3rem] border border-white/5 shadow-md overflow-hidden group">
             {/* Ambient Background Glow */}
             <div className="absolute inset-0 z-0">
-                <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-[#4a3aff]/10 blur-[120px] rounded-full animate-pulse" />
-                <div className="absolute bottom-1/4 right-1/4 w-[300px] h-[300px] bg-stealth-accent/10 blur-[100px] rounded-full animate-pulse delay-700" />
+                <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-[#4a3aff]/10 blur-[120px] rounded-full " />
+                <div className="absolute bottom-1/4 right-1/4 w-[300px] h-[300px] bg-formeon-accent/10 blur-[100px] rounded-full  delay-700" />
             </div>
 
             {/* Phase 1: Command Input Container */}
@@ -68,13 +68,13 @@ const MorningBriefDemo = () => {
                         exit={{ opacity: 0, scale: 0.9, y: -20 }}
                         className="relative z-20 w-full max-w-xl"
                     >
-                        <div className="bg-white/[0.03] backdrop-blur-3xl border border-white/10 rounded-2xl p-6 shadow-2xl">
+                        <div className="bg-white/[0.03]  border border-white/10 rounded-2xl p-6 shadow-md">
                             <div className="flex items-center gap-4">
-                                <div className="w-10 h-10 bg-[#4a3aff] rounded-xl flex items-center justify-center shadow-[0_0_20px_rgba(74,58,255,0.4)]">
+                                <div className="w-10 h-10 bg-[#4a3aff] rounded-xl flex items-center justify-center shadow-sm">
                                     <Sparkles size={20} className="text-white" />
                                 </div>
                                 <div className="flex-grow">
-                                    <div className="text-xs font-black tracking-widest text-[#4a3aff] uppercase mb-1">Stealth</div>
+                                    <div className="text-xs font-black tracking-widest text-[#4a3aff] uppercase mb-1">Formeon</div>
                                     <div className="text-lg font-medium text-white/90">
                                         {typedText}
                                         <motion.span
@@ -236,10 +236,10 @@ const MorningBriefDemo = () => {
                         initial={{ opacity: 0, y: 50, scale: 0.9 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 20 }}
-                        className="absolute bottom-12 z-30 px-8 py-5 bg-black/80 backdrop-blur-3xl border border-[#4a3aff]/30 rounded-3xl shadow-[0_30px_100px_rgba(74,58,255,0.3)] flex items-center gap-6"
+                        className="absolute bottom-12 z-30 px-8 py-5 bg-black/80  border border-[#4a3aff]/30 rounded-3xl shadow-[0_30px_100px_rgba(74,58,255,0.3)] flex items-center gap-6"
                     >
-                        <div className="w-14 h-14 bg-[#4a3aff] rounded-2xl flex items-center justify-center text-white shadow-[0_0_30px_rgba(74,58,255,0.5)]">
-                            <Sparkles size={28} className="animate-pulse" />
+                        <div className="w-14 h-14 bg-[#4a3aff] rounded-2xl flex items-center justify-center text-white shadow-sm">
+                            <Sparkles size={28} className="" />
                         </div>
                         <div className="max-w-md">
                             <div className="text-[11px] font-black tracking-[0.2em] text-[#4a3aff] uppercase mb-1">Morning Summary Complete</div>
@@ -290,7 +290,7 @@ const GridPanel = ({ children, icon, title, color, delay }: any) => (
         transition={{ duration: 0.8, ease: "easeOut" }}
         className="relative group/panel h-full"
     >
-        <div className="h-full bg-white/[0.04] backdrop-blur-2xl border border-white/[0.08] rounded-[2rem] p-6 shadow-xl flex flex-col transition-all duration-500 group-hover/panel:bg-white/[0.06] group-hover/panel:border-white/20 group-hover/panel:translate-y-[-4px]">
+        <div className="h-full bg-white/[0.04]  border border-white/[0.08] rounded-[2rem] p-6 shadow-sm flex flex-col transition-all duration-500 group-hover/panel:bg-white/[0.06] group-hover/panel:border-white/20 group-hover/panel:translate-y-[-4px]">
             <div className="flex items-center gap-3 mb-6">
                 <div className={`w-9 h-9 ${color} rounded-xl flex items-center justify-center shadow-lg`}>
                     {icon}

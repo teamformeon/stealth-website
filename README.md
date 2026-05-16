@@ -1,6 +1,6 @@
-# Stealth Marketing Website
+# Formeon Marketing Website
 
-A premium, high-performance marketing website for Stealth AI.
+A premium, high-performance marketing website for Formeon AI.
 
 ## Tech Stack
 - **Framework**: Next.js 16 (App Router)
@@ -13,7 +13,7 @@ A premium, high-performance marketing website for Stealth AI.
 
 1. Navigate to the `website` directory:
    ```bash
-   cd stealth/website
+   cd formeon/website
    ```
 
 2. Install dependencies:

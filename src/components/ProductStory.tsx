@@ -13,7 +13,7 @@ const ProductStory = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8 }}
-                className="relative w-full max-w-6xl aspect-square md:aspect-video rounded-3xl overflow-hidden shadow-2xl"
+                className="relative w-full max-w-6xl aspect-square md:aspect-video rounded-3xl overflow-hidden shadow-md"
             >
                 <ConsolidationVisual />
             </motion.div>

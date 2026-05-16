@@ -9,22 +9,22 @@ import { motion } from 'framer-motion';
 const features = [
     {
         title: 'Instant Synthesis',
-        description: 'Upload 50 customer interviews, support tickets, or sales calls. Stealth identifies common patterns instantly, giving you a single source of truth for user pain points.',
+        description: 'Drop in your 50 customer interviews, support tickets, or sales calls. Formeon synthesizes them into actionable product opportunities instantly.',
         icon: <Layers size={24} />,
     },
     {
         title: 'Living PRDs',
-        description: 'Generate comprehensive Product Requirements Docs that link directly to your source data. When the data changes, your specs update automatically.',
+        description: 'Turn validated ideas into structured Product Requirements Docs that link directly to your source evidence. When the data changes, your specs update.',
         icon: <Command size={24} />,
     },
     {
         title: 'Strategic Clarity',
-        description: 'Stealth connects the dots between usage metrics and qualitative feedback, highlighting exactly which feature will drive the most impact next.',
+        description: 'Visually map out product roadmaps, evaluate ideas, and trace hypotheses directly back to customer calls before committing to Jira.',
         icon: <Zap size={24} />,
     },
     {
         title: 'Automated Discovery',
-        description: 'Let Stealth browse your linear tickets and github issues to find discrepancies between what was planned and what was built.',
+        description: 'Run Discovery sessions in the Sandbox to turn messy inputs into visual blueprints. Test and refine your plans before deploying tasks to engineering.',
         icon: <MousePointer2 size={24} />,
     },
 ];
@@ -39,8 +39,8 @@ const Features = () => {
                     viewport={{ once: true }}
                     className="text-4xl md:text-5xl font-bold mb-6 tracking-tight text-black"
                 >
-                    From Gut Feeling to <br />
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Data-Driven Strategy.</span>
+                    Your Execution <br />
+                    <span className="text-neutral-400">Command Center.</span>
                 </motion.h2>
                 <motion.p
                     initial={{ opacity: 0, y: 20 }}
@@ -49,7 +49,7 @@ const Features = () => {
                     transition={{ delay: 0.1 }}
                     className="text-slate-500 text-lg leading-relaxed max-w-2xl font-light"
                 >
-                    Stop guessing what to build. Stealth ingests your customer feedback, market data, and usage metrics to reveal the truth about your product.
+                    Stop guessing what to build. Formeon ingests your customer feedback, market data, and usage metrics to synthesize, score, and confidently deliver blueprints to Jira.
                 </motion.p>
             </div>
 

@@ -22,7 +22,7 @@ const MOCK_RESPONSES = [
 export default function DemoPage() {
     const [prompt, setPrompt] = useState('');
     const [logs, setLogs] = useState<{ id: number; text: string; type: 'info' | 'success' | 'cmd' }[]>([
-        { id: 0, text: 'Stealth v1.0.0 initializing...', type: 'info' }
+        { id: 0, text: 'Formeon v1.0.0 initializing...', type: 'info' }
     ]);
     const [isProcessing, setIsProcessing] = useState(false);
     const logEndRef = useRef<HTMLDivElement>(null);
@@ -61,7 +61,7 @@ export default function DemoPage() {
         <div className="pt-40 min-h-screen bg-black">
             <Section className="py-20">
                 <div className="max-w-4xl mb-24">
-                    <h1 className="text-6xl md:text-8xl font-black mb-8 italic">Live <br /> <span className="text-stealth-accent">Demo.</span></h1>
+                    <h1 className="text-6xl md:text-8xl font-black mb-8 italic">Live <br /> <span className="text-formeon-accent">Demo.</span></h1>
                     <p className="text-neutral-500 text-xl leading-relaxed">
                         Test the command interface. No local installation required for visual verification.
                     </p>
@@ -78,7 +78,7 @@ export default function DemoPage() {
                                 placeholder="Ask anything..."
                                 className="w-full h-32 bg-transparent border-none text-white focus:ring-0 p-0 text-sm placeholder:text-neutral-700 resize-none mb-8"
                             />
-                            <button
+                            <button suppressHydrationWarning
                                 className="w-full h-14 bg-white text-black font-black uppercase tracking-widest text-[11px] rounded-lg hover:opacity-90 transition-all flex items-center justify-center disabled:opacity-50"
                                 onClick={handleRun}
                                 disabled={isProcessing || !prompt.trim()}
@@ -100,7 +100,7 @@ export default function DemoPage() {
                                     >
                                         <div className="text-sm font-bold text-neutral-400 group-hover:text-white transition-colors flex items-center justify-between">
                                             {item.name}
-                                            <ChevronRight size={14} className="opacity-0 group-hover:opacity-100 text-stealth-accent transition-all translate-x-[-10px] group-hover:translate-x-0" />
+                                            <ChevronRight size={14} className="opacity-0 group-hover:opacity-100 text-formeon-accent transition-all translate-x-[-10px] group-hover:translate-x-0" />
                                         </div>
                                         <div className="text-[11px] text-neutral-700 italic uppercase tracking-tighter">{item.lastRun}</div>
                                     </div>
@@ -128,7 +128,7 @@ export default function DemoPage() {
                                         key={log.id}
                                         className={cn(
                                             "leading-loose",
-                                            log.type === 'cmd' && "text-stealth-accent font-bold",
+                                            log.type === 'cmd' && "text-formeon-accent font-bold",
                                             log.type === 'success' && "text-green-500",
                                             log.type === 'info' && "text-neutral-500"
                                         )}
@@ -141,7 +141,7 @@ export default function DemoPage() {
 
                             <div className="px-10 py-4 border-t border-white/5 flex items-center justify-between text-[10px] font-mono text-neutral-600 uppercase tracking-widest">
                                 <div>Memory Buffer: OK</div>
-                                <div className="text-stealth-accent">Lat: 0.04ms</div>
+                                <div className="text-formeon-accent">Lat: 0.04ms</div>
                             </div>
                         </div>
                     </div>

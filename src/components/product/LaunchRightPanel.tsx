@@ -48,7 +48,7 @@ const LaunchRightPanel = ({ isAnimated, step }: LaunchRightPanelProps) => {
     const showChat = step === 'showChat' || step === 'typing';
 
     return (
-        <div className={`w-[320px] bg-[#1C1C1C] flex flex-col h-full rounded-tr-3xl rounded-br-3xl border-l border-[#2A2A2A] relative overflow-hidden backdrop-blur-xl ${isAnimated ? 'pointer-events-none' : ''}`}>
+        <div className={`w-[320px] bg-[#1C1C1C] flex flex-col h-full rounded-tr-3xl rounded-br-3xl border-l border-[#2A2A2A] relative overflow-hidden  ${isAnimated ? 'pointer-events-none' : ''}`}>
             {/* Header */}
             <div className="p-5 pb-2">
                 <div className="flex items-center justify-between mb-4">
@@ -63,14 +63,14 @@ const LaunchRightPanel = ({ isAnimated, step }: LaunchRightPanelProps) => {
                             <div className="text-[10px] text-gray-500 font-medium uppercase tracking-wider">Unified Inbox</div>
                         </div>
                     </div>
-                    <div className="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.4)]" />
+                    <div className="w-2 h-2 rounded-full bg-green-500 shadow-sm" />
                 </div>
 
                 {/* Tabs */}
                 {!showChat && (
                     <div className="flex items-center gap-1 overflow-x-auto no-scrollbar pb-2">
                         {['All', 'Gmail', 'Slack', 'Teams'].map(tab => (
-                            <button
+                            <button suppressHydrationWarning
                                 key={tab}
                                 className={`
                                     px-3 py-1.5 rounded-full text-[10px] font-semibold transition-all whitespace-nowrap
@@ -100,7 +100,7 @@ const LaunchRightPanel = ({ isAnimated, step }: LaunchRightPanelProps) => {
                             {messages.map((msg, i) => (
                                 <div
                                     key={msg.id}
-                                    className={`p-3 rounded-xl border transition-all ${i === 0 && step === 'clickSlack' ? 'bg-[#2A2A2A] border-blue-500/50 shadow-[0_0_15px_rgba(59,130,246,0.2)]' : 'bg-[#252525] border-[#333]'} ${!isAnimated ? 'hover:border-[#444] hover:bg-[#2A2A2A] cursor-pointer group' : ''}`}
+                                    className={`p-3 rounded-xl border transition-all ${i === 0 && step === 'clickSlack' ? 'bg-[#2A2A2A] border-blue-500/50 shadow-sm' : 'bg-[#252525] border-[#333]'} ${!isAnimated ? 'hover:border-[#444] hover:bg-[#2A2A2A] cursor-pointer group' : ''}`}
                                 >
                                     <div className="flex items-start justify-between mb-1">
                                         <div className="flex items-center gap-2">
@@ -181,7 +181,7 @@ const LaunchRightPanel = ({ isAnimated, step }: LaunchRightPanelProps) => {
                             <span className="text-gray-600">Reply to #roadmap-sync...</span>
                         )}
                     </div>
-                    <div className="absolute left-3 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.6)]" />
+                    <div className="absolute left-3 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-blue-500 shadow-sm" />
 
                     <div className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 rounded-lg bg-[#222] text-blue-500">
                         <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -214,7 +214,7 @@ const TypingText = ({ text }: { text: string }) => {
         return () => clearInterval(interval);
     }, [text]);
 
-    return <span>{displayedText}<span className="animate-pulse">|</span></span>;
+    return <span>{displayedText}<span className="">|</span></span>;
 };
 
 export default LaunchRightPanel;

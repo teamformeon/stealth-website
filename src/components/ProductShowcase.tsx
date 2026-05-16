@@ -7,7 +7,7 @@ import LaunchLeftPanel from './product/LaunchLeftPanel';
 import LaunchRightPanel from './product/LaunchRightPanel';
 
 /**
- * ProductShowcase - Animations based on the exact Stealth Electron product overlay.
+ * ProductShowcase - Animations based on the exact Formeon Electron product overlay.
  * Styling matches: src/renderer/App.tsx, CommandBar, LaunchScreen
  */
 const ProductShowcase = () => {
@@ -23,17 +23,17 @@ const ProductShowcase = () => {
                     className="text-center mb-16"
                 >
                     <h2 className="text-3xl md:text-5xl font-black tracking-tight text-black mb-4">
-                        The Product
+                        The Execution Copilot
                     </h2>
                     <p className="text-slate-600 text-lg max-w-2xl mx-auto">
-                        System-wide overlay that appears when you need it. Same look, anywhere.
+                        Ingest, plan, and orchestrate product execution from a single command center.
                     </p>
                 </motion.div>
 
                 {/* View Toggle - Circular indicators */}
                 <div className="flex justify-center gap-4 mb-12">
                     {(['overlay', 'launch', 'discovery'] as const).map((v) => (
-                        <button
+                        <button suppressHydrationWarning
                             key={v}
                             onClick={() => setView(v)}
                             className="relative flex items-center justify-center p-2 group"
@@ -47,7 +47,7 @@ const ProductShowcase = () => {
                                 className={cn(
                                     "w-4 h-4 rounded-full transition-all duration-300",
                                     view === v
-                                        ? "bg-gradient-to-r from-blue-600 to-indigo-600 shadow-[0_0_15px_rgba(37,99,235,0.5)]"
+                                        ? "bg-neutral-900 shadow-sm"
                                         : "bg-slate-300 group-hover:bg-slate-400"
                                 )}
                             />
@@ -84,14 +84,14 @@ const ProductShowcase = () => {
 const MockDesktop = () => (
     <div className="absolute inset-0 z-0 bg-slate-200 overflow-hidden font-sans select-none pointer-events-none">
         {/* Desktop Wallpaper */}
-        <div className="absolute inset-0 bg-gradient-to-br from-indigo-100 to-purple-100" />
+        <div className="absolute inset-0 bg-neutral-900" />
 
         {/* Spreadsheet Access Window */}
         <motion.div
             initial={{ opacity: 0, scale: 0.95, y: 10 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="absolute top-8 left-8 right-8 bottom-8 bg-white rounded-lg shadow-xl border border-slate-300 flex flex-col overflow-hidden"
+            className="absolute top-8 left-8 right-8 bottom-8 bg-white rounded-lg shadow-sm border border-slate-300 flex flex-col overflow-hidden"
         >
             {/* Window Header */}
             <div className="h-8 bg-green-700 flex items-center px-4 justify-between">
@@ -195,7 +195,7 @@ const MockDesktop = () => (
                     <div className="flex-1 flex items-end gap-2 px-2 pb-2 border-b border-l border-slate-100 relative">
                         <div className="w-6 bg-blue-200 h-[60%] rounded-t-sm" />
                         <div className="w-6 bg-blue-300 h-[75%] rounded-t-sm" />
-                        <div className="w-6 bg-blue-500 h-[90%] rounded-t-sm shadow-[0_0_10px_rgba(59,130,246,0.3)]" />
+                        <div className="w-6 bg-blue-500 h-[90%] rounded-t-sm shadow-sm" />
                     </div>
                 </div>
             </div>
@@ -223,12 +223,12 @@ const OverlayAnimation = () => {
     }, []);
 
     return (
-        <div className="relative w-[1000px] h-[600px] rounded-3xl overflow-hidden border border-slate-200 shadow-2xl bg-slate-100 flex flex-col items-center pt-12">
+        <div className="relative w-[1000px] h-[600px] rounded-3xl overflow-hidden border border-slate-200 shadow-md bg-slate-100 flex flex-col items-center pt-12">
             {/* Background mockup */}
             <MockDesktop />
 
             {/* Overlay removed as requested ("not blurry") */}
-            {/* <div className="absolute inset-0 z-0 bg-white/10 backdrop-blur-[1px]" /> */}
+            {/* <div className="absolute inset-0 z-0 bg-white/10 " /> */}
 
             <motion.div
                 animate={{
@@ -300,7 +300,7 @@ const OverlayAnimation = () => {
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: 0.2 }}
                                 >
-                                    {['Analyze Q3 Financial Performance', 'Create chart from data', 'Draft email to CFO'].map((text, i) => (
+                                    {['Score feature against Q3 Roadmap', 'Synthesize feedback into blueprint', 'Draft PRD from transcript'].map((text, i) => (
                                         <motion.div
                                             key={text}
                                             initial={{ opacity: 0, x: -10 }}
@@ -355,7 +355,7 @@ const OverlayAnimation = () => {
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                                     </svg>
                                 </div>
-                                <span className="text-sm font-medium text-white">Analyze Q3 Financial Performance</span>
+                                <span className="text-sm font-medium text-white">Score feature against Q3 Roadmap</span>
                             </div>
 
                             {/* Content */}
@@ -418,13 +418,13 @@ const MockPPT = () => (
             </div>
             <div className="flex-1 max-w-md h-6 bg-slate-100 rounded-md border border-slate-200 flex items-center px-3 gap-2">
                 <svg className="w-3 h-3 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
-                <span className="text-[10px] text-slate-500">app.stealth.ai/roadmap-2026</span>
+                <span className="text-[10px] text-slate-500">app.formeon.ai/roadmap-2026</span>
             </div>
         </div>
 
         {/* PPT Canvas */}
         <div className="absolute inset-0 top-10 p-12 flex flex-col items-center bg-[#F5F5F5]">
-            <div className="w-full max-w-4xl aspect-[16/9] bg-white border border-slate-300 shadow-xl flex overflow-hidden">
+            <div className="w-full max-w-4xl aspect-[16/9] bg-white border border-slate-300 shadow-sm flex overflow-hidden">
                 {/* PPT Navigation */}
                 <div className="w-48 bg-[#2B2B2B] p-4 space-y-3">
                     <div className="text-[9px] font-bold text-gray-400 uppercase tracking-widest mb-4">Slides</div>
@@ -451,7 +451,7 @@ const MockPPT = () => (
                                 {[
                                     { t: 'Self-Healing Integrations', s: 'AI-driven connector maintenance' },
                                     { t: 'Universal Search v2', s: 'Multi-hop context retrieval' },
-                                    { t: 'Stealth OS Beta', s: 'Native desktop orchestration layer' }
+                                    { t: 'Formeon OS Beta', s: 'Native desktop orchestration layer' }
                                 ].map((item, i) => (
                                     <li key={i} className="flex gap-3">
                                         <div className="w-1.5 h-1.5 rounded-full bg-slate-300 mt-1.5" />
@@ -519,7 +519,7 @@ const LaunchScreenAnimation = () => {
     const showRight = step === 'moveToRight' || step === 'clickSlack' || step === 'showChat' || step === 'typing';
 
     return (
-        <div className="relative w-[1100px] h-[650px] rounded-3xl overflow-hidden shadow-2xl bg-white border border-slate-200 group">
+        <div className="relative w-[1100px] h-[650px] rounded-3xl overflow-hidden shadow-md bg-white border border-slate-200 group">
             {/* Background: PPT Presentation */}
             <MockPPT />
 
@@ -636,15 +636,15 @@ const STEP_DELAYS: Record<DiscoveryStep, number> = {
 
 /** Cursor positions (x, y) and labels for each scripted step. Container ~1000x560. */
 const DISCOVERY_CURSOR: Record<DiscoveryStep, { x: number; y: number; label: string; click?: boolean }> = {
-    pipelineBrowse: { x: 360, y: 310, label: 'Browse Files', click: true },
-    filesMenu: { x: 380, y: 270, label: 'Choose source files' },
-    synthesizeButton: { x: 520, y: 348, label: 'Synthesize Insights', click: true },
-    showSynthesis: { x: 700, y: 300, label: 'Review synthesized output' },
-    gotoPrdTab: { x: 75, y: 148, label: 'PRD & Specs', click: true },
-    gotoGeneratePrd: { x: 480, y: 208, label: 'Generate full PRD', click: true },
-    pdfGenerating: { x: 640, y: 230, label: 'Generating PRD PDF…' },
-    pdfScroll: { x: 620, y: 280, label: 'Scroll through PRD', click: true },
-    done: { x: 620, y: 320, label: 'Final PRD ready' },
+    pipelineBrowse: { x: 360, y: 310, label: 'Drop Research Files', click: true },
+    filesMenu: { x: 380, y: 270, label: 'Select transcripts & logs' },
+    synthesizeButton: { x: 520, y: 348, label: 'Synthesize Opportunities', click: true },
+    showSynthesis: { x: 700, y: 300, label: 'Review valid blueprints' },
+    gotoPrdTab: { x: 75, y: 148, label: 'PRD Pipeline', click: true },
+    gotoGeneratePrd: { x: 480, y: 208, label: 'Generate Jira Blueprint', click: true },
+    pdfGenerating: { x: 640, y: 230, label: 'Structuring PRD...' },
+    pdfScroll: { x: 620, y: 280, label: 'Review Blueprint', click: true },
+    done: { x: 620, y: 320, label: 'Ready for Jira' },
 };
 
 /** Discovery Hub animation - PRD generation & delegate to engineers. Matches app: src/renderer/components/DiscoveryHub.tsx */
@@ -706,7 +706,7 @@ const DiscoveryAnimation = () => {
 
     const bg = '#1a1a1a';
     return (
-        <div className="relative w-[1000px] h-[560px] rounded-2xl overflow-hidden border border-slate-200 shadow-2xl flex" style={{ background: bg }}>
+        <div className="relative w-[1000px] h-[560px] rounded-2xl overflow-hidden border border-slate-200 shadow-md flex" style={{ background: bg }}>
             {/* Sidebar - matches DiscoveryHub nav (Pipeline, PRD & Specs, Share & Comments only) */}
             <nav className="flex-shrink-0 w-[140px] border-r border-white/[0.08] bg-white/[0.02] flex flex-col py-3 pl-2 gap-0.5">
                 <div className="text-[9px] font-bold uppercase tracking-wider text-white/40 px-2 mb-1">Tools</div>
@@ -742,9 +742,9 @@ const DiscoveryAnimation = () => {
                 {/* Header */}
                 <div className="flex items-center justify-between flex-shrink-0">
                     <div>
-                        <div className="text-[10px] uppercase tracking-[0.2em] text-white/35 font-black">Discovery Hub</div>
-                        <h2 className="text-lg font-semibold text-white tracking-tight mt-0.5">Product Exploration Pipeline</h2>
-                        <p className="text-xs text-white/45 mt-0.5">Consolidate research, synthesize insights, and ship clear next steps.</p>
+                        <div className="text-[10px] uppercase tracking-[0.2em] text-white/35 font-black">Discovery Sandbox</div>
+                        <h2 className="text-lg font-semibold text-white tracking-tight mt-0.5">Research Synthesis & Execution</h2>
+                        <p className="text-xs text-white/45 mt-0.5">Consolidate PRDs, synthesize insights, and generate Jira-ready blueprints.</p>
                     </div>
                     <div className="px-3 h-8 rounded-lg bg-blue-600 text-white text-[11px] font-bold flex items-center border border-blue-500/30">New Initiative</div>
                 </div>
@@ -762,7 +762,7 @@ const DiscoveryAnimation = () => {
                             <div className="flex gap-2 flex-shrink-0">
                                 <div className="flex-1 h-8 rounded-lg bg-white/[0.04] border border-white/[0.08] flex items-center gap-2 px-2">
                                     <svg className="w-3.5 h-3.5 text-white/35" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-4.35-4.35m1.35-5.65a7 7 0 11-14 0 9 9 0 0114 0z" /></svg>
-                                    <span className="text-[10px] text-white/40">Search initiatives, themes, or evidence...</span>
+                                    <span className="text-[10px] text-white/40">Search blueprints, transcripts, or Jira tasks...</span>
                                 </div>
                                 <span className="px-2 py-1 rounded-md bg-white/[0.04] border border-white/[0.08] text-[10px] text-white/40">All</span>
                                 <span className="px-2 py-1 rounded-md bg-white/[0.04] border border-white/[0.08] text-[10px] text-white/40">Active</span>
@@ -787,14 +787,14 @@ const DiscoveryAnimation = () => {
                                         ) : (
                                             <>
                                                 <svg className="w-8 h-8 text-white/20 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" /></svg>
-                                                <span className="text-sm font-medium text-white/35">Drop research data, transcripts, or logs</span>
-                                                <span className="text-[10px] text-white/20 mt-2 uppercase tracking-wide mb-3">Supports .txt, .json, .csv, .pdf, .doc, .md, .xlsx</span>
+                                                <span className="text-sm font-medium text-white/35">Drop PRDs, transcripts, and logs</span>
+                                                <span className="text-[10px] text-white/20 mt-2 uppercase tracking-wide mb-3">Then click Synthesize to get a proposed plan.</span>
                                                 <div className="relative">
                                                     <div className="px-4 py-2 rounded-lg bg-blue-600/20 border border-blue-500/30 text-xs font-medium text-blue-400">
-                                                        Browse Files
+                                                        Browse Input Files
                                                     </div>
                                                     {showFileDropdown && (
-                                                        <div className="absolute left-0 mt-2 w-60 rounded-lg bg-slate-950/95 border border-white/10 shadow-2xl text-[10px] text-white/80 z-20">
+                                                        <div className="absolute left-0 mt-2 w-60 rounded-lg bg-slate-950/95 border border-white/10 shadow-md text-[10px] text-white/80 z-20">
                                                             <div className="px-3 py-2 border-b border-white/10 text-[9px] font-bold uppercase tracking-wider text-white/40">
                                                                 This Mac
                                                             </div>

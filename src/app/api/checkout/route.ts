@@ -29,8 +29,8 @@ export async function POST(req: Request) {
                     price_data: {
                         currency: 'usd',
                         product_data: {
-                            name: 'Stealth AI - 1 Month Access',
-                            description: 'Full access to Stealth AI for 30 days.',
+                            name: 'Formeon AI - 1 Month Access',
+                            description: 'Full access to Formeon AI for 30 days.',
                         },
                         unit_amount: 2500,
                     },

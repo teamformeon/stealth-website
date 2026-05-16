@@ -33,7 +33,7 @@ const ScrollRevealSection = () => {
     const items = [
         {
             title: "Upload Transcripts & Logs",
-            text: "PMs drop meeting transcripts or research logs into Stealth. AI extracts tasks and context for Jira and docs.",
+            text: "PMs drop meeting transcripts or research logs into Formeon. AI extracts tasks and context for Jira and docs.",
             opacity: opacity1,
             scale: scale1
         },
@@ -72,7 +72,7 @@ const ScrollRevealSection = () => {
                             <motion.div
                                 key={i}
                                 style={{ opacity: item.opacity, scale: item.scale }}
-                                className="p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-sm"
+                                className="p-8 rounded-3xl bg-white/5 border border-white/10 "
                             >
                                 <div className="w-10 h-10 rounded-xl bg-blue-500/20 flex items-center justify-center text-blue-400 mb-6 font-bold">
                                     0{i + 1}

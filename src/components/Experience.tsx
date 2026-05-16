@@ -18,10 +18,10 @@ const Experience = () => {
                 >
                     <h2 className="text-4xl md:text-7xl font-black tracking-tighter mb-8 uppercase leading-none">
                         Chaos to <br />
-                        <span className="text-stealth-accent italic">Order.</span>
+                        <span className="text-formeon-accent italic">Order.</span>
                     </h2>
                     <p className="text-neutral-500 text-xl leading-relaxed">
-                        Stealth Technologies bridges the gap between fragmented tools.
+                        Formeon Technologies bridges the gap between fragmented tools.
                         Watch as chaos integrates into a seamless, high-performance workflow.
                     </p>
                 </motion.div>
@@ -38,8 +38,8 @@ const Experience = () => {
                     <ExperienceAnimation />
 
                     {/* Decorative elements around the animation */}
-                    <div className="absolute -top-12 -left-12 w-24 h-24 border-l border-t border-stealth-accent/20" />
-                    <div className="absolute -bottom-12 -right-12 w-24 h-24 border-r border-b border-stealth-accent/20" />
+                    <div className="absolute -top-12 -left-12 w-24 h-24 border-l border-t border-formeon-accent/20" />
+                    <div className="absolute -bottom-12 -right-12 w-24 h-24 border-r border-b border-formeon-accent/20" />
                 </motion.div>
             </div>
         </Section>

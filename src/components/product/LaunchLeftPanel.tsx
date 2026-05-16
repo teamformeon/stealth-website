@@ -14,13 +14,13 @@ const LaunchLeftPanel = ({ isAnimated, activeItem }: LaunchLeftPanelProps) => {
             {/* Header */}
             <div className="p-5 flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg shadow-purple-500/20">
+                    <div className="w-8 h-8 rounded-lg bg-neutral-900 flex items-center justify-center shadow-lg shadow-purple-500/20">
                         <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
                         </svg>
                     </div>
                     <div>
-                        <div className="text-white font-bold text-sm tracking-tight leading-none">Stealth AI</div>
+                        <div className="text-white font-bold text-sm tracking-tight leading-none">Formeon AI</div>
                         <div className="text-[10px] text-gray-500 font-medium mt-0.5">Work</div>
                     </div>
                 </div>
@@ -91,7 +91,7 @@ const LaunchLeftPanel = ({ isAnimated, activeItem }: LaunchLeftPanelProps) => {
                             <div className="text-xs font-semibold text-gray-200">Claude 3 Haiku</div>
                             <div className="text-[10px] text-gray-500">Fast & Concise</div>
                         </div>
-                        <div className="w-1.5 h-1.5 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.4)]" />
+                        <div className="w-1.5 h-1.5 rounded-full bg-green-500 shadow-sm" />
                     </div>
                 </div>
 
@@ -138,7 +138,7 @@ const NavItem = ({ icon, label, active = false, isAnimated }: { icon: string, la
                 {getIcon()}
             </svg>
             <span className="text-sm">{label}</span>
-            {active && <div className="ml-auto w-1.5 h-1.5 rounded-full bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.8)]" />}
+            {active && <div className="ml-auto w-1.5 h-1.5 rounded-full bg-blue-500 shadow-sm" />}
         </div>
     );
 };
@@ -194,7 +194,7 @@ const IntegrationItem = ({ name, connected = false, isAnimated }: { name: string
                 </div>
                 <span className="text-xs font-medium text-gray-400">{name}</span>
             </div>
-            <div className={`w-1.5 h-1.5 rounded-full ${connected ? 'bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.4)]' : 'bg-gray-700'}`} />
+            <div className={`w-1.5 h-1.5 rounded-full ${connected ? 'bg-green-500 shadow-sm' : 'bg-gray-700'}`} />
         </div>
     )
 }

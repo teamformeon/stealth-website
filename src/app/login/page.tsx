@@ -84,7 +84,7 @@ export default function LoginPage() {
                         </div>
 
                         <h1 className="text-3xl font-bold text-white mb-3 tracking-tight">
-                            Welcome to Stealth
+                            Welcome to Formeon
                         </h1>
                         <p className="text-white/40 mb-10 text-base font-light leading-relaxed">
                             Sign in to sync your intelligent context and unlock pro features across all devices.
@@ -100,7 +100,7 @@ export default function LoginPage() {
                             </motion.div>
                         )}
 
-                        <button
+                        <button suppressHydrationWarning
                             onClick={handleLogin}
                             disabled={loading}
                             className="w-full py-4 bg-white text-black font-bold rounded-2xl transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 flex items-center justify-center gap-4 text-base relative group overflow-hidden"
@@ -124,7 +124,7 @@ export default function LoginPage() {
 
                         <div className="mt-10 pt-8 border-t border-white/[0.03]">
                             <p className="text-[10px] text-white/20 font-medium tracking-[0.2em] uppercase">
-                                Stealth Applied Intelligence
+                                Formeon Applied Intelligence
                             </p>
                         </div>
                     </motion.div>
@@ -153,7 +153,7 @@ export default function LoginPage() {
                             />
                         </div>
                         <h2 className="text-3xl font-bold text-white mb-2">Success!</h2>
-                        <p className="text-white/40">Redirecting you back to the Stealth App...</p>
+                        <p className="text-white/40">Redirecting you back to the Formeon App...</p>
                     </motion.div>
                 )}
             </AnimatePresence>

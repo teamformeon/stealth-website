@@ -17,10 +17,10 @@ const VisionSection = () => {
                     className="text-center mb-16"
                 >
                     <h2 className="text-4xl md:text-6xl font-black mb-6 text-black leading-tight">
-                        How It <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Works</span>
+                        How It <span className="text-slate-400">Works</span>
                     </h2>
                     <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
-                        Upload meeting transcripts and logs, then delegate tasks to engineers via Jira. Stealth runs on your desktop and connects to your tools—one hotkey, no tab-switching.
+                        Upload meeting transcripts and logs, then delegate tasks to engineers via Jira. Formeon runs on your desktop and connects to your tools—one hotkey, no tab-switching.
                     </p>
                 </motion.div>
 
@@ -37,7 +37,7 @@ const VisionSection = () => {
                         {
                             icon: <Upload size={24} />,
                             title: 'Upload Transcripts & Logs',
-                            description: 'PMs drop meeting transcripts or logs into Stealth',
+                            description: 'PMs drop meeting transcripts or logs into Formeon',
                             iconBg: 'bg-indigo-50',
                             iconColor: 'text-indigo-600'
                         },
@@ -85,7 +85,7 @@ const VisionSection = () => {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="p-10 bg-gradient-to-br from-black to-slate-900 rounded-3xl text-white relative overflow-hidden"
+                    className="p-10 bg-neutral-900 rounded-3xl text-white relative overflow-hidden"
                 >
                     <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-indigo-600/10" />
                     <div className="relative z-10">
@@ -94,12 +94,12 @@ const VisionSection = () => {
                             <h3 className="text-3xl font-black">System-Wide Intelligence</h3>
                         </div>
                         <p className="text-xl text-slate-300 leading-relaxed mb-6 max-w-3xl">
-                            Stealth integrates with your entire workflow: email (Gmail, Outlook), calendar, tasks, notes, Notion, Slack, and more. It understands context across all your tools.
+                            Formeon integrates with your entire workflow: email (Gmail, Outlook), calendar, tasks, notes, Notion, Slack, and more. It understands context across all your tools.
                         </p>
                         <div className="grid md:grid-cols-2 gap-4 mt-8">
                             <div className="p-4 bg-white/5 rounded-xl border border-white/10">
                                 <div className="text-sm font-semibold text-blue-400 mb-2">Upload Transcripts & Logs</div>
-                                <div className="text-slate-300 text-sm">PMs drop meeting transcripts or research logs; Stealth extracts tasks and context for Jira and docs.</div>
+                                <div className="text-slate-300 text-sm">PMs drop meeting transcripts or research logs; Formeon extracts tasks and context for Jira and docs.</div>
                             </div>
                             <div className="p-4 bg-white/5 rounded-xl border border-white/10">
                                 <div className="text-sm font-semibold text-blue-400 mb-2">Delegate to SWEs via Jira</div>
@@ -111,7 +111,7 @@ const VisionSection = () => {
                             </div>
                             <div className="p-4 bg-white/5 rounded-xl border border-white/10">
                                 <div className="text-sm font-semibold text-blue-400 mb-2">Natural Language Commands</div>
-                                <div className="text-slate-300 text-sm">Type anything—Stealth maps it to the right action across Jira, Slack, and docs.</div>
+                                <div className="text-slate-300 text-sm">Type anything—Formeon maps it to the right action across Jira, Slack, and docs.</div>
                             </div>
                         </div>
                     </div>

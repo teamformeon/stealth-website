@@ -23,17 +23,17 @@ export default function TermsPage() {
 
                     <h3>2. Use License</h3>
                     <p>
-                        Permission is granted to temporarily download one copy of the materials (information or software) on Stealth's website for personal, non-commercial transitory viewing only.
+                        Permission is granted to temporarily download one copy of the materials (information or software) on Formeon's website for personal, non-commercial transitory viewing only.
                     </p>
 
                     <h3>3. Disclaimer</h3>
                     <p>
-                        The materials on Stealth's website are provided on an 'as is' basis. Stealth makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.
+                        The materials on Formeon's website are provided on an 'as is' basis. Formeon makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.
                     </p>
 
                     <h3>4. Limitations</h3>
                     <p>
-                        In no event shall Stealth or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on Stealth's website.
+                        In no event shall Formeon or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on Formeon's website.
                     </p>
 
                     <h3>5. Governing Law</h3>

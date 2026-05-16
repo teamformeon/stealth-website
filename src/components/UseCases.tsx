@@ -26,12 +26,12 @@ const cases = [
     },
     {
         title: 'Native Coordination',
-        desc: 'Stealth lives on the desktop, unifying your entire product stack.',
+        desc: 'Formeon lives on the desktop, unifying your entire product stack.',
         icon: <Users size={20} />,
     },
     {
         title: 'Context-Aware AI',
-        desc: 'Zero prompts. Stealth understands your screen context and suggests the next move.',
+        desc: 'Zero prompts. Formeon understands your screen context and suggests the next move.',
         icon: <CheckSquare size={20} />,
     },
     {
@@ -48,7 +48,7 @@ const UseCases = () => {
                 <div className="max-w-xl">
                     <h2 className="text-4xl md:text-6xl font-bold mb-8 text-black">Productivity <br /> for PMs.</h2>
                     <p className="text-slate-600 text-xl leading-relaxed font-medium">
-                        No more context-switching. Stealth integrates your entire toolstack into one native layer.
+                        No more context-switching. Formeon integrates your entire toolstack into one native layer.
                     </p>
                 </div>
             </div>

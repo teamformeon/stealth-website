@@ -57,11 +57,7 @@ const BookDemo = () => {
     };
 
     return (
-        <Section id="company-inquiry" className="relative overflow-hidden pb-48">
-            {/* Background Gradients */}
-            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-100/30 rounded-full blur-[100px] -z-10 translate-x-1/2 -translate-y-1/2" />
-            <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-indigo-100/30 rounded-full blur-[100px] -z-10 -translate-x-1/2 translate-y-1/2" />
-
+        <Section id="contact" className="relative overflow-hidden pb-32 pt-4">
             <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
                 {/* Left Column: Copy */}
                 <div>
@@ -71,29 +67,22 @@ const BookDemo = () => {
                         viewport={{ once: true }}
                         transition={{ duration: 0.6 }}
                     >
-                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 text-blue-600 text-[11px] font-medium tracking-wide mb-6 uppercase">
-                            <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
-                            For Companies
-                        </div>
-
-                        <h2 className="text-4xl md:text-5xl font-black tracking-tight mb-6 text-black leading-tight">
-                            Need a custom plan for <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">your company?</span>
+                        <h2 className="font-serif-display text-3xl md:text-4xl tracking-tight mb-5 text-[#171717] leading-tight">
+                            Book a demo
                         </h2>
 
-                        <p className="text-lg text-slate-600 mb-8 leading-relaxed font-medium">
-                            Tell us about your team and requirements. We will follow up with enterprise pricing and rollout options.
+                        <p className="text-[#6b6b6b] mb-8 leading-relaxed">
+                            Tell us about your product team. We&apos;ll show you how Formeon fits your workflow.
                         </p>
 
                         <ul className="space-y-4 mb-10">
                             {[
-                                'Custom enterprise pricing',
-                                'Security and compliance review',
-                                'Dedicated onboarding support',
-                                'Procurement and deployment assistance'
+                                'See Formeon pull context from your tools',
+                                'Walk through PRD and ticket generation',
+                                'Discuss team rollout and integrations',
                             ].map((item, i) => (
-                                <li key={i} className="flex items-start gap-3 text-slate-700">
-                                    <div className="mt-1 w-5 h-5 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 text-blue-600">
+                                <li key={i} className="flex items-start gap-3 text-[#525252]">
+                                    <div className="mt-1 w-5 h-5 rounded-full bg-[#eef0f8] flex items-center justify-center flex-shrink-0 text-[#4f5dff]">
                                         <Check size={12} strokeWidth={3} />
                                     </div>
                                     <span>{item}</span>
@@ -111,7 +100,7 @@ const BookDemo = () => {
                     transition={{ duration: 0.6, delay: 0.2 }}
                     className="relative"
                 >
-                    <div className="bg-white p-8 md:p-10 rounded-[2rem] border border-slate-100 shadow-xl shadow-slate-200/50">
+                    <div className="premium-card p-8 md:p-10 rounded-[1.5rem]">
                         {formState === 'success' ? (
                             <div className="text-center py-16">
                                 <div className="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -119,7 +108,7 @@ const BookDemo = () => {
                                 </div>
                                 <h3 className="text-2xl font-bold text-slate-900 mb-2">Inquiry Received!</h3>
                                 <p className="text-slate-500">We&apos;ll reach out shortly with enterprise details.</p>
-                                <button
+                                <button suppressHydrationWarning
                                     onClick={() => setFormState('idle')}
                                     className="mt-8 text-sm text-blue-600 font-semibold hover:text-blue-700"
                                 >
@@ -202,16 +191,16 @@ const BookDemo = () => {
                                     />
                                 </div>
 
-                                <button
+                                <button suppressHydrationWarning
                                     type="submit"
                                     disabled={formState === 'submitting'}
-                                    className="w-full py-4 bg-black text-white font-bold rounded-xl hover:bg-neutral-800 transition-all shadow-lg shadow-black/20 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed group mt-2"
+                                    className="w-full py-4 btn-primary rounded-full font-medium flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed group mt-2"
                                 >
                                     {formState === 'submitting' ? (
                                         <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                                     ) : (
                                         <>
-                                            Send Enterprise Inquiry
+                                            Book a demo
                                             <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />
                                         </>
                                     )}
@@ -221,8 +210,8 @@ const BookDemo = () => {
                     </div>
 
                     {/* Decorative Elements around form */}
-                    <div className="absolute -top-10 -right-10 w-24 h-24 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-full blur-2xl opacity-20 -z-10" />
-                    <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-full blur-2xl opacity-20 -z-10" />
+                    <div className="absolute -top-10 -right-10 w-24 h-24 bg-neutral-900 rounded-full blur-2xl opacity-20 -z-10" />
+                    <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-neutral-900 rounded-full blur-2xl opacity-20 -z-10" />
                 </motion.div>
             </div>
         </Section>

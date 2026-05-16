@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import { cn } from '@/lib/utils';
 
 interface LogoProps {
     className?: string;
@@ -13,38 +14,50 @@ interface LogoProps {
 }
 
 const Logo = ({ className = '', showText = true, size = 'md', textColor = 'black' }: LogoProps) => {
-    const sizeClasses = {
-        sm: 'w-6 h-6',
-        md: 'w-8 h-8',
-        lg: 'w-12 h-12'
+    const markSizes = {
+        sm: 28,
+        md: 32,
+        lg: 40,
     };
 
     const textSizeClasses = {
-        sm: 'text-base',
-        md: 'text-xl',
-        lg: 'text-2xl'
+        sm: 'text-[15px]',
+        md: 'text-lg',
+        lg: 'text-xl',
     };
 
+    const px = markSizes[size];
+
     return (
-        <Link href="/" className={`flex items-center gap-3 active:scale-95 transition-transform ${className}`}>
+        <Link
+            href="/"
+            className={cn('flex items-center gap-2.5 active:scale-[0.98] transition-transform', className)}
+        >
             <motion.div
-                className={`${sizeClasses[size]} relative`}
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.2 }}
+                whileHover={{ scale: 1.06, rotate: -2 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 18 }}
+                className="relative shrink-0"
+                style={{ width: px, height: px }}
             >
                 <Image
-                    src="/stealth-logo.png"
-                    alt="Stealth Technologies Logo"
-                    width={size === 'sm' ? 24 : size === 'md' ? 32 : 48}
-                    height={size === 'sm' ? 24 : size === 'md' ? 32 : 48}
-                    className="w-full h-full object-contain"
+                    src="/formeon-logo.png"
+                    alt="Formeon"
+                    width={px}
+                    height={px}
+                    className="w-full h-full object-contain drop-shadow-sm"
                     priority
                 />
             </motion.div>
-            
+
             {showText && (
-                <span className={`font-bold tracking-tighter ${textColor === 'white' ? 'text-white' : 'text-black'} ${textSizeClasses[size]}`}>
-                    Stealth Technologies
+                <span
+                    className={cn(
+                        'font-semibold tracking-tight',
+                        textColor === 'white' ? 'text-white' : 'text-[#12141c]',
+                        textSizeClasses[size]
+                    )}
+                >
+                    Formeon
                 </span>
             )}
         </Link>
@@ -52,4 +65,3 @@ const Logo = ({ className = '', showText = true, size = 'md', textColor = 'black
 };
 
 export default Logo;
-

@@ -6,10 +6,10 @@
   --color-formeon-muted: #64687a;
   --color-formeon-border: rgba(18, 20, 28, 0.08);
   --color-formeon-accent: #1c2033;
-  --color-formeon-accent-bright: #4f5dff;
-  --color-formeon-accent-hover: #3d4ae8;
-  --color-formeon-badge: #e8eaff;
-  --color-formeon-badge-text: #3d4ae8;
+  --color-formeon-accent-bright: #6366f1;
+  --color-formeon-accent-hover: #4f46e5;
+  --color-formeon-badge: #eef2ff;
+  --color-formeon-badge-text: #6366f1;
   --color-formeon-surface: #eef0f8;
 
   --font-sans: "Inter", system-ui, sans-serif;
@@ -64,7 +64,7 @@ body {
   justify-content: center;
   gap: 0.5rem;
   padding: 0.875rem 1.75rem;
-  background: var(--color-formeon-accent);
+  background: var(--color-formeon-accent-bright);
   color: white;
   font-size: 0.9375rem;
   font-weight: 500;
@@ -73,7 +73,7 @@ body {
 }
 
 .btn-primary:hover {
-  background: #2a3048;
+  background: var(--color-formeon-accent-hover);
   transform: translateY(-1px);
   box-shadow: 0 8px 24px rgba(28, 32, 51, 0.2);
 }
@@ -94,7 +94,7 @@ body {
 }
 
 .btn-secondary:hover {
-  border-color: rgba(79, 93, 255, 0.35);
+  border-color: rgba(99, 102, 241, 0.35);
   background: #fafbff;
   transform: translateY(-1px);
 }
@@ -108,8 +108,8 @@ body {
 }
 
 .premium-card:hover {
-  border-color: rgba(79, 93, 255, 0.2);
-  box-shadow: 0 8px 20px rgba(79, 93, 255, 0.08), 0 20px 48px rgba(28, 32, 51, 0.08);
+  border-color: rgba(99, 102, 241, 0.2);
+  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.08), 0 20px 48px rgba(28, 32, 51, 0.08);
   transform: translateY(-4px);
 }
 
@@ -124,7 +124,7 @@ body {
 
 .product-window:hover {
   transform: translateY(-3px);
-  box-shadow: 0 12px 40px rgba(79, 93, 255, 0.1), 0 4px 12px rgba(28, 32, 51, 0.06);
+  box-shadow: 0 12px 40px rgba(99, 102, 241, 0.1), 0 4px 12px rgba(28, 32, 51, 0.06);
 }
 
 /* Infinite logo marquee */
@@ -137,19 +137,28 @@ body {
   }
 }
 
+@keyframes marquee-reverse {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
 .marquee-mask {
   mask-image: linear-gradient(
     to right,
     transparent,
-    black 8%,
-    black 92%,
+    black 6%,
+    black 94%,
     transparent
   );
   -webkit-mask-image: linear-gradient(
     to right,
     transparent,
-    black 8%,
-    black 92%,
+    black 6%,
+    black 94%,
     transparent
   );
 }
@@ -157,28 +166,71 @@ body {
 .marquee-track {
   display: flex;
   width: max-content;
-  animation: marquee 28s linear infinite;
+  will-change: transform;
+  animation: marquee 48s linear infinite;
 }
 
-.marquee-track:hover {
+.marquee-track-reverse {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: marquee-reverse 52s linear infinite;
+}
+
+.marquee-group:hover .marquee-track,
+.marquee-group:hover .marquee-track-reverse {
   animation-play-state: paused;
 }
 
 @keyframes float {
   0%,
   100% {
-    transform: translateY(0);
+    transform: translateY(0) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-8px) rotate(0.3deg);
+  }
+  66% {
+    transform: translateY(-4px) rotate(-0.2deg);
+  }
+}
+
+@keyframes glow-pulse {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(1);
   }
   50% {
-    transform: translateY(-6px);
+    opacity: 0.55;
+    transform: scale(1.08);
   }
 }
 
 .animate-float {
-  animation: float 5s ease-in-out infinite;
+  animation: float 8s cubic-bezier(0.45, 0, 0.55, 1) infinite;
 }
 
 .animate-float-delayed {
-  animation: float 5s ease-in-out infinite;
-  animation-delay: -2.5s;
+  animation: float 8s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  animation-delay: -4s;
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 10s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track,
+  .marquee-track-reverse,
+  .animate-float,
+  .animate-float-delayed,
+  .animate-glow-pulse {
+    animation: none;
+  }
+
+  .premium-card:hover,
+  .product-window:hover {
+    transform: none;
+  }
 }

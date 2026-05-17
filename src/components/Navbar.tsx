@@ -26,7 +26,10 @@ const Navbar = () => {
 
     return (
         <header className="fixed top-0 left-0 right-0 z-50 pt-5 px-4 md:px-6">
-            <nav
+            <motion.nav
+                initial={{ y: -20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                 className={cn(
                     'pill-nav mx-auto max-w-3xl rounded-full px-4 md:px-6 py-2.5 flex items-center justify-between transition-shadow duration-300',
                     scrolled && 'shadow-md'
@@ -60,7 +63,7 @@ const Navbar = () => {
                 >
                     {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
                 </button>
-            </nav>
+            </motion.nav>
 
             <AnimatePresence>
                 {mobileMenuOpen && (

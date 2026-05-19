@@ -4,68 +4,20 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { ease, useReducedMotion } from './shared';
+import { APPS, AppIcon, type AppId } from './AppIcon';
 
 type Phase = 'scatter' | 'condense' | 'unified';
 
 const PHASE_MS = { scatter: 2200, condense: 2400, unified: 2800 } as const;
 
-const sources = [
-    {
-        id: 'slack',
-        name: 'Slack',
-        brand: '#4A154B',
-        glyph: 'S',
-        x: 10,
-        y: 18,
-        snippet: 'SSO request from enterprise…',
-    },
-    {
-        id: 'jira',
-        name: 'Jira',
-        brand: '#0052CC',
-        glyph: 'J',
-        x: 8,
-        y: 58,
-        snippet: 'FEAT-284 — no acceptance criteria',
-    },
-    {
-        id: 'microsoft',
-        name: 'Microsoft',
-        brand: '#00A4EF',
-        glyph: '⊞',
-        x: 86,
-        y: 16,
-        snippet: 'Teams · Engineering sync notes',
-        useLogo: true,
-    },
-    {
-        id: 'gmail',
-        name: 'Gmail',
-        brand: '#EA4335',
-        glyph: 'M',
-        x: 88,
-        y: 50,
-        snippet: 'Re: Q3 roadmap — your input?',
-    },
-    {
-        id: 'notion',
-        name: 'Notion',
-        brand: '#191919',
-        glyph: 'N',
-        x: 78,
-        y: 78,
-        snippet: 'Product brief (outdated)',
-    },
-    {
-        id: 'linear',
-        name: 'Linear',
-        brand: '#5E6AD2',
-        glyph: 'L',
-        x: 12,
-        y: 80,
-        snippet: 'Customer call notes',
-    },
-] as const;
+const sources: { id: AppId; x: number; y: number; snippet: string }[] = [
+    { id: 'slack', x: 10, y: 18, snippet: 'SSO request from enterprise…' },
+    { id: 'jira', x: 8, y: 58, snippet: 'FEAT-284 — no acceptance criteria' },
+    { id: 'microsoft', x: 86, y: 16, snippet: 'Teams · Engineering sync notes' },
+    { id: 'gmail', x: 88, y: 50, snippet: 'Re: Q3 roadmap — your input?' },
+    { id: 'notion', x: 78, y: 78, snippet: 'Product brief (outdated)' },
+    { id: 'linear', x: 12, y: 80, snippet: 'Customer call notes' },
+];
 
 const CENTER = { x: 50, y: 46 };
 
@@ -116,22 +68,9 @@ function AppBadge({
                 }
                 transition={{ repeat: phase === 'scatter' ? Infinity : 0, duration: 2.8 + index * 0.2, ease: 'easeInOut' }}
             >
-                <motion.div
-                    className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 text-white text-xs font-bold"
-                    style={{
-                        backgroundColor:
-                            'useLogo' in source && source.useLogo ? '#ffffff' : source.brand,
-                        border: 'useLogo' in source && source.useLogo ? '1px solid #e5e7eb' : undefined,
-                    }}
-                >
-                    {'useLogo' in source && source.useLogo ? (
-                        <Image src="/logos/microsoft.svg" alt="" width={20} height={20} />
-                    ) : (
-                        source.glyph
-                    )}
-                </motion.div>
+                <AppIcon appId={source.id} size="badge" shape="rounded" className="shadow-none" />
                 <div className="min-w-0 text-left">
-                    <p className="text-[10px] font-semibold text-slate-800">{source.name}</p>
+                    <p className="text-[10px] font-semibold text-slate-800">{APPS[source.id].name}</p>
                     <p className="text-[9px] text-slate-500 truncate leading-tight">{source.snippet}</p>
                 </div>
             </motion.div>

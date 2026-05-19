@@ -63,9 +63,38 @@ const Solution = () => {
                 </h2>
             </motion.div>
 
-            <div className="space-y-20 md:space-y-28 max-w-6xl mx-auto">
+            <motion.div className="space-y-20 md:space-y-28 max-w-6xl mx-auto">
                 {features.map((item, i) => {
                     const reverse = i % 2 === 1;
+
+                    if (item.animation === 'graph') {
+                        return (
+                            <motion.div
+                                key={item.title}
+                                initial="hidden"
+                                whileInView="visible"
+                                viewport={viewport}
+                                variants={fadeUpChild}
+                                className="flex flex-col gap-8 lg:gap-10"
+                            >
+                                <motion.div className="max-w-xl">
+                                    <motion.div className="w-10 h-10 rounded-xl bg-[#eef0f8] flex items-center justify-center text-[#4f5dff] mb-5">
+                                        <item.icon className="w-5 h-5" />
+                                    </motion.div>
+                                    <h3 className="font-serif-display text-2xl md:text-[1.75rem] text-[#12141c] mb-4 leading-snug">
+                                        {item.title}
+                                    </h3>
+                                    <p className="text-[#64687a] leading-relaxed text-[15px] md:text-base">
+                                        {item.description}
+                                    </p>
+                                </motion.div>
+                                <motion.div className="w-full">
+                                    <FeatureAnimation type="graph" />
+                                </motion.div>
+                            </motion.div>
+                        );
+                    }
+
                     return (
                         <motion.div
                             key={item.title}
@@ -73,14 +102,12 @@ const Solution = () => {
                             whileInView="visible"
                             viewport={viewport}
                             variants={fadeUpChild}
-                            className={`grid lg:grid-cols-2 gap-10 lg:gap-14 items-center ${
-                                reverse ? '' : ''
-                            }`}
+                            className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center"
                         >
                             <motion.div className={reverse ? 'lg:order-2' : ''}>
-                                <div className="w-10 h-10 rounded-xl bg-[#eef0f8] flex items-center justify-center text-[#4f5dff] mb-5">
+                                <motion.div className="w-10 h-10 rounded-xl bg-[#eef0f8] flex items-center justify-center text-[#4f5dff] mb-5">
                                     <item.icon className="w-5 h-5" />
-                                </div>
+                                </motion.div>
                                 <h3 className="font-serif-display text-2xl md:text-[1.75rem] text-[#12141c] mb-4 leading-snug">
                                     {item.title}
                                 </h3>
@@ -94,7 +121,7 @@ const Solution = () => {
                         </motion.div>
                     );
                 })}
-            </div>
+            </motion.div>
         </Section>
     );
 };

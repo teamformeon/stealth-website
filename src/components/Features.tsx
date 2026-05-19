@@ -5,7 +5,7 @@ import Section from './Section';
 import FeatureCard from './FeatureCard';
 import { Zap, Shield, Cpu, Layers, MousePointer2, Command } from 'lucide-react';
 import { motion } from 'framer-motion';
-
+// temp push
 const features = [
     {
         title: 'Instant Synthesis',

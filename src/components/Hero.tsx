@@ -7,11 +7,10 @@ import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { fadeUpChild, springSnappy, staggerContainer } from '@/lib/motion';
 
-// Embed: lazy-load hero animation to protect LCP — poster is first frame inside component
-const HeroProductAnimation = dynamic(() => import('@/components/HeroProductAnimation'), {
+const DiscoveryHubAnimation = dynamic(() => import('@/components/animations/DiscoveryHubAnimation'), {
     ssr: false,
     loading: () => (
-        <div className="w-full aspect-[16/10] max-h-[320px] md:max-h-[560px] rounded-2xl bg-[#FAFAF8] border border-black/[0.06] animate-pulse" />
+        <motion.div className="w-full aspect-[16/10] max-h-[320px] md:max-h-[520px] rounded-2xl bg-white border border-black/[0.06] animate-pulse" />
     ),
 });
 
@@ -82,7 +81,7 @@ const Hero = () => {
                         transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
                         className="order-first lg:order-last"
                     >
-                        <HeroProductAnimation />
+                        <DiscoveryHubAnimation />
                     </motion.div>
                 </div>
             </div>

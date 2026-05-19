@@ -10,7 +10,6 @@ import Logo from './Logo';
 const navLinks = [
     { href: '/#product', label: 'Product' },
     { href: '/#use-cases', label: 'Use Cases' },
-    { href: '/#pricing', label: 'Pricing' },
     { href: '/#contact', label: 'Contact' },
 ];
 

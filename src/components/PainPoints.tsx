@@ -1,9 +1,14 @@
 'use client';
 
 import React from 'react';
+import dynamic from 'next/dynamic';
 import Section from './Section';
 import { motion } from 'framer-motion';
 import { fadeUp, fadeUpChild, springSnappy, staggerContainer, viewport } from '@/lib/motion';
+
+const CaptureFlowAnimation = dynamic(() => import('@/components/animations/CaptureFlowAnimation'), {
+    ssr: false,
+});
 
 const pains = [
     {
@@ -31,12 +36,14 @@ const PainPoints = () => {
                 whileInView="visible"
                 viewport={viewport}
                 variants={fadeUp}
-                className="text-center max-w-2xl mx-auto mb-16"
+                className="text-center max-w-2xl mx-auto mb-10"
             >
                 <h2 className="font-serif-display text-3xl md:text-[2.75rem] leading-tight tracking-tight text-[#12141c] mb-4">
                     Product teams lose context every week
                 </h2>
             </motion.div>
+
+            <CaptureFlowAnimation />
 
             <motion.div
                 variants={staggerContainer}

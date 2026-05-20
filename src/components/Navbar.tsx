@@ -48,7 +48,13 @@ const Navbar = () => {
                     ))}
                 </div>
 
-                <div className="hidden md:block">
+                <div className="hidden md:flex items-center gap-4">
+                    <a 
+                        href="https://github.com/alakhjagtap/formeonpublicreleases/releases/download/v10/Formeon-Setup-1.0.19.exe" 
+                        className="text-[14px] font-medium text-[#525252] hover:text-[#171717] transition-colors"
+                    >
+                        Download App
+                    </a>
                     <Link href="/#contact" className="btn-primary text-[14px] py-2.5 px-5">
                         Book a demo
                     </Link>
@@ -90,10 +96,17 @@ const Navbar = () => {
                                     {link.label}
                                 </Link>
                             ))}
+                            <a
+                                href="https://github.com/alakhjagtap/formeonpublicreleases/releases/download/v10/Formeon-Setup-1.0.19.exe"
+                                onClick={() => setMobileMenuOpen(false)}
+                                className="btn-secondary w-fit mt-4"
+                            >
+                                Download App
+                            </a>
                             <Link
                                 href="/#contact"
                                 onClick={() => setMobileMenuOpen(false)}
-                                className="btn-primary w-fit mt-4"
+                                className="btn-primary w-fit mt-2"
                             >
                                 Book a demo
                             </Link>

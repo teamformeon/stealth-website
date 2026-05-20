@@ -63,9 +63,9 @@ const Hero = () => {
                             className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3"
                         >
                             <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }} transition={springSnappy}>
-                                <Link href="/#contact" className="btn-primary w-full sm:w-auto">
-                                    Book a demo
-                                </Link>
+                                <a href="https://github.com/alakhjagtap/formeonpublicreleases/releases/download/v10/Formeon-Setup-1.0.19.exe" className="btn-primary w-full sm:w-auto flex items-center justify-center">
+                                    Download App
+                                </a>
                             </motion.div>
                             <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }} transition={springSnappy}>
                                 <Link href="/#product" className="btn-secondary w-full sm:w-auto">

@@ -125,12 +125,18 @@
           access_token: session.access_token,
           refresh_token: session.refresh_token,
         };
+        // Forward the Google provider token(s) ONLY when present. Never use `|| null`
+        // — URLSearchParams would serialize null as the string "null", which the app
+        // would store as a bogus 4-char token.
+        if (session.provider_token) payload.provider_token = session.provider_token;
+        if (session.provider_refresh_token) payload.provider_refresh_token = session.provider_refresh_token;
 
         statusEl.textContent = 'Connecting to Formeon on your computer…';
         await postToDesktop(payload);
 
         statusEl.textContent = 'Opening Formeon…';
-        window.location.replace('stealth://auth/callback#' + tokensHash(payload.access_token, payload.refresh_token));
+        // Build the hash from the full payload so provider_token is included when present.
+        window.location.replace('stealth://auth/callback#' + new URLSearchParams(payload).toString());
       }
 
       run().catch(function (e) {

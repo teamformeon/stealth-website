@@ -149,6 +149,9 @@
         errEl.classList.remove('visible');
         var options = { redirectTo: redirectUri };
         if (provider === 'google') {
+          // Request Google Calendar (read-only) so the session carries a calendar-scoped
+          // provider_token. access_type=offline + prompt=consent force refresh + token back.
+          options.scopes = 'openid email profile https://www.googleapis.com/auth/calendar.readonly';
           options.queryParams = { access_type: 'offline', prompt: 'consent' };
         }
         var result = await supabase.auth.signInWithOAuth({ provider: provider, options: options });

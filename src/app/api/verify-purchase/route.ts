@@ -1,9 +1,5 @@
 import { NextResponse } from 'next/server';
-import Stripe from 'stripe';
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-    apiVersion: '2025-01-27.acacia' as Stripe.LatestApiVersion,
-});
+import { getStripe } from '@/lib/stripe';
 
 const WINDOWS_DOWNLOAD_URL = 'https://github.com/alakhjagtap/stealthpublicreleases/releases/download/v10/Formeon-Setup-1.0.19.exe';
 const MAC_DOWNLOAD_URL = 'https://github.com/alakhjagtap/stealthpublicreleases/releases/latest/download/Stealth-1.0.11-arm64.dmg';
@@ -21,7 +17,7 @@ export async function POST(req: Request) {
         }
 
         try {
-            const session = await stripe.checkout.sessions.retrieve(sessionId);
+            const session = await getStripe().checkout.sessions.retrieve(sessionId);
             if (session.payment_status === 'paid') {
                 return NextResponse.json({
                     success: true,

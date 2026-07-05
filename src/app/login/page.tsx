@@ -4,7 +4,7 @@ import { createClient } from '@/utils/supabase/client';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
-const DESKTOP_CALLBACK = 'https://stealthtechnologies.dev/auth/desktop-callback.html';
+const DESKTOP_CALLBACK = 'https://formeon.org/auth/desktop-callback.html';
 
 export default function LoginPage() {
     const [loading, setLoading] = useState(false);

@@ -1,5 +1,5 @@
 /**
- * Writes public/auth/login-config.js from NEXT_PUBLIC_* env (Vercel / .env.local).
+ * Writes public/auth/login-config.js from NEXT_PUBLIC_* env (.env.local / Cloudflare).
  * Never writes service role or other secrets.
  */
 const fs = require('fs');

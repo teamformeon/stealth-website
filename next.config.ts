@@ -8,6 +8,15 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: projectRoot,
   },
+  async redirects() {
+    return [
+      {
+        source: "/:path*",
+        destination: "https://formeon.org/:path*",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

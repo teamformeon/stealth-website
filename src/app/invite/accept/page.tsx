@@ -14,8 +14,9 @@
 //
 // On success: deep-link into the desktop app via stealth://auth/invite-callback.
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState, type FormEvent } from 'react';
 import { createClient } from '@/utils/supabase/client';
+import type { SupabaseClient } from '@supabase/supabase-js';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface InviteMeta {
@@ -41,10 +42,15 @@ export default function InviteAcceptPage() {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
-  const supabase = useMemo(() => createClient(), []);
+  const [supabase, setSupabase] = useState<SupabaseClient | null>(null);
+
+  useEffect(() => {
+    setSupabase(createClient());
+  }, []);
 
   // 1. Read the session Supabase auto-populated from the invite-email hash.
   useEffect(() => {
+    if (!supabase) return;
     let cancelled = false;
     (async () => {
       const { data, error: sessErr } = await supabase.auth.getSession();
@@ -74,8 +80,7 @@ export default function InviteAcceptPage() {
     return () => {
       cancelled = true;
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [supabase]);
 
   const hydrateFromSession = (session: {
     user: {
@@ -108,7 +113,7 @@ export default function InviteAcceptPage() {
 
   // ─── Promote membership + hand off to desktop ──────────────────────────
   const finalizeAcceptance = async (userId: string) => {
-    if (!meta) return;
+    if (!meta || !supabase) return;
 
     const { error: memErr } = await supabase
       .from('workspace_members')
@@ -132,9 +137,9 @@ export default function InviteAcceptPage() {
   };
 
   // ─── Signup path (new user) ────────────────────────────────────────────
-  const onSignup = async (e: React.FormEvent) => {
+  const onSignup = async (e: FormEvent) => {
     e.preventDefault();
-    if (!meta) return;
+    if (!meta || !supabase) return;
     if (!firstName.trim()) {
       setError('First name is required.');
       return;
@@ -172,9 +177,9 @@ export default function InviteAcceptPage() {
   };
 
   // ─── Sign-in path (returning user) ─────────────────────────────────────
-  const onSignin = async (e: React.FormEvent) => {
+  const onSignin = async (e: FormEvent) => {
     e.preventDefault();
-    if (!meta) return;
+    if (!meta || !supabase) return;
     setError(null);
     setPhase('joining');
 

@@ -1,148 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Completing sign-in · Formeon</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Returning to Formeon…</title>
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
+      margin: 0;
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 1.5rem;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: #050505;
-      color: #f5f5f5;
-      text-align: center;
+      background: #f9fafb;
+      color: #334155;
     }
-    .spin {
-      width: 32px; height: 32px;
-      margin: 0 auto 1.25rem;
-      border: 3px solid rgba(255,255,255,0.1);
-      border-top-color: #6366f1;
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    h1 { font-size: 1.15rem; font-weight: 600; margin-bottom: 0.35rem; }
-    p { color: rgba(255,255,255,0.45); font-size: 0.875rem; }
-    .err { color: #fca5a5; margin-top: 1rem; font-size: 0.8rem; max-width: 360px; }
-  </style>
-</head>
-<body>
-  <div>
-    <div class="spin" id="spinner" aria-hidden="true"></div>
-    <h1 id="title">Completing sign-in</h1>
-    <p id="status">Returning you to the Formeon app…</p>
-    <p id="error" class="err" hidden></p>
-  </div>
 
+    .card {
+      text-align: center;
+      padding: 2rem;
+      max-width: 360px;
+    }
+
+    .error {
+      color: #b91c1c;
+      font-size: 14px;
+      margin-top: 12px;
+      display: none;
+    }
+
+    .error.visible {
+      display: block;
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="/auth/login-config.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.1/dist/umd/supabase.min.js"></script>
+</head>
+
+<body>
+  <div class="card">
+    <p id="msg">Completing sign-in…</p>
+    <p id="error" class="error" role="alert"></p>
+  </div>
   <script>
     (function () {
-      var titleEl = document.getElementById('title');
-      var statusEl = document.getElementById('status');
+      var msg = document.getElementById('msg');
       var errorEl = document.getElementById('error');
-      var spinnerEl = document.getElementById('spinner');
 
-      function fail(msg) {
-        spinnerEl.style.display = 'none';
-        titleEl.textContent = 'Sign-in failed';
-        statusEl.textContent = '';
-        errorEl.textContent = msg;
-        errorEl.hidden = false;
+      function showError(text) {
+        msg.textContent = 'Sign-in could not be completed';
+        errorEl.textContent = text;
+        errorEl.classList.add('visible');
       }
 
-      function tokensHash(accessToken, refreshToken) {
-        return (
-          'access_token=' + encodeURIComponent(accessToken) +
-          '&refresh_token=' + encodeURIComponent(refreshToken)
-        );
-      }
-
-      async function postToDesktop(payload) {
-        var hosts = ['http://localhost:47836', 'http://127.0.0.1:47836'];
-        for (var i = 0; i < hosts.length; i++) {
-          try {
-            var res = await fetch(hosts[i] + '/auth-callback', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(payload),
-              mode: 'cors',
-            });
-            if (res.ok) return true;
-          } catch (e) { /* try next host */ }
+      function postTokensToApp(tokens) {
+        var body = JSON.stringify(tokens);
+        function post(host) {
+          return fetch('http://' + host + ':47836/auth-callback', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: body,
+          });
         }
-        return false;
+        return post('localhost').catch(function () {
+          return post('127.0.0.1');
+        });
+      }
+
+      function openDeepLink(hashOrQuery) {
+        window.location.replace('stealth://auth/callback' + hashOrQuery);
+      }
+
+      async function finish(session) {
+        if (!session || !session.access_token || !session.refresh_token) {
+          showError('No session returned from sign-in.');
+          return;
+        }
+        var tokens = {
+          access_token: session.access_token,
+          refresh_token: session.refresh_token,
+        };
+        // Google Calendar access is granted via the dedicated Calendar OAuth
+        // flow in the app — sign-in no longer forwards a provider_token.
+        var hash = '#' + new URLSearchParams(tokens).toString();
+
+        try {
+          await postTokensToApp(tokens);
+        } catch (e) {
+          console.warn('HTTP callback to app failed (deep link may still work):', e);
+        }
+
+        msg.textContent = 'Opening Formeon…';
+        openDeepLink(hash);
+        setTimeout(function () {
+          msg.textContent = 'Return to the Formeon app to continue.';
+        }, 2000);
       }
 
       async function run() {
         var cfg = window.FORMEON_AUTH_CONFIG;
         if (!cfg || !cfg.supabaseUrl || !cfg.supabaseAnonKey) {
-          fail('Auth is not configured on this site.');
+          showError('Auth is not configured on this page.');
           return;
         }
 
-        var params = new URLSearchParams(window.location.search);
-        var oauthError = params.get('error_description') || params.get('error');
-        if (oauthError) {
-          fail(oauthError);
+        var hash = window.location.hash || '';
+        var search = window.location.search || '';
+
+        if (hash && hash.indexOf('access_token=') !== -1) {
+          var hashParams = new URLSearchParams(hash.substring(1));
+          await finish({
+            access_token: hashParams.get('access_token'),
+            refresh_token: hashParams.get('refresh_token'),
+          });
           return;
         }
 
-        var code = params.get('code');
-        if (!code) {
-          fail('Missing authorization code. Close this window and try signing in again.');
+        var queryParams = new URLSearchParams(search.replace(/^\?/, ''));
+        var code = queryParams.get('code');
+        var err = queryParams.get('error_description') || queryParams.get('error');
+        if (err) {
+          showError(err);
           return;
         }
 
-        var supabase = window.supabase.createClient(cfg.supabaseUrl, cfg.supabaseAnonKey, {
-          auth: {
-            flowType: 'pkce',
-            detectSessionInUrl: false,
-            persistSession: true,
-            storage: window.localStorage,
-            storageKey: 'formeon-desktop-auth',
-          },
-        });
-
-        var result = await supabase.auth.exchangeCodeForSession(code);
-        if (result.error) {
-          fail(result.error.message);
+        if (code) {
+          var supabase = window.supabase.createClient(cfg.supabaseUrl, cfg.supabaseAnonKey, {
+            auth: {
+              flowType: 'pkce',
+              detectSessionInUrl: false,
+              persistSession: true,
+              storage: window.localStorage,
+            },
+          });
+          var result = await supabase.auth.exchangeCodeForSession(code);
+          if (result.error) {
+            showError(result.error.message || 'Code exchange failed');
+            return;
+          }
+          await finish(result.data.session);
           return;
         }
 
-        var session = result.data && result.data.session;
-        if (!session) {
-          fail('No session returned from Supabase.');
-          return;
-        }
-
-        var payload = {
-          access_token: session.access_token,
-          refresh_token: session.refresh_token,
-        };
-        // Forward the Google provider token(s) ONLY when present. Never use `|| null`
-        // — URLSearchParams would serialize null as the string "null", which the app
-        // would store as a bogus 4-char token.
-        if (session.provider_token) payload.provider_token = session.provider_token;
-        if (session.provider_refresh_token) payload.provider_refresh_token = session.provider_refresh_token;
-
-        statusEl.textContent = 'Connecting to Formeon on your computer…';
-        await postToDesktop(payload);
-
-        statusEl.textContent = 'Opening Formeon…';
-        // Build the hash from the full payload so provider_token is included when present.
-        window.location.replace('stealth://auth/callback#' + new URLSearchParams(payload).toString());
+        showError('Missing sign-in data. Close this tab and try again from Formeon.');
       }
 
       run().catch(function (e) {
-        fail(e && e.message ? e.message : 'Unexpected error during sign-in.');
+        showError(e && e.message ? e.message : 'Unexpected error');
       });
     })();
   </script>
 </body>
+
 </html>

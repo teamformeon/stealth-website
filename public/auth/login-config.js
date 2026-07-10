@@ -1,0 +1,1 @@
+window.FORMEON_AUTH_CONFIG = { "supabaseUrl": "https://yjnkjakslgcvhbxsebxr.supabase.co", "supabaseAnonKey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlqbmtqYWtzbGdjdmhieHNlYnhyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjY5NDU1ODYsImV4cCI6MjA4MjUyMTU4Nn0.wnlTCi6e-dgcC5gKSileDUi1sIQhHjFCLY_qq78lyA4" };

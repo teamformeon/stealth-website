@@ -40,7 +40,7 @@ export const CONNECT_APPS: Record<ConnectAppId, ConnectApp> = {
   confluence: {
     id: 'confluence',
     name: 'Confluence',
-    // No brand asset shipped yet — the lettermark tile keeps the family consistent.
+    logo: '/logos/confluence.svg',
     deepLink: 'stealth://auth/confluence',
     accent: '#1868DB',
   },

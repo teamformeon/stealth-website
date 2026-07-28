@@ -171,31 +171,32 @@ function ConnectVisual({ app, status, reduce }: { app: ConnectApp; status: Statu
         )}
       </div>
 
-      {/* Formeon fills its tile. /formeon-logo.png is a PADDED asset (it doubles
-          as the favicon and OG image), so at 30px its glyph rendered far smaller
-          than the connector logos beside it and read as a little square floating
-          in a big box. /formeon-mark.png is the tight mark; `flush` lets it run
-          to the tile edge, and the slight scale crops the margin still baked in.
-          Its white background is opaque, which is invisible on a white tile. */}
-      <Tile flush>
+      {/* Same 30px box as the connector logos, so both tiles carry equal weight
+          and keep the same inset from the border.
+
+          The original bug was the ASSET, not the size: /formeon-logo.png doubles
+          as the favicon and OG image, so it ships with heavy transparent padding
+          — at 30px its glyph landed near 18px while the connector SVGs (tight
+          viewBoxes) filled their full 30px. /formeon-mark.png is the same mark
+          without that padding, so the same 30px now renders at a matching
+          optical size. Its white background is opaque, invisible on a white tile. */}
+      <Tile>
         <Image
           src="/formeon-mark.png"
           alt="Formeon"
-          width={58}
-          height={58}
-          className="h-full w-full scale-[1.16] object-cover"
+          width={30}
+          height={30}
+          className="h-[30px] w-[30px] object-contain"
         />
       </Tile>
     </div>
   );
 }
 
-function Tile({ children, flush = false }: { children: React.ReactNode; flush?: boolean }) {
+function Tile({ children }: { children: React.ReactNode }) {
   return (
     <div
-      className={`flex h-[58px] w-[58px] shrink-0 items-center justify-center rounded-[16px] border border-black/[0.09] bg-white${
-        flush ? ' overflow-hidden' : ''
-      }`}
+      className="flex h-[58px] w-[58px] shrink-0 items-center justify-center rounded-[16px] border border-black/[0.09] bg-white"
     >
       {children}
     </div>

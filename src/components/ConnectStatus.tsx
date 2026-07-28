@@ -171,17 +171,31 @@ function ConnectVisual({ app, status, reduce }: { app: ConnectApp; status: Statu
         )}
       </div>
 
-      <Tile>
-        <Image src="/formeon-logo.png" alt="Formeon" width={30} height={30} className="h-[30px] w-[30px] object-contain" />
+      {/* Formeon fills its tile. /formeon-logo.png is a PADDED asset (it doubles
+          as the favicon and OG image), so at 30px its glyph rendered far smaller
+          than the connector logos beside it and read as a little square floating
+          in a big box. /formeon-mark.png is the tight mark; `flush` lets it run
+          to the tile edge, and the slight scale crops the margin still baked in.
+          Its white background is opaque, which is invisible on a white tile. */}
+      <Tile flush>
+        <Image
+          src="/formeon-mark.png"
+          alt="Formeon"
+          width={58}
+          height={58}
+          className="h-full w-full scale-[1.16] object-cover"
+        />
       </Tile>
     </div>
   );
 }
 
-function Tile({ children }: { children: React.ReactNode }) {
+function Tile({ children, flush = false }: { children: React.ReactNode; flush?: boolean }) {
   return (
     <div
-      className="flex h-[58px] w-[58px] shrink-0 items-center justify-center rounded-[16px] border border-black/[0.09] bg-white"
+      className={`flex h-[58px] w-[58px] shrink-0 items-center justify-center rounded-[16px] border border-black/[0.09] bg-white${
+        flush ? ' overflow-hidden' : ''
+      }`}
     >
       {children}
     </div>

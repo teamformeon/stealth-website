@@ -191,8 +191,12 @@ function CheckoutVisual({
         )}
         {(done || cancelled) && (
           <motion.div
-            className="absolute left-1/2 top-1/2 flex h-[26px] w-[26px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full text-white"
-            style={{ background: badge, boxShadow: `0 4px 14px ${badge}55` }}
+            className="absolute left-1/2 top-1/2 flex h-[26px] w-[26px] items-center justify-center rounded-full text-white"
+            // x/y go through Motion, not Tailwind's -translate-x-1/2: Motion writes
+            // its own inline `transform` for `scale`, which silently overwrites a
+            // transform set by class. The badge then anchors by its top-left corner
+            // and sits 13px — half its size — low and right of the track centre.
+            style={{ background: badge, boxShadow: `0 4px 14px ${badge}55`, x: '-50%', y: '-50%' }}
             initial={reduce ? { opacity: 0 } : { scale: 0.6, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={reduce ? { duration: 0.2 } : { type: 'spring', duration: 0.5, bounce: 0.42 }}

@@ -163,13 +163,16 @@ function CheckoutVisual({
           placeholder looks like. The headline already names the plan, so this tile
           is better spent saying who took the payment — which also makes the figure
           match the app's own seat-cost dialog: [payer] → [Formeon]. */}
-      <Tile>
+      {/* flush: the Stripe mark IS an app icon — a rounded purple square — so
+          insetting it inside another rounded white square gives you two nested
+          tiles and a ring of dead space. It fills the tile and becomes the tile. */}
+      <Tile flush>
         <Image
           src="/logos/stripe-mark.svg"
           alt="Stripe"
-          width={34}
-          height={34}
-          className="h-[34px] w-[34px] rounded-[8px] object-contain"
+          width={58}
+          height={58}
+          className="h-full w-full object-cover"
         />
       </Tile>
 
@@ -221,9 +224,15 @@ function CheckoutVisual({
   );
 }
 
-function Tile({ children }: { children: React.ReactNode }) {
+function Tile({ children, flush = false }: { children: React.ReactNode; flush?: boolean }) {
   return (
-    <div className="flex h-[58px] w-[58px] shrink-0 items-center justify-center rounded-[16px] border border-black/[0.09] bg-white">
+    <div
+      className={`flex h-[58px] w-[58px] shrink-0 items-center justify-center rounded-[16px] border border-black/[0.09] ${
+        // A flush child paints to the edge, so the tile keeps only its border and
+        // clips the corners; its white fill would never be visible anyway.
+        flush ? 'overflow-hidden' : 'bg-white'
+      }`}
+    >
       {children}
     </div>
   );

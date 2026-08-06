@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
+  <!-- Stripe's app mark: white parallelogram on the brand purple, rounded-square
+       icon form. Used instead of the plan glyph because the stacked-bar plan icons
+       read as a loading skeleton at 30px — three small blocks, two of them ghosted,
+       is exactly what a placeholder looks like. The plan is already named in the
+       headline, so the tile is free to say WHO took the payment instead. -->
+  <rect width="48" height="48" rx="11" fill="#635BFF"/>
+  <path d="M12.8 17.8 L35.2 12.8 L35.2 30.2 L12.8 35.2 Z" fill="#FFFFFF"/>
+</svg>

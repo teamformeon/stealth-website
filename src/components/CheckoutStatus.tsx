@@ -157,18 +157,20 @@ function CheckoutVisual({
 
   return (
     <div className="mb-7 flex items-center justify-center">
+      {/* Stripe, always — not the plan.
+          The plan glyphs (stacked bars, unfilled ones ghosted) read as a loading
+          skeleton at this size: a few small blocks, some greyed out, is what a
+          placeholder looks like. The headline already names the plan, so this tile
+          is better spent saying who took the payment — which also makes the figure
+          match the app's own seat-cost dialog: [payer] → [Formeon]. */}
       <Tile>
-        {plan ? (
-          <Image
-            src={plan.icon}
-            alt={plan.name}
-            width={30}
-            height={30}
-            className="h-[30px] w-[30px] object-contain"
-          />
-        ) : (
-          <StripeGlyph />
-        )}
+        <Image
+          src="/logos/stripe-mark.svg"
+          alt="Stripe"
+          width={34}
+          height={34}
+          className="h-[34px] w-[34px] rounded-[8px] object-contain"
+        />
       </Tile>
 
       <div className="relative mx-0 h-[2px] w-[76px]">
@@ -224,13 +226,6 @@ function Tile({ children }: { children: React.ReactNode }) {
     <div className="flex h-[58px] w-[58px] shrink-0 items-center justify-center rounded-[16px] border border-black/[0.09] bg-white">
       {children}
     </div>
-  );
-}
-
-/** Fallback when Stripe returns without a recognisable tier. */
-function StripeGlyph() {
-  return (
-    <span className="text-[15px] font-semibold tracking-tight text-[#635BFF]">stripe</span>
   );
 }
 

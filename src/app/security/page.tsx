@@ -85,7 +85,7 @@ const SecurityPage = () => {
                         If you have specific questions about our security posture or require an enterprise security audit, please reach out directly.
                     </p>
                     <a
-                        href="mailto:formeonassistant1@gmail.com"
+                        href="mailto:teamformeon@gmail.com"
                         className="inline-block px-10 py-5 bg-black text-white font-black uppercase text-xs tracking-[0.2em] rounded-full hover:bg-slate-800 transition-all"
                     >
                         Contact Security Team

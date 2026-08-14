@@ -52,7 +52,6 @@ export default function PrivacyPage() {
                     <ul>
                         <li><strong>Gmail messages (gmail.readonly):</strong> to extract product decisions and context from your emails.</li>
                         <li><strong>Drive files (drive.readonly):</strong> to read the files in your Google Drive so we can extract product context and match relevant documents to your workspace.</li>
-                        <li><strong>Google Docs content (documents.readonly):</strong> to read your documents so we can extract decisions, context, and generate artifacts.</li>
                         <li><strong>Calendar events (calendar.readonly):</strong> to read event details that add timeline and context to your product memory.</li>
                     </ul>
                     <p>
@@ -69,7 +68,7 @@ export default function PrivacyPage() {
 
                     <h3>7. Data Retention and Deletion</h3>
                     <p>
-                        You may disconnect any Google integration at any time, and you may request deletion of your data by contacting us at formeonassistant1@gmail.com. Upon request, we delete stored Google user data within 30 days.
+                        You may disconnect any Google integration at any time, and you may request deletion of your data by contacting us at teamformeon@gmail.com. Upon request, we delete stored Google user data within 30 days.
                     </p>
 
                     <h3>8. Limited Use</h3>
@@ -79,7 +78,7 @@ export default function PrivacyPage() {
 
                     <h3>9. Contact Us</h3>
                     <p>
-                        If you have any questions about this privacy policy or our privacy practices, please contact us at formeonassistant1@gmail.com.
+                        If you have any questions about this privacy policy or our privacy practices, please contact us at teamformeon@gmail.com.
                     </p>
                 </div>
             </Section>

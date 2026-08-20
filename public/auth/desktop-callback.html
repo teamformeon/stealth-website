@@ -81,6 +81,14 @@
           access_token: session.access_token,
           refresh_token: session.refresh_token,
         };
+        // Echo the sign-in nonce back to the app. It was put on this page's URL by
+        // the desktop app when it opened sign-in, and rode through the provider
+        // redirect on redirect_uri. Formeon refuses any session callback it cannot
+        // tie back to a sign-in it started, so without this the app sends the user
+        // back to try again. MUST stay deployed ahead of the desktop release that
+        // enforces it.
+        var callbackNonce = new URLSearchParams(window.location.search).get('nonce');
+        if (callbackNonce) tokens.nonce = callbackNonce;
         // Google Calendar access is granted via the dedicated Calendar OAuth
         // flow in the app — sign-in no longer forwards a provider_token.
         var hash = '#' + new URLSearchParams(tokens).toString();

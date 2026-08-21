@@ -56,12 +56,21 @@
 
       function postTokensToApp(tokens) {
         var body = JSON.stringify(tokens);
+        // Hard timeout per attempt. This POST is only ONE of two delivery channels
+        // — the stealth:// deep link below is the other, and it runs after this
+        // resolves. Chrome can leave a loopback preflight PENDING rather than
+        // failing it (Private Network Access), and an un-timed await there strands
+        // the whole sign-in on a page that says "Completing sign-in…" forever.
+        // Failing fast costs nothing: the deep link still delivers the session.
         function post(host) {
+          var ac = new AbortController();
+          var timer = setTimeout(function () { ac.abort(); }, 2500);
           return fetch('http://' + host + ':47836/auth-callback', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: body,
-          });
+            signal: ac.signal,
+          }).finally(function () { clearTimeout(timer); });
         }
         return post('localhost').catch(function () {
           return post('127.0.0.1');

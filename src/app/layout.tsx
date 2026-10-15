@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Instrument_Serif } from "next/font/google";
+import { Fraunces, Hanken_Grotesk } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
@@ -7,14 +7,14 @@ import Footer from "@/components/Footer";
 import AuthRedirector from "@/components/AuthRedirector";
 import { cn } from "@/lib/utils";
 
-const inter = Inter({
+const hanken = Hanken_Grotesk({
   subsets: ["latin"],
   variable: "--font-sans",
 });
 
-const instrumentSerif = Instrument_Serif({
-  weight: "400",
+const fraunces = Fraunces({
   subsets: ["latin"],
+  axes: ["opsz"],
   variable: "--font-serif",
 });
 
@@ -61,9 +61,9 @@ export default function RootLayout({
     <html lang="en" className="scroll-smooth">
       <body
         className={cn(
-          "min-h-screen bg-[#FAFAF8] font-sans text-slate-900 antialiased selection:bg-[#6366F1]/20",
-          inter.variable,
-          instrumentSerif.variable
+          "min-h-screen bg-paper font-sans text-ink antialiased selection:bg-moss/20",
+          hanken.variable,
+          fraunces.variable
         )}
       >
         <AuthRedirector />

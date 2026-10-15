@@ -2,14 +2,10 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 
 const BlogPage = () => {
     return (
         <main className="min-h-screen bg-white text-slate-900 font-sans selection:bg-blue-100 selection:text-blue-900">
-            <Navbar />
-
             {/* Hero Section - Simplified */}
             <section className="flex flex-col items-center justify-center min-h-[80vh] px-6 text-center">
                 <div className="max-w-4xl mx-auto">
@@ -40,7 +36,6 @@ const BlogPage = () => {
                 </div>
             </section>
 
-            <Footer />
         </main>
     );
 };

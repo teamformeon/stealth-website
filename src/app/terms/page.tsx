@@ -2,16 +2,11 @@
 
 import React from 'react';
 import Section from '@/components/Section';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 
 export default function TermsPage() {
     return (
         <main className="bg-white min-h-screen">
-            <div className="fixed top-0 left-0 right-0 z-50">
-                <Navbar />
-            </div>
-            <Section className="pt-48 pb-24">
+            <Section className="pt-24 pb-24">
                 <div className="max-w-3xl mx-auto prose prose-slate prose-lg">
                     <h1 className="text-4xl font-black text-black mb-8">Terms of Service</h1>
                     <p className="text-slate-500 text-sm mb-12">Last updated: {new Date().toLocaleDateString()}</p>
@@ -42,7 +37,6 @@ export default function TermsPage() {
                     </p>
                 </div>
             </Section>
-            <Footer />
         </main>
     );
 }

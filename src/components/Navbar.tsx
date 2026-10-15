@@ -1,120 +1,67 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Link from 'next/link';
-import { cn } from '@/lib/utils';
-import { Menu, X } from 'lucide-react';
-import { AnimatePresence, motion } from 'framer-motion';
-import Logo from './Logo';
+import Image from 'next/image';
+import { usePathname } from 'next/navigation';
+import { DEMO_URL } from '@/lib/links';
 
 const navLinks = [
     { href: '/#product', label: 'Product' },
-    { href: '/#use-cases', label: 'Use Cases' },
-    { href: '/#contact', label: 'Contact' },
+    { href: '/#how', label: 'How it works' },
+    { href: '/#heard', label: 'Why Formeon' },
+    { href: '/#pricing', label: 'Pricing' },
+    { href: '/blog', label: 'Blog' },
 ];
 
-const Navbar = () => {
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-    const [scrolled, setScrolled] = useState(false);
+const Announcement = () => (
+    <div className="leading-[normal] bg-ink text-paper text-sm px-4 py-2.5 text-center">
+        <span className="inline-flex flex-wrap items-center justify-center gap-2">
+            <span className="bg-moss text-white rounded-full px-2.5 py-0.5 text-xs font-semibold">New</span>
+            Project Briefing — get up to speed on any project instantly.
+            <Link href="/#product" className="text-paper underline underline-offset-[3px] hover:text-sage">
+                See how
+            </Link>
+        </span>
+    </div>
+);
 
-    useEffect(() => {
-        const onScroll = () => setScrolled(window.scrollY > 20);
-        window.addEventListener('scroll', onScroll, { passive: true });
-        return () => window.removeEventListener('scroll', onScroll);
-    }, []);
+const Navbar = () => {
+    const isHome = usePathname() === '/';
 
     return (
-        <header className="fixed top-0 left-0 right-0 z-50 pt-5 px-4 md:px-6">
-            <motion.nav
-                initial={{ y: -20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                className={cn(
-                    'pill-nav mx-auto max-w-3xl rounded-full px-4 md:px-6 py-2.5 flex items-center justify-between transition-shadow duration-300',
-                    scrolled && 'shadow-md'
-                )}
-            >
-                <Logo showText size="sm" textColor="black" />
-
-                <div className="hidden md:flex items-center gap-1">
-                    {navLinks.map((link) => (
-                        <Link
-                            key={link.href}
-                            href={link.href}
-                            className="px-3.5 py-2 text-[14px] text-[#525252] hover:text-[#171717] transition-colors rounded-full hover:bg-black/[0.03]"
-                        >
-                            {link.label}
-                        </Link>
-                    ))}
-                </div>
-
-                <div className="hidden md:flex items-center gap-4">
-                    <a 
-                        href="https://github.com/alakhjagtap/formeonpublicreleases/releases/download/v10/Formeon-Setup-1.0.19.exe" 
-                        className="text-[14px] font-medium text-[#525252] hover:text-[#171717] transition-colors"
-                    >
-                        Download App
-                    </a>
-                    <Link href="/#contact" className="btn-primary text-[14px] py-2.5 px-5">
-                        Book a demo
+        <>
+            {isHome && <Announcement />}
+            <header className="leading-[normal] sticky top-0 z-20 bg-paper/88 backdrop-blur-[14px] border-b border-ink/6">
+                <nav className="max-w-[1200px] mx-auto px-6 py-3.5 flex items-center justify-between gap-6">
+                    <Link href="/" className="flex items-center gap-2.5 text-ink">
+                        <Image src="/formeon-mark.png" alt="" width={30} height={30} className="object-contain" priority />
+                        <span className="font-serif text-[22px] font-semibold tracking-[-0.01em]">Formeon</span>
                     </Link>
-                </div>
-
-                <button
-                    type="button"
-                    className="md:hidden p-2 text-[#171717]"
-                    onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                    aria-label="Toggle menu"
-                >
-                    {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
-                </button>
-            </motion.nav>
-
-            <AnimatePresence>
-                {mobileMenuOpen && (
-                    <motion.div
-                        initial={{ opacity: 0, y: -8 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -8 }}
-                        className="md:hidden fixed inset-0 z-40 bg-[#F4F5FA] pt-24 px-8"
-                    >
-                        <button
-                            type="button"
-                            className="absolute top-7 right-6 p-2"
-                            onClick={() => setMobileMenuOpen(false)}
-                            aria-label="Close menu"
-                        >
-                            <X size={24} />
-                        </button>
-                        <div className="flex flex-col gap-6 text-2xl font-medium">
-                            {navLinks.map((link) => (
-                                <Link
-                                    key={link.href}
-                                    href={link.href}
-                                    onClick={() => setMobileMenuOpen(false)}
-                                >
-                                    {link.label}
-                                </Link>
-                            ))}
-                            <a
-                                href="https://github.com/alakhjagtap/formeonpublicreleases/releases/download/v10/Formeon-Setup-1.0.19.exe"
-                                onClick={() => setMobileMenuOpen(false)}
-                                className="btn-secondary w-fit mt-4"
-                            >
-                                Download App
-                            </a>
-                            <Link
-                                href="/#contact"
-                                onClick={() => setMobileMenuOpen(false)}
-                                className="btn-primary w-fit mt-2"
-                            >
-                                Book a demo
+                    <div className="fm-navlinks flex items-center gap-8 text-[15px]">
+                        {navLinks.map((link) => (
+                            <Link key={link.href} href={link.href} className="text-muted hover:text-ink transition-colors">
+                                {link.label}
                             </Link>
-                        </div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
-        </header>
+                        ))}
+                    </div>
+                    <div className="flex items-center gap-2.5">
+                        <a
+                            href={DEMO_URL}
+                            className="fm-hide-sm text-[15px] font-medium px-[18px] py-2.5 rounded-full border border-ink/14 bg-white text-ink hover:border-ink/28 transition-colors"
+                        >
+                            Book a demo
+                        </a>
+                        <Link
+                            href="/#download"
+                            className="text-[15px] font-medium px-5 py-[11px] rounded-full bg-ink text-white hover:bg-black transition-colors"
+                        >
+                            Download
+                        </Link>
+                    </div>
+                </nav>
+            </header>
+        </>
     );
 };
 

@@ -12,15 +12,43 @@
   --color-formeon-badge-text: #6366f1;
   --color-formeon-surface: #eef0f8;
 
-  --font-sans: "Inter", system-ui, sans-serif;
-  --font-serif: "Instrument Serif", Georgia, serif;
+  /* Formeon site palette (from the Formeon Website design) */
+  --color-ink: #1b1a18;
+  --color-paper: #f7f6f2;
+  --color-surface: #fbfaf7;
+  --color-sidebar: #f3f2ee;
+  --color-stone: #edebe5;
+  --color-selected: #e7e5df;
+  --color-body: #3a3834;
+  --color-muted: #5e5b55;
+  --color-subtle: #6b6862;
+  --color-faint: #8a867e;
+  --color-hush: #a39f96;
+  --color-moss: #2f6b4f;
+  --color-moss-tint: #e6efe8;
+  --color-moss-ink: #4f5a52;
+  --color-sage: #a9c9b6;
+  --color-dim: #c9c5bc;
+  --color-alert: #a33a2a;
+  --color-alert-tint: #fbeae6;
+  --color-alert-line: #f2d2cb;
+  --color-signal: #cf4a3a;
+  --color-warn: #8a5a0b;
+  --color-warn-tint: #fbf1de;
+  --color-warn-line: #f3e2bd;
+  --color-info: #2f4ba8;
+  --color-info-tint: #e7ecfb;
+  --color-acme: #8e2741;
+
+  --font-sans: "Hanken Grotesk", system-ui, sans-serif;
+  --font-serif: "Fraunces", Georgia, serif;
 
   --spacing-section: 120px;
 }
 
 :root {
-  --background: #f4f5fa;
-  --foreground: #12141c;
+  --background: #f7f6f2;
+  --foreground: #1b1a18;
 }
 
 html,
@@ -233,4 +261,97 @@ body {
   .product-window:hover {
     transform: none;
   }
+}
+
+/* ------------------------------------------------------------------
+   Formeon home — animations ported verbatim from the Formeon Website
+   design (fm-*), plus a few Granola-style extras at the bottom.
+   ------------------------------------------------------------------ */
+
+/* Logo marquee */
+@keyframes fm-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.fm-marquee{display:flex;align-items:center;width:max-content;animation:fm-marquee 38s linear infinite}
+.fm-marquee-wrap:hover .fm-marquee{animation-play-state:paused}
+.fm-marquee-wrap{-webkit-mask-image:linear-gradient(to right,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(to right,transparent,#000 8%,#000 92%,transparent)}
+
+/* Capture flow: scattered → connected → remembered (9s loop) */
+.fm-cf-badge{position:absolute;left:var(--x);top:var(--y);transform:translate(-50%,-50%);animation:fm-gather 9s cubic-bezier(.65,0,.35,1) infinite}
+@keyframes fm-gather{
+0%{left:var(--x);top:var(--y);transform:translate(-50%,-50%) scale(.85) translateY(10px);opacity:0;filter:blur(0)}
+4%{left:var(--x);top:var(--y);transform:translate(-50%,-50%) scale(1) translateY(0);opacity:1;filter:blur(0)}
+27%{left:var(--x);top:var(--y);transform:translate(-50%,-50%) scale(1);opacity:1;filter:blur(0)}
+41%{left:50%;top:44%;transform:translate(-50%,-50%) scale(.3);opacity:.9;filter:blur(1.5px)}
+45%{left:50%;top:44%;transform:translate(-50%,-50%) scale(0);opacity:0;filter:blur(3px)}
+100%{left:50%;top:44%;transform:translate(-50%,-50%) scale(0);opacity:0;filter:blur(3px)}}
+@keyframes fm-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.fm-bob{animation:fm-bob 2.8s ease-in-out infinite}
+@keyframes fm-ping{0%{transform:scale(1);opacity:.7}80%,100%{transform:scale(2.4);opacity:0}}
+.fm-ping{animation:fm-ping 1.4s ease-out infinite}
+.fm-cf-line{animation:fm-lines 9s ease-in-out infinite}
+@keyframes fm-lines{0%,24%{opacity:0;stroke-dashoffset:60}30%{opacity:.6}44%{opacity:.6;stroke-dashoffset:0}52%,100%{opacity:0;stroke-dashoffset:0}}
+.fm-cf-dot{position:absolute;width:8px;height:8px;margin:-4px 0 0 -4px;border-radius:50%;background:#2F6B4F;box-shadow:0 0 0 4px rgba(47,107,79,.15);left:var(--x);top:var(--y);opacity:0;animation:fm-dot 9s linear infinite}
+@keyframes fm-dot{
+0%,28%{left:var(--x);top:var(--y);opacity:0}
+29%{left:var(--x);top:var(--y);opacity:1}
+37%{left:50%;top:44%;opacity:1}
+38%{left:50%;top:44%;opacity:0}
+39%{left:var(--x);top:var(--y);opacity:0}
+40%{left:var(--x);top:var(--y);opacity:1}
+48%{left:50%;top:44%;opacity:1}
+49%,100%{left:50%;top:44%;opacity:0}}
+.fm-cf-hubpos{animation:fm-hubpos 9s cubic-bezier(.65,0,.35,1) infinite}
+@keyframes fm-hubpos{0%,54%{left:50%}62%,95%{left:30%}100%{left:50%}}
+.fm-cf-hub{animation:fm-hub 9s cubic-bezier(.16,1,.3,1) infinite}
+@keyframes fm-hub{0%,24%{transform:scale(.78)}32%{transform:scale(.92)}38%{transform:scale(.88)}44%{transform:scale(1.08)}50%,100%{transform:scale(1)}}
+.fm-cf-ring{animation:fm-ring 9s ease-out infinite}
+@keyframes fm-ring{0%,28%{transform:scale(.8);opacity:0}29%{transform:scale(.8);opacity:.8}37%{transform:scale(1.9);opacity:0}38%{transform:scale(.8);opacity:.8}46%{transform:scale(1.9);opacity:0}100%{opacity:0}}
+.fm-cf-glow{animation:fm-glow 9s cubic-bezier(.16,1,.3,1) infinite}
+@keyframes fm-glow{0%,26%{transform:translate(-50%,-50%) scale(1);opacity:.3}44%{transform:translate(-50%,-50%) scale(2);opacity:.7}60%,94%{transform:translate(-50%,-50%) scale(2.4);opacity:.6}100%{transform:translate(-50%,-50%) scale(1);opacity:.3}}
+.fm-s1{animation:fm-s1 9s ease infinite}
+.fm-s2{animation:fm-s2 9s ease infinite}
+.fm-s3{animation:fm-s3 9s ease infinite}
+@keyframes fm-s1{0%,25%{opacity:1}28%,98%{opacity:0}100%{opacity:1}}
+@keyframes fm-s2{0%,27%{opacity:0}30%,52%{opacity:1}55%,100%{opacity:0}}
+@keyframes fm-s3{0%,54%{opacity:0}58%,95%{opacity:1}98%,100%{opacity:0}}
+@keyframes fm-shake{0%,100%{transform:rotate(0)}20%{transform:rotate(-3deg)}40%{transform:rotate(3deg)}60%{transform:rotate(-2deg)}80%{transform:rotate(1deg)}}
+.fm-shake{display:inline-block;animation:fm-shake 1.8s ease-in-out infinite}
+.fm-cf-card{animation:fm-card 9s cubic-bezier(.16,1,.3,1) infinite}
+@keyframes fm-card{0%,58%{opacity:0;transform:translate(16px,-50%)}63%,94%{opacity:1;transform:translate(0,-50%)}98%,100%{opacity:0;transform:translate(0,-50%)}}
+.fm-r1{animation:fm-r1 9s cubic-bezier(.16,1,.3,1) infinite}
+.fm-r2{animation:fm-r2 9s cubic-bezier(.16,1,.3,1) infinite}
+.fm-r3{animation:fm-r3 9s cubic-bezier(.16,1,.3,1) infinite}
+@keyframes fm-r1{0%,63%{opacity:0;transform:translateY(8px)}67%,100%{opacity:1;transform:translateY(0)}}
+@keyframes fm-r2{0%,68%{opacity:0;transform:translateY(8px)}72%,100%{opacity:1;transform:translateY(0)}}
+@keyframes fm-r3{0%,73%{opacity:0;transform:translateY(8px)}77%,100%{opacity:1;transform:translateY(0)}}
+.fm-progress{transform-origin:left center;animation:fm-progress 9s linear infinite}
+@keyframes fm-progress{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+/* Graph */
+@keyframes fm-pulse{0%{transform:scale(1);opacity:.55}100%{transform:scale(2.1);opacity:0}}
+.fm-pulse{animation:fm-pulse 2.4s ease-out infinite}
+@keyframes fm-flow{to{stroke-dashoffset:-24}}
+.fm-flow{stroke-dasharray:3 5;animation:fm-flow 1.6s linear infinite}
+
+/* Granola-style extras */
+/* Hold the 9s story on frame 0 until it scrolls into view, so it always starts at "Scattered". */
+.fm-stage:not([data-play]) *{animation-play-state:paused !important}
+@keyframes fm-caret{0%,49%{opacity:1}50%,100%{opacity:0}}
+.fm-caret{display:inline-block;width:1.5px;height:1.1em;margin-left:1px;vertical-align:-0.18em;background:currentColor;animation:fm-caret 1s steps(1) infinite}
+@keyframes fm-drift{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.fm-drift{animation:fm-drift 6s ease-in-out infinite}
+@keyframes fm-scan{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+.fm-scan{animation:fm-scan 2.6s cubic-bezier(.65,0,.35,1) infinite}
+
+@media (prefers-reduced-motion: reduce){
+  .fm-marquee,.fm-cf-badge,.fm-bob,.fm-cf-line,.fm-cf-hub,.fm-cf-ring,.fm-cf-glow,.fm-s1,.fm-s2,.fm-s3,.fm-pulse,.fm-flow,.fm-ping,.fm-shake,.fm-cf-dot,.fm-cf-hubpos,.fm-cf-card,.fm-r1,.fm-r2,.fm-r3,.fm-progress,.fm-caret,.fm-drift,.fm-scan{animation:none !important}
+  .fm-s2,.fm-s3,.fm-cf-card,.fm-cf-dot{opacity:0}
+}
+@media (max-width: 860px){
+  .fm-cf-hubpos{animation:none !important;left:50% !important}
+  .fm-cf-card{display:none !important}
+  .fm-cf-badge > div{width:150px !important}
+  .fm-side{display:none !important}
+  .fm-navlinks{display:none !important}
+  .fm-float{display:none !important}
+  .fm-hide-sm{display:none !important}
 }

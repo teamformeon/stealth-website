@@ -58,25 +58,74 @@ const CheckIcon = ({ size, width }: { size: number; width: number }) => (
     </svg>
 );
 
-const SlackCard = () => (
+const captures = [
+    {
+        logo: '/logos/slack.svg',
+        alt: 'Slack',
+        meta: '#product · 2:14 PM',
+        body: 'Let’s go with Gong for Riverstone — Meridian can’t do call summaries yet.',
+        className: '-left-16 top-[120px]',
+        fromX: -48,
+        rotate: -4,
+        delay: 1.2,
+        drift: '0s',
+    },
+    {
+        logo: '/logos/gmail.svg',
+        alt: 'Gmail',
+        meta: 'Maya Chen · 9:41 AM',
+        body: 'Re: Q3 roadmap — ship SSO for the enterprise tier this quarter.',
+        className: '-right-8 top-[108px]',
+        fromX: 48,
+        rotate: 3,
+        delay: 1.45,
+        drift: '-2s',
+    },
+    {
+        logo: '/logos/jira.svg',
+        alt: 'Jira',
+        meta: 'FEAT-284 · Open',
+        body: 'SSO still has no acceptance criteria.',
+        className: '-left-10 top-[400px]',
+        fromX: -48,
+        rotate: -2,
+        delay: 1.7,
+        drift: '-4s',
+    },
+    {
+        logo: '/logos/granola.png',
+        alt: 'Granola',
+        meta: 'Eng sync · Apr 8',
+        body: 'In-house transcription for the real-time path. Two-pass design.',
+        className: '-right-8 top-[460px]',
+        fromX: 48,
+        rotate: 2,
+        delay: 1.95,
+        drift: '-1s',
+    },
+];
+
+const CaptureCard = ({ card }: { card: (typeof captures)[number] }) => (
     <motion.div
-        className="fm-float absolute -left-16 top-[120px] z-[3] w-[250px] text-left"
-        initial={{ opacity: 0, x: -48, rotate: -10 }}
-        animate={{ opacity: 1, x: 0, rotate: -4 }}
-        transition={{ duration: 1.1, ease: easeOut, delay: 1.2 }}
+        className={`fm-float absolute z-[3] w-[250px] text-left ${card.className}`}
+        initial={{ opacity: 0, x: card.fromX, rotate: card.fromX < 0 ? -10 : 8 }}
+        animate={{ opacity: 1, x: 0, rotate: card.rotate }}
+        transition={{ duration: 1.1, ease: easeOut, delay: card.delay }}
     >
-        <div className="fm-drift bg-white border border-ink/8 rounded-2xl p-4 shadow-[0_18px_40px_rgba(27,26,24,0.10)]">
+        <div
+            className="fm-drift bg-white border border-ink/8 rounded-2xl p-4 shadow-[0_18px_40px_rgba(27,26,24,0.10)]"
+            style={{ animationDelay: card.drift }}
+        >
             <div className="flex items-center gap-2 text-xs text-subtle">
-                <Image src="/logos/slack.svg" alt="Slack" width={16} height={16} />
-                #product · 2:14 PM
+                <Image src={card.logo} alt={card.alt} width={16} height={16} />
+                {card.meta}
             </div>
-            <div className="text-sm leading-[1.45] mt-2">Let’s go with Gong for Riverstone — Meridian can’t do call summaries yet.</div>
-            {/* the "enhance" beat: the message is recognised as a decision a moment after it lands */}
+            <div className="text-sm leading-[1.45] mt-2">{card.body}</div>
             <motion.div
                 className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-moss bg-moss-tint rounded-full px-2.5 py-1"
                 initial={{ opacity: 0, scale: 0.6, y: 6 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
-                transition={{ type: 'spring', stiffness: 380, damping: 18, delay: 2.2 }}
+                transition={{ type: 'spring', stiffness: 380, damping: 18, delay: card.delay + 1 }}
             >
                 <CheckIcon size={12} width={2.5} />
                 Captured as decision
@@ -113,7 +162,9 @@ const ConflictCard = () => (
 
 const ProductWindow = () => (
     <div id="product" className="relative max-w-[1120px] mx-auto mt-[72px] [perspective:1600px]">
-        <SlackCard />
+        {captures.map((card) => (
+            <CaptureCard key={card.alt} card={card} />
+        ))}
         <ConflictCard />
 
         <motion.div

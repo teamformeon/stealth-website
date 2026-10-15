@@ -1,7 +1,10 @@
-// ponytail: GitHub's /latest/download/<file> only resolves while the newest
-// release ships this exact filename — bump it with each macOS release.
+// GitHub's /latest/download/<file> only resolves while the newest release
+// ships this exact filename — bump both when a release renames them.
 export const MAC_DOWNLOAD_URL =
     'https://github.com/teamformeon/formeonpublicreleases/releases/latest/download/Formeon-1.0.0-arm64.dmg';
+
+export const WINDOWS_DOWNLOAD_URL =
+    'https://github.com/teamformeon/formeonpublicreleases/releases/latest/download/Formeon-Setup-1.0.0.exe';
 
 export const DEMO_URL = 'mailto:teamformeon@gmail.com?subject=Formeon%20demo';
 

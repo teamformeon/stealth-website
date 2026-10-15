@@ -7,30 +7,13 @@ import { easeOut, viewport } from '@/lib/motion';
 
 const svgProps = { viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2, strokeLinecap: 'round', strokeLinejoin: 'round', 'aria-hidden': true } as const;
 
-const MicIcon = () => (
-    <svg width="18" height="18" {...svgProps}>
-        <rect x="9" y="3" width="6" height="11" rx="3" />
-        <path d="M5 11a7 7 0 0 0 14 0" />
-        <path d="M12 18v3" />
-    </svg>
-);
-
-const DocIcon = () => (
-    <svg width="18" height="18" {...svgProps}>
-        <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" />
-        <path d="M14 3v5h5" />
-        <path d="M9 13h6" />
-        <path d="M9 17h6" />
-    </svg>
-);
-
 // Source colours are data colours (one per tool), so they live with the data.
 const hubs = [
     { left: '56%', top: '24%', ring: '#5B84E6', label: 'Jira · 2', icon: <Image src="/logos/jira.svg" alt="" width={20} height={20} /> },
-    { left: '30%', top: '40%', ring: '#5FAF7A', label: 'Meeting Notes · 2', icon: <span className="text-[#3E8E5A]"><MicIcon /></span> },
+    { left: '30%', top: '40%', ring: '#B6D36B', label: 'Granola · 2', icon: <Image src="/logos/granola.png" alt="" width={22} height={22} className="rounded-[6px]" /> },
     { left: '76%', top: '50%', ring: '#9B6597', label: 'Slack · 1', icon: <Image src="/logos/slack.svg" alt="" width={20} height={20} /> },
     { left: '36%', top: '78%', ring: '#6E7AA6', label: 'Confluence · 5', icon: <Image src="/logos/confluence.svg" alt="" width={20} height={20} /> },
-    { left: '64%', top: '80%', ring: '#7FA3E8', label: 'Google Docs · 1', icon: <span className="text-[#3F6FD1]"><DocIcon /></span> },
+    { left: '64%', top: '80%', ring: '#7FA3E8', label: 'Google Docs · 1', icon: <Image src="/logos/google-docs.svg" alt="" width={20} height={20} /> },
 ];
 
 const flows = [
@@ -49,8 +32,8 @@ const links = [
 const cards = [
     { left: '47%', top: '12%', border: '#C9D6F5', src: 'Jira', date: 'Apr 8', title: 'LIVE-127: Latency budget and load test' },
     { left: '67%', top: '14%', border: '#C9D6F5', src: 'Jira', date: 'Apr 7', title: 'LIVE-110: Streaming ASR architecture' },
-    { left: '16%', top: '14%', border: '#CFE6D6', src: 'Meeting Notes', date: 'Apr 8', title: 'Incident Retrospective — PLAT-88 OOM' },
-    { left: '12%', top: '36%', border: '#CFE6D6', src: 'Meeting Notes', date: 'Oct 2', title: 'Real-Time Platform Sync' },
+    { left: '16%', top: '14%', border: '#E3EEC4', src: 'Granola', date: 'Apr 8', title: 'Incident Retrospective — PLAT-88 OOM' },
+    { left: '12%', top: '36%', border: '#E3EEC4', src: 'Granola', date: 'Oct 2', title: 'Real-Time Platform Sync' },
     { left: '88%', top: '32%', border: '#E5D2E4', src: 'Slack', date: 'Apr 7', title: '#asr-eng — latency budget agreed' },
     { left: '14%', top: '64%', border: '#D3D8EA', src: 'Confluence', date: 'Apr 7', title: 'Decision Log — ML Architecture' },
     { left: '14%', top: '88%', border: '#D3D8EA', src: 'Confluence', date: '6d ago', title: 'Transcription Platform Strategy' },

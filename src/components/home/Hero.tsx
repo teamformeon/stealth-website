@@ -3,8 +3,8 @@
 import React from 'react';
 import { motion, type Variants } from 'framer-motion';
 import { easeOut } from '@/lib/motion';
-import { MAC_DOWNLOAD_URL } from '@/lib/links';
-import { AppleIcon } from './motion';
+import { MAC_DOWNLOAD_URL, WINDOWS_DOWNLOAD_URL } from '@/lib/links';
+import { AppleIcon, WindowsIcon, useDesktopPlatform } from './motion';
 import ProductWindow from './ProductWindow';
 
 const HEADLINE = 'Your team’s decisions, remembered.';
@@ -14,8 +14,12 @@ const rise = (delay: number): Variants => ({
     visible: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.9, ease: easeOut, delay } },
 });
 
-const Hero = () => (
-    <section id="top" className="pt-[88px] px-6 text-center">
+const Hero = () => {
+    const platform = useDesktopPlatform();
+    const windows = platform === 'windows';
+
+    return (
+        <section id="top" className="pt-[88px] px-6 text-center">
         <motion.div initial="hidden" animate="visible" className="max-w-[860px] mx-auto flex flex-col items-center gap-[22px]">
             <motion.div variants={rise(0)} className="text-[13px] tracking-[0.08em] uppercase text-moss font-semibold">
                 Decision intelligence for product teams
@@ -34,13 +38,13 @@ const Hero = () => (
             </motion.p>
             <motion.div variants={rise(0.62)} className="flex gap-3 flex-wrap justify-center mt-2">
                 <a
-                    href={MAC_DOWNLOAD_URL}
+                    href={windows ? WINDOWS_DOWNLOAD_URL : MAC_DOWNLOAD_URL}
                     className="group inline-flex items-center gap-2.5 text-[17px] font-medium px-7 py-4 rounded-full bg-ink text-white hover:bg-black min-h-11 transition-[background-color,transform,box-shadow] duration-300 hover:-translate-y-0.5 hover:shadow-[0_12px_28px_rgba(27,26,24,0.22)]"
                 >
                     <span className="transition-transform duration-300 group-hover:-translate-y-px">
-                        <AppleIcon />
+                        {windows ? <WindowsIcon /> : <AppleIcon />}
                     </span>
-                    Download for free
+                    {windows ? 'Download for Windows' : 'Download for Mac'}
                 </a>
                 <a
                     href="#how"
@@ -50,12 +54,13 @@ const Hero = () => (
                 </a>
             </motion.div>
             <motion.div variants={rise(0.72)} className="text-sm text-subtle">
-                Available for macOS and Windows
+                {windows ? 'Windows installer' : 'macOS installer'}
             </motion.div>
         </motion.div>
 
-        <ProductWindow />
-    </section>
-);
+            <ProductWindow />
+        </section>
+    );
+};
 
 export default Hero;

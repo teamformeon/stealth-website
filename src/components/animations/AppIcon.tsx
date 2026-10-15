@@ -8,7 +8,7 @@ export const APPS = {
     jira: { id: 'jira', name: 'Jira', logo: '/logos/jira.svg' },
     microsoft: { id: 'microsoft', name: 'Microsoft', logo: '/logos/microsoft.svg' },
     gmail: { id: 'gmail', name: 'Gmail', logo: '/logos/gmail.png' },
-    notion: { id: 'notion', name: 'Notion', logo: '/logos/notion.svg' },
+    notion: { id: 'notion', name: 'Notion', logo: '/logos/notion.png' },
     linear: { id: 'linear', name: 'Linear', logo: '/logos/linear.svg' },
 } as const;
 

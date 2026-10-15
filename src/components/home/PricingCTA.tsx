@@ -3,8 +3,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { easeOut, viewport } from '@/lib/motion';
-import { MAC_DOWNLOAD_URL } from '@/lib/links';
-import { AppleIcon } from './motion';
+import { MAC_DOWNLOAD_URL, WINDOWS_DOWNLOAD_URL } from '@/lib/links';
+import { AppleIcon, WindowsIcon, useDesktopPlatform } from './motion';
 
 const plans = [
     { name: 'Starter', blurb: 'Unlimited capture, every agent finding', price: '$39', featured: false },
@@ -12,8 +12,11 @@ const plans = [
     { name: 'Scale', blurb: 'For larger orgs — talk to us', price: '$79+', featured: false },
 ];
 
-const PricingCTA = () => (
-    <section id="pricing" className="px-6 pt-[120px] pb-20 scroll-mt-16">
+const PricingCTA = () => {
+    const windows = useDesktopPlatform() === 'windows';
+
+    return (
+        <section id="pricing" className="px-6 pt-[120px] pb-20 scroll-mt-16">
         <motion.div
             id="download"
             className="max-w-[1120px] mx-auto bg-ink text-paper rounded-[28px] px-[clamp(24px,5vw,72px)] py-[clamp(40px,6vw,80px)] flex flex-wrap gap-12 items-center scroll-mt-24"
@@ -34,11 +37,11 @@ const PricingCTA = () => (
                 </p>
                 <div className="flex flex-wrap gap-3 mt-7">
                     <a
-                        href={MAC_DOWNLOAD_URL}
+                        href={windows ? WINDOWS_DOWNLOAD_URL : MAC_DOWNLOAD_URL}
                         className="inline-flex items-center gap-2.5 text-base font-medium px-6 py-3.5 rounded-full bg-paper text-ink hover:bg-white transition-[background-color,transform] duration-300 hover:-translate-y-0.5"
                     >
-                        <AppleIcon size={17} />
-                        Download for free
+                        {windows ? <WindowsIcon size={17} /> : <AppleIcon size={17} />}
+                        {windows ? 'Download for Windows' : 'Download for Mac'}
                     </a>
                     <a
                         href="#pricing"
@@ -67,7 +70,8 @@ const PricingCTA = () => (
                 ))}
             </div>
         </motion.div>
-    </section>
-);
+        </section>
+    );
+};
 
 export default PricingCTA;

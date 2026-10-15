@@ -17,7 +17,7 @@ const sources = [
     { x: '16%', y: '74%', delay: '0.24s', bob: '3s', logo: '/logos/linear.svg', size: 24, title: 'Linear', note: 'Customer call notes' },
     { x: '87%', y: '16%', delay: '0.06s', bob: '3.4s', logo: '/logos/microsoft.svg', size: 22, title: 'Microsoft Teams', note: 'Eng sync — SSO scoped?', ping: '0.4s' },
     { x: '89%', y: '46%', delay: '0.18s', bob: '2.9s', logo: '/logos/gmail.svg', size: 24, title: 'Gmail', note: 'Re: Q3 roadmap — your input?', ping: '0.8s' },
-    { x: '84%', y: '74%', delay: '0.3s', bob: '3.2s', logo: '/logos/notion.svg', size: 24, title: 'Notion', note: 'Product brief (outdated)' },
+    { x: '84%', y: '74%', delay: '0.3s', bob: '3.2s', logo: '/logos/notion.png', size: 24, title: 'Notion', note: 'Product brief (outdated)' },
 ];
 
 const problems = [

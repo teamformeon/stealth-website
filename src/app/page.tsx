@@ -15,12 +15,12 @@ export default function Home() {
       {/* the design sets no line-height, so match the browser default rather than Tailwind's 1.5 */}
       <div className="leading-[normal]">
         <Hero />
+        <WhatWeHeard />
         <LogoMarquee />
         <ValueProps />
         <ContextFlow />
         <Integrations />
         <HowItWorks />
-        <WhatWeHeard />
         <FeatureList />
         <PricingCTA />
       </div>

@@ -1,8 +1,6 @@
 import { NextResponse } from 'next/server';
 import { getStripe } from '@/lib/stripe';
-
-const WINDOWS_DOWNLOAD_URL = 'https://github.com/alakhjagtap/stealthpublicreleases/releases/download/v10/Formeon-Setup-1.0.19.exe';
-const MAC_DOWNLOAD_URL = 'https://github.com/alakhjagtap/stealthpublicreleases/releases/latest/download/Stealth-1.0.11-arm64.dmg';
+import { MAC_DOWNLOAD_URL, WINDOWS_DOWNLOAD_URL } from '@/lib/links';
 
 export async function POST(req: Request) {
     try {

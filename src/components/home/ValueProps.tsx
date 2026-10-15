@@ -31,7 +31,7 @@ const props = [
     },
     {
         title: 'Private by default',
-        body: 'Sign in with Google or Microsoft. [Add your data-handling and retention commitments here.]',
+        body: 'Sign in with Google or Microsoft. Access is read-only, and you can ask us to delete your data.',
         icon: (
             <svg {...icon}>
                 <rect x="4" y="11" width="16" height="10" rx="2" />

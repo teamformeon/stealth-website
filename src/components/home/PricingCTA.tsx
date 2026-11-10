@@ -3,8 +3,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { easeOut, viewport } from '@/lib/motion';
-import { MAC_DOWNLOAD_URL, WINDOWS_DOWNLOAD_URL } from '@/lib/links';
-import { AppleIcon, WindowsIcon, useDesktopPlatform } from './motion';
 
 const plans = [
     { name: 'Starter', blurb: 'Unlimited capture, every agent finding', price: '$39', featured: false },
@@ -13,12 +11,9 @@ const plans = [
 ];
 
 const PricingCTA = () => {
-    const windows = useDesktopPlatform() === 'windows';
-
     return (
         <section id="pricing" className="px-6 pt-[120px] pb-20 scroll-mt-16">
         <motion.div
-            id="download"
             className="max-w-[1120px] mx-auto bg-ink text-paper rounded-[28px] px-[clamp(24px,5vw,72px)] py-[clamp(40px,6vw,80px)] flex flex-wrap gap-12 items-center scroll-mt-24"
             initial="hidden"
             whileInView="visible"
@@ -33,16 +28,13 @@ const PricingCTA = () => {
                     Start free. Upgrade when your team does.
                 </h2>
                 <p className="mt-[18px] text-[17px] leading-[1.55] text-dim max-w-[460px]">
-                    A free workspace gets you connected and capturing today. Paid plans unlock every agent finding and team-wide memory.
+                    When we launch, a free workspace gets you connected and capturing from day one. Paid plans unlock every agent finding and team-wide memory.
                 </p>
                 <div className="flex flex-wrap gap-3 mt-7">
-                    <a
-                        href={windows ? WINDOWS_DOWNLOAD_URL : MAC_DOWNLOAD_URL}
-                        className="inline-flex items-center gap-2.5 text-base font-medium px-6 py-3.5 rounded-full bg-paper text-ink hover:bg-white transition-[background-color,transform] duration-300 hover:-translate-y-0.5"
-                    >
-                        {windows ? <WindowsIcon size={17} /> : <AppleIcon size={17} />}
-                        {windows ? 'Download for Windows' : 'Download for Mac'}
-                    </a>
+                    <span className="inline-flex items-center gap-2.5 text-base font-medium px-6 py-3.5 rounded-full bg-paper text-ink cursor-default">
+                        <span className="size-2 rounded-full bg-moss animate-pulse" aria-hidden="true" />
+                        Coming soon
+                    </span>
                     <a
                         href="#pricing"
                         className="inline-flex items-center text-base font-medium px-6 py-3.5 rounded-full border border-paper/30 text-paper hover:border-paper/60 transition-colors"

@@ -48,16 +48,10 @@ const Navbar = () => {
                     <div className="flex items-center gap-2.5">
                         <a
                             href={DEMO_URL}
-                            className="fm-hide-sm text-[15px] font-medium px-[18px] py-2.5 rounded-full border border-ink/14 bg-white text-ink hover:border-ink/28 transition-colors"
+                            className="text-[15px] font-medium px-5 py-[11px] rounded-full bg-ink text-white hover:bg-black transition-colors"
                         >
                             Book a demo
                         </a>
-                        <Link
-                            href="/#download"
-                            className="text-[15px] font-medium px-5 py-[11px] rounded-full bg-ink text-white hover:bg-black transition-colors"
-                        >
-                            Download
-                        </Link>
                     </div>
                 </nav>
             </header>
